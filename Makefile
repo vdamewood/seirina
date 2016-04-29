@@ -1,10 +1,12 @@
-wave: wave.o
-	gcc -lm -o wave wave.o
+all: cmaj
 
-wave.o: wave.c
-	gcc -c -o wave.o wave.c
+cmaj: cmaj.o waves.o
+	$(CC) -lm -o cmaj waves.o cmaj.o
 
-play: wave
-	./play.sh
+waves.o: waves.c
+	$(CC) -c -o waves.o waves.c
+
+cmaj.o: cmaj.c
+	$(CC) -c -o cmaj.o cmaj.c
 
 .PHONY: play
