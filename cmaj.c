@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
 				? wave(phase(noteG, i-SampleRate*2))
 				: 0);
 		total /= 3;
-		total ^= 0x8000; // Swich signed values to unsigned values
+		total ^= 0x8000; // Swich unsigned values to signed values
 
 		Output16(total);
 		Output16(total);
