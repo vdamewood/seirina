@@ -19,7 +19,7 @@
 
 #include "waves.h"
 
-#define peak (1<<15)
+#define peak 0xFFFF
 
 sample square(double phase)
 {

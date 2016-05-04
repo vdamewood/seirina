@@ -1,4 +1,4 @@
-/* wave.c: Generate a C chord in various wave forms
+/* output.h: Output data
  *
  * Copyright 2016 Vincent Damewood
  *
@@ -15,19 +15,15 @@
  * limitations under the License.
  */
 
-#ifndef WAVES_H
-#define WAVES_H
+#ifndef OUTPUT_H
+#define OUTPUT_H
 
-#include <stdint.h>
+#include "waves.h"
 
-typedef uint16_t sample;
+float phase(float frequency, int sample);
+void Output16(uint16_t output);
+void Output32(const uint32_t output);
+void OutputHeader(uint32_t SampleCount);
+void NoteOut(fpWave wave, float note, int duration);
 
-typedef sample (*fpWave)(double);
-
-sample square(double phase);
-sample sine(double phase);
-sample absine(double phase);
-sample saw(double phase);
-sample triangle(double phase);
-
-#endif /* WAVES_H */
+#endif /* OUTPUT_H */
