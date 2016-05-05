@@ -54,8 +54,6 @@ int main(int argc, char *argv[])
 			+ ((i > SampleRate * 2)
 				? wave(phase(noteG, i-SampleRate*2))
 				: 0))/3*0x7FFF;
-		//ftotal /= 3;
-		//uint16_t total = ftotal * 0x7FFF;
 
 		Output16(total);
 		Output16(total);
