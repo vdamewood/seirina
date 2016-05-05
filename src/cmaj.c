@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
 	for (int i = 0; i < SampleRate*3; i++)
 	{
-		unsigned int total = 0
+		int total = 0
 			+ wave(phase(noteC, i))
 			+ ((i > SampleRate)
 				? wave(phase(noteE, i-SampleRate))
@@ -55,7 +55,6 @@ int main(int argc, char *argv[])
 				? wave(phase(noteG, i-SampleRate*2))
 				: 0);
 		total /= 3;
-		total ^= 0x8000; // Swich unsigned values to signed values
 
 		Output16(total);
 		Output16(total);

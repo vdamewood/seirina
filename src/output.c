@@ -68,8 +68,7 @@ void NoteOut(fpWave wave, float note, int duration)
 {
 	for (int i = 0; i < duration; i++)
 	{
-		unsigned int total = wave(phase(note, i))
-			^ 0x8000; // Swich signed values to unsigned values
+		unsigned int total = wave(phase(note, i));
 
 		Output16(total);
 		Output16(total);

@@ -20,7 +20,7 @@
 
 #include <stdint.h>
 
-typedef uint16_t sample;
+typedef int16_t sample;
 
 typedef sample (*fpWave)(double);
 
