@@ -31,15 +31,17 @@ double sine(double phase)
 
 double absine(double phase)
 {
-	return fabs(sin(phase * M_PI)) * 2.0 - 1.0;
+	return fabs(sin((phase+1.0/6.0) * M_PI)) * 2.0 - 1.0;
 }
 
 double saw(double phase)
 {
+	phase = fmod(phase + 0.5, 1.0);
 	return phase * 2.0 - 1.0;
 }
 
 double triangle(double phase)
 {
+	phase = fmod(phase + 0.25, 1.0);
 	return (phase <= 0.5 ? phase : 1.0 - phase) * 4.0 - 1.0;
 }
