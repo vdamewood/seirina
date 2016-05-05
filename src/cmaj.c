@@ -46,15 +46,16 @@ int main(int argc, char *argv[])
 
 	for (int i = 0; i < SampleRate*3; i++)
 	{
-		int total = 0
+		uint16_t total = (0
 			+ wave(phase(noteC, i))
 			+ ((i > SampleRate)
 				? wave(phase(noteE, i-SampleRate))
 				: 0)
 			+ ((i > SampleRate * 2)
 				? wave(phase(noteG, i-SampleRate*2))
-				: 0);
-		total /= 3;
+				: 0))/3*0x7FFF;
+		//ftotal /= 3;
+		//uint16_t total = ftotal * 0x7FFF;
 
 		Output16(total);
 		Output16(total);

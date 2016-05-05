@@ -18,16 +18,12 @@
 #ifndef WAVES_H
 #define WAVES_H
 
-#include <stdint.h>
+typedef double (*fpWave)(double);
 
-typedef int16_t sample;
-
-typedef sample (*fpWave)(double);
-
-sample square(double phase);
-sample sine(double phase);
-sample absine(double phase);
-sample saw(double phase);
-sample triangle(double phase);
+double square(double phase);
+double sine(double phase);
+double absine(double phase);
+double saw(double phase);
+double triangle(double phase);
 
 #endif /* WAVES_H */

@@ -19,29 +19,27 @@
 
 #include "waves.h"
 
-#define peak 0x7FFF
-
-sample square(double phase)
+double square(double phase)
 {
-	return peak * (phase < 0.5 ? 1 : -1);
+	return phase < 0.5 ? 1 : -1;
 }
 
-sample sine(double phase)
+double sine(double phase)
 {
-	return peak * sin(phase*M_PI*2);
+	return sin(phase * M_PI * 2);
 }
 
-sample absine(double phase)
+double absine(double phase)
 {
-	return peak * (fabs(sin(phase*M_PI))*2 - 1);
+	return fabs(sin(phase * M_PI)) * 2.0 - 1.0;
 }
 
-sample saw(double phase)
+double saw(double phase)
 {
-	return peak * (phase*2-1);
+	return phase * 2.0 - 1.0;
 }
 
-sample triangle(double phase)
+double triangle(double phase)
 {
-	return peak * ((phase <= 0.5 ? phase : 1.0-phase) * 4 - 1);
+	return (phase <= 0.5 ? phase : 1.0 - phase) * 4.0 - 1.0;
 }

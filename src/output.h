@@ -18,6 +18,8 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
+#include <stdint.h>
+
 #include "waves.h"
 
 float phase(float frequency, int sample);
