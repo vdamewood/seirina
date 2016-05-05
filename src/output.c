@@ -17,7 +17,6 @@
 
 #include <stdio.h>
 #include <math.h>
-//#include <string.h>
 #include <stdint.h>
 
 #include "waves.h"

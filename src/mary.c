@@ -15,10 +15,7 @@
  * limitations under the License.
  */
 
-//#include <stdio.h>
-//#include <math.h>
 #include <string.h>
-//#include <stdint.h>
 
 #include "output.h"
 #include "waves.h"
