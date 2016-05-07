@@ -21,7 +21,7 @@
 
 double square(double phase)
 {
-	return phase < 0.5 ? 1 : -1;
+	return phase < 0.5 ? 1.0 : -1.0;
 }
 
 double sine(double phase)
