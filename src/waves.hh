@@ -1,4 +1,4 @@
-/* wave.c: Generate a C chord in various wave forms
+/* waves.hh: Various waveforms
  *
  * Copyright 2016 Vincent Damewood
  *
