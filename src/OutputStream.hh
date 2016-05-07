@@ -1,4 +1,4 @@
-/* wave.c: Generate a C chord in various wave forms
+/* OutputStream.h: Interface for outputting audio data
  *
  * Copyright 2016 Vincent Damewood
  *
@@ -15,15 +15,16 @@
  * limitations under the License.
  */
 
-#ifndef WAVES_H
-#define WAVES_H
+#ifndef OUTPUT_STREAM_H
+#define OUTPUT_STREAM_H
 
-typedef double (*fpWave)(double);
+class OutputStream
+{
+public:
+	virtual void WriteFrame(short) = 0;
+	virtual void WriteFrame(short, short) = 0;
+	virtual ~OutputStream();
+};
 
-double square(double phase);
-double sine(double phase);
-double absine(double phase);
-double saw(double phase);
-double triangle(double phase);
 
-#endif /* WAVES_H */
+#endif /* OUTPUT_STREAM_H */

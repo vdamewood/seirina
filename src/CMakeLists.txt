@@ -13,9 +13,9 @@
 # limitations under the License.
 
 set(LIBNAME  Seirina)
-set(LIBPHDRS output.h waves.h)
+set(LIBPHDRS OutputStream.hh WaveFile.hh waves.hh)
 set(LIBHDRS  ${LIBPHDRS})
-set(LIBSRCS  output.c waves.c)
+set(LIBSRCS  OutputStream.cc WaveFile.cc waves.cc)
 
 add_library(${LIBNAME} ${LIBHDRS} ${LIBSRCS})
 set_target_properties(${LIBNAME}
@@ -29,7 +29,7 @@ install(TARGETS ${LIBNAME}
   FRAMEWORK     DESTINATION ${FRAMEWORK_INSTALL_PATH}
   PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH}/${LIBNAME})
 
-add_executable(cmaj ${LIBPHDRS} cmaj.c)
+add_executable(cmaj ${LIBPHDRS} cmaj.cc)
 target_link_libraries(cmaj ${LIBNAME})
-add_executable(mary ${LIBPHDRS} mary.c)
+add_executable(mary ${LIBPHDRS} mary.cc)
 target_link_libraries(mary ${LIBNAME})

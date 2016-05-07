@@ -1,4 +1,4 @@
-/* wave.c: Generate a C chord in various wave forms
+/* WaveFile.h: Output to .wav file
  *
  * Copyright 2016 Vincent Damewood
  *
@@ -15,33 +15,22 @@
  * limitations under the License.
  */
 
-#include <math.h>
+#ifndef WAVE_FILE_H
+#define WAVE_FILE_H
 
-#include "waves.h"
+#include "OutputStream.hh"
 
-double square(double phase)
+class WaveFilePrivate;
+
+class WaveFile : public OutputStream
 {
-	return phase < 0.5 ? 1.0 : -1.0;
-}
+public:
+	WaveFile(const char* Filename);
+	virtual void WriteFrame(short);
+	virtual void WriteFrame(short, short);
+	virtual ~WaveFile();
+private:
+	WaveFilePrivate *d;
+};
 
-double sine(double phase)
-{
-	return sin(phase * M_PI * 2);
-}
-
-double absine(double phase)
-{
-	return fabs(sin((phase+1.0/6.0) * M_PI)) * 2.0 - 1.0;
-}
-
-double saw(double phase)
-{
-	phase = fmod(phase + 0.5, 1.0);
-	return phase * 2.0 - 1.0;
-}
-
-double triangle(double phase)
-{
-	phase = fmod(phase + 0.25, 1.0);
-	return (phase <= 0.5 ? phase : 1.0 - phase) * 4.0 - 1.0;
-}
+#endif /* WAVE_FILE_H */

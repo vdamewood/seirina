@@ -1,4 +1,4 @@
-/* output.h: Output data
+/* OutputStream.cc: Interface for outputting audio data
  *
  * Copyright 2016 Vincent Damewood
  *
@@ -15,17 +15,6 @@
  * limitations under the License.
  */
 
-#ifndef OUTPUT_H
-#define OUTPUT_H
+#include "OutputStream.hh"
 
-#include <stdint.h>
-
-#include "waves.h"
-
-float phase(float frequency, int sample);
-void Output16(uint16_t output);
-void Output32(const uint32_t output);
-void OutputHeader(uint32_t SampleCount);
-void NoteOut(fpWave wave, float note, int duration);
-
-#endif /* OUTPUT_H */
+OutputStream::~OutputStream() { }

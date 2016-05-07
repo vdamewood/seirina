@@ -1,4 +1,4 @@
-/* cmaj.c: Generate a C chord in various wave forms
+/* cmaj.cc: Generate a C chord in various wave forms
  *
  * Copyright 2016 Vincent Damewood
  *
@@ -15,10 +15,11 @@
  * limitations under the License.
  */
 
-#include <string.h>
+#include <cstring>
+#include <string>
 
-#include "output.h"
-#include "waves.h"
+#include "wavefile.hh"
+#include "waves.hh"
 
 #define noteC 261.6
 #define noteE 329.6
@@ -29,24 +30,47 @@
 int main(int argc, char *argv[])
 {
 	fpWave wave = saw;
+	std::string Filename = "cmaj-";
 
 	if (argc == 2)
 	{
-		if (strcmp(argv[1], "sine") == 0)
+		if (std::strcmp(argv[1], "sine") == 0)
+		{
 			wave = sine;
-		else if (strcmp(argv[1], "square") == 0)
+			Filename += "sine";
+		}
+		else if (std::strcmp(argv[1], "square") == 0)
+		{
 			wave = square;
-		else if (strcmp(argv[1], "absine") == 0)
+			Filename += "square";
+		}
+		else if (std::strcmp(argv[1], "absine") == 0)
+		{
 			wave = absine;
-		else if (strcmp(argv[1], "triangle") == 0)
+			Filename += "absine";
+		}
+		else if (std::strcmp(argv[1], "triangle") == 0)
+		{
 			wave = triangle;
+			Filename += "triangle";
+		}
+		else
+		{
+			Filename += "saw";
+		}
+	}
+	else
+	{
+		Filename += "saw";
 	}
 
-	OutputHeader(3 * 44100);
+	Filename += ".wav";
+
+	WaveFile myFile(Filename.c_str());
 
 	for (int i = 0; i < SampleRate*3; i++)
 	{
-		uint16_t total = (0
+		short total = (0
 			+ wave(phase(noteC, i))
 			+ ((i > SampleRate)
 				? wave(phase(noteE, i-SampleRate))
@@ -55,8 +79,7 @@ int main(int argc, char *argv[])
 				? wave(phase(noteG, i-SampleRate*2))
 				: 0))/3*0x7FFF;
 
-		Output16(total);
-		Output16(total);
+		myFile.WriteFrame(total);
 	}
 }
 
