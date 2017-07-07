@@ -20,6 +20,7 @@
 
 #include "WaveFile.hh"
 #include "waves.hh"
+#include "adsr.h"
 
 #define hstep 1.0594630943592951988208028
 
@@ -32,9 +33,11 @@
 
 void NoteOut(fpWave wave, float note, int duration, OutputStream* stream)
 {
+	int release = 0;
+	AdsrEnvelope e(2000, 14000, 0.0, release);
 	for (int i = 0; i < duration; i++)
 	{
-		unsigned int total = (wave(phase(note, i)) * 0x7FFF);
+		unsigned int total = (wave(phase(note, i)) * e.GetSample(i, duration-release) *0x7FFF);
 
 		stream->WriteFrame(total);
 	}
