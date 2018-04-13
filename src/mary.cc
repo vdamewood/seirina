@@ -23,7 +23,7 @@
 
 #define hstep 1.0594630943592951988208028
 
-#define noteA 400.0
+#define noteA 440.0
 #define noteB (noteA * hstep * hstep)
 #define noteG (noteA / hstep / hstep)
 #define noteD (noteB * hstep * hstep * hstep)
@@ -114,4 +114,3 @@ int main(int argc, char *argv[])
 
 	NoteOut(wave, noteG, BeatLength*4, &myWaveFile);
 }
-
