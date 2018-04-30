@@ -19,8 +19,8 @@
 #include <iostream>
 #include <string>
 
-#include "WaveFile.hh"
-#include "waves.hh"
+#include "WaveFile.h"
+#include "waves.h"
 
 #define hstep 1.0594630943592951988208028
 

@@ -17,7 +17,7 @@
 
 #include <cmath>
 
-#include "waves.hh"
+#include "Waves.h"
 
 #define SampleRate 44100
 float phase(float frequency, int sample)

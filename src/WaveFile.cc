@@ -17,7 +17,7 @@
 
 #include <fstream>
 
-#include "WaveFile.hh"
+#include "WaveFile.h"
 
 class WaveFilePrivate
 {

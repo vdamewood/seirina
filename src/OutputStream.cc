@@ -15,6 +15,6 @@
  * limitations under the License.
  */
 
-#include "OutputStream.hh"
+#include "OutputStream.h"
 
 OutputStream::~OutputStream() { }

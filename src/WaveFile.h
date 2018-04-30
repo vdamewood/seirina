@@ -18,7 +18,7 @@
 #ifndef WAVE_FILE_H
 #define WAVE_FILE_H
 
-#include "OutputStream.hh"
+#include "OutputStream.h"
 
 class WaveFilePrivate;
 

@@ -18,8 +18,8 @@
 #include <cstring>
 #include <string>
 
-#include "wavefile.hh"
-#include "waves.hh"
+#include "WaveFile.h"
+#include "Waves.h"
 
 #define noteC 261.6
 #define noteE 329.6
@@ -82,4 +82,3 @@ int main(int argc, char *argv[])
 		myFile.WriteFrame(total);
 	}
 }
-
