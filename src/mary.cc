@@ -16,6 +16,7 @@
  */
 
 #include <cstring>
+#include <iostream>
 #include <string>
 
 #include "WaveFile.hh"
@@ -42,43 +43,72 @@ void NoteOut(fpWave wave, float note, int duration, OutputStream* stream)
 
 int main(int argc, char *argv[])
 {
-	fpWave wave = saw;
-	std::string Filename = "mary-";
+	fpWave wave = sine;
+	std::string WaveName = "sine";
+	std::string InFileName = "input.txt";
+	std::string OutFileName = "output.wav";
 
-	if (argc == 2)
+
+	for (int arg = 1; arg < argc; arg++)
 	{
-		if (std::strcmp(argv[1], "sine") == 0)
+		if (argv[arg][0] == '-')
 		{
-			wave = sine;
-			Filename += "sine";
-		}
-		else if (std::strcmp(argv[1], "square") == 0)
-		{
-			wave = square;
-			Filename += "square";
-		}
-		else if (std::strcmp(argv[1], "absine") == 0)
-		{
-			wave = absine;
-			Filename += "absine";
-		}
-		else if (std::strcmp(argv[1], "triangle") == 0)
-		{
-			wave = triangle;
-			Filename += "triangle";
+			switch (argv[arg][1])
+			{
+			case 'i':
+				arg++;
+				InFileName = argv[arg];
+				break;
+			case 'o':
+				arg++;
+				OutFileName = argv[arg];
+				break;
+			case 'w':
+				arg++;
+				if (std::strcmp(argv[arg], "sine") == 0)
+				{
+					wave = sine;
+					WaveName = "sine";
+				}
+				else if (std::strcmp(argv[arg], "square") == 0)
+				{
+					wave = square;
+					WaveName = "square";
+				}
+				else if (std::strcmp(argv[arg], "absine") == 0)
+				{
+					wave = absine;
+					WaveName = "absine";
+				}
+				else if (std::strcmp(argv[arg], "saw") == 0)
+				{
+					wave = saw;
+					WaveName = "saw";
+				}
+				else if (std::strcmp(argv[arg], "triangle") == 0)
+				{
+					wave = triangle;
+					WaveName = "triangle";
+				}
+				else
+				{
+					std::cout << "Bad waveform\n";
+					exit(1);
+				}
+				break;
+			default:
+				std::cout << "Bad flag\n";
+				exit(1);
+			}
 		}
 		else
 		{
-			Filename += "saw";
+			std::cout << "Bad argument: " << argv[arg] << "\n";
+			exit(1);
 		}
 	}
-	else
-	{
-		Filename += "saw";
-	}
-	Filename += ".wav";
 
-	WaveFile myWaveFile(Filename.c_str());
+	WaveFile myWaveFile(OutFileName.c_str());
 
 	NoteOut(wave, noteB, BeatLength, &myWaveFile);
 	NoteOut(wave, noteA, BeatLength, &myWaveFile);
