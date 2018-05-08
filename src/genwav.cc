@@ -103,9 +103,9 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		Note innote = Input.Fetch();
-		if (innote.Pitch == 0.0)
+		if (innote.Pitch().Class() == PitchClass::None)
 			break;
 		else
-			NoteOut(wave, innote.Pitch, BeatLength*innote.Length, &myWaveFile);
+			NoteOut(wave, innote.Pitch().Frequency(), BeatLength*innote.Duration(), &myWaveFile);
 	}
 }

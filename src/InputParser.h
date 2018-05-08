@@ -18,11 +18,7 @@
 #if !defined INPUT_PARSER_H
 #define INPUT_PARSER_H
 
-struct Note
-{
-	double Pitch;
-	int Length;
-};
+#include "Note.h"
 
 class InputParserPrivate;
 class InputParser

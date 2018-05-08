@@ -13,9 +13,9 @@
 # limitations under the License.
 
 set(LIBNAME  Seirina)
-set(LIBPHDRS OutputStream.h WaveFile.h Waves.h)
+set(LIBPHDRS OutputStream.h WaveFile.h Waves.h Note.h)
 set(LIBHDRS  ${LIBPHDRS})
-set(LIBSRCS  OutputStream.cc WaveFile.cc Waves.cc)
+set(LIBSRCS  OutputStream.cc WaveFile.cc Waves.cc Note.cc Mpc.cc)
 
 add_library(${LIBNAME} ${LIBHDRS} ${LIBSRCS})
 set_target_properties(${LIBNAME}

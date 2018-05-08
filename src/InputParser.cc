@@ -19,16 +19,6 @@
 
 #include "InputParser.h"
 
-// Part of Note
-#define hstep 1.0594630943592951988208028
-
-#define noteA 440.0
-#define noteG (noteA / hstep / hstep)
-#define noteB (noteA * hstep * hstep)
-#define noteC (noteB * hstep)
-#define noteD (noteC * hstep * hstep)
-
-
 class InputParserPrivate
 {
 public:
@@ -61,8 +51,10 @@ enum State
 
 Note InputParser::Fetch()
 {
-	Note rVal = {0.0, 0};
-
+	char NoteLetter = ' ';
+	char NoteAccidental = ' ';
+	int NoteOctave = 4;
+	int NoteDuration = 1;
 	State St = Letter;
 	while (St != End)
 	{
@@ -77,26 +69,20 @@ Note InputParser::Fetch()
 				case '=':
 					St = Comment;
 					break;
-				case 'G':
-					rVal.Pitch = noteG;
-					break;
 				case 'A':
-					rVal.Pitch = noteA;
-					break;
 				case 'B':
-					rVal.Pitch = noteB;
-					break;
 				case 'C':
-					rVal.Pitch = noteC;
-					break;
 				case 'D':
-					rVal.Pitch = noteD;
+				case 'E':
+				case 'F':
+				case 'G':
+					NoteLetter = inChar;
 					break;
 			}
-			if (St != Comment) St = Octave;
+			if (St != Comment) St = Octave; // FIXME: Accidental
 			break;
 		case Octave:
-			// Ignore for now
+			NoteOctave = inChar - '0';
 			St = Duration;
 			break;
 		case Duration:
@@ -105,7 +91,7 @@ Note InputParser::Fetch()
 				case ',':
 					break;
 				default:
-					rVal.Length = inChar - '0';
+					NoteDuration = inChar - '0';
 					St = LineBreak;
 			}
 			break;
@@ -119,5 +105,9 @@ Note InputParser::Fetch()
 		}
 	}
 
-	return rVal;
+	return Note(
+		Pitch(
+			MakePitchClass(NoteLetter, NoteAccidental),
+			NoteOctave),
+		NoteDuration);
 }
