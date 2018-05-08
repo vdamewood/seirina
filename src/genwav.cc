@@ -1,6 +1,6 @@
-/* mary.cc: Generate Mary Had a Little Lamb in various wave forms
+/* genwav.cc: Generate music as a wav file
  *
- * Copyright 2016 Vincent Damewood
+ * Copyright 2016, 2018 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,11 @@
  */
 
 #include <cstring>
-#include <iostream>
 #include <string>
 
+#include "InputParser.h"
 #include "WaveFile.h"
-#include "waves.h"
-
-#define hstep 1.0594630943592951988208028
-
-#define noteA 440.0
-#define noteB (noteA * hstep * hstep)
-#define noteG (noteA / hstep / hstep)
-#define noteD (noteB * hstep * hstep * hstep)
+#include "Waves.h"
 
 #define BeatLength 18900 // 140 BPM: 44100*60/140
 
@@ -44,9 +37,9 @@ void NoteOut(fpWave wave, float note, int duration, OutputStream* stream)
 int main(int argc, char *argv[])
 {
 	fpWave wave = sine;
-	std::string WaveName = "sine";
-	std::string InFileName = "input.txt";
-	std::string OutFileName = "output.wav";
+	std::string WaveName("sine");
+	std::string InFileName("input.txt");
+	std::string OutFileName("output.wav");
 
 
 	for (int arg = 1; arg < argc; arg++)
@@ -92,55 +85,27 @@ int main(int argc, char *argv[])
 				}
 				else
 				{
-					std::cout << "Bad waveform\n";
 					exit(1);
 				}
 				break;
 			default:
-				std::cout << "Bad flag\n";
 				exit(1);
 			}
 		}
 		else
 		{
-			std::cout << "Bad argument: " << argv[arg] << "\n";
 			exit(1);
 		}
 	}
 
+	InputParser Input(InFileName.c_str());
 	WaveFile myWaveFile(OutFileName.c_str());
-
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-	NoteOut(wave, noteG, BeatLength, &myWaveFile);
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteB, BeatLength*2, &myWaveFile);
-
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-	NoteOut(wave, noteA, BeatLength*2, &myWaveFile);
-
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteD, BeatLength, &myWaveFile);
-	NoteOut(wave, noteD, BeatLength*2, &myWaveFile);
-
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-	NoteOut(wave, noteG, BeatLength, &myWaveFile);
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-	NoteOut(wave, noteB, BeatLength, &myWaveFile);
-	NoteOut(wave, noteA, BeatLength, &myWaveFile);
-
-	NoteOut(wave, noteG, BeatLength*4, &myWaveFile);
+	while (1)
+	{
+		Note innote = Input.Fetch();
+		if (innote.Pitch == 0.0)
+			break;
+		else
+			NoteOut(wave, innote.Pitch, BeatLength*innote.Length, &myWaveFile);
+	}
 }

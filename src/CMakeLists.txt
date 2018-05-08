@@ -1,4 +1,4 @@
-# Copyright 2016 Vincent Damewood
+# Copyright 2016, 2018 Vincent Damewood
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,5 +31,5 @@ install(TARGETS ${LIBNAME}
 
 add_executable(cmaj ${LIBPHDRS} cmaj.cc)
 target_link_libraries(cmaj ${LIBNAME})
-add_executable(mary ${LIBPHDRS} mary.cc)
-target_link_libraries(mary ${LIBNAME})
+add_executable(genwav ${LIBPHDRS} InputParser.cc genwav.cc)
+target_link_libraries(genwav ${LIBNAME})
