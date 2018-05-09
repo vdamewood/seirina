@@ -1,4 +1,4 @@
-/* waves.hh: Various waveforms
+/* waves.h: Various waveforms
  *
  * Copyright 2016 Vincent Damewood
  *
