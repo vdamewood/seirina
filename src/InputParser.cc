@@ -38,7 +38,7 @@ InputParser::~InputParser()
 	delete d;
 }
 
-enum State
+enum class State
 {
 	EndOfFile = 0,
 	Letter = 1,
@@ -55,19 +55,19 @@ Note InputParser::Fetch()
 	char NoteAccidental = ' ';
 	int NoteOctave = 4;
 	int NoteDuration = 1;
-	State St = Letter;
-	while (St != End)
+	State St = State::Letter;
+	while (St != State::End)
 	{
 		int inChar = d->File->get();
 		if (inChar == EOF)
 			break;
 		switch (St)
 		{
-		case Letter:
+		case State::Letter:
 			switch (inChar)
 			{
 				case '=':
-					St = Comment;
+					St = State::Comment;
 					break;
 				case 'A':
 				case 'B':
@@ -79,29 +79,29 @@ Note InputParser::Fetch()
 					NoteLetter = inChar;
 					break;
 			}
-			if (St != Comment) St = Octave; // FIXME: Accidental
+			if (St != State::Comment) St = State::Octave; // FIXME: Accidental
 			break;
-		case Octave:
+		case State::Octave:
 			NoteOctave = inChar - '0';
-			St = Duration;
+			St = State::Duration;
 			break;
-		case Duration:
+		case State::Duration:
 			switch (inChar)
 			{
 				case ',':
 					break;
 				default:
 					NoteDuration = inChar - '0';
-					St = LineBreak;
+					St = State::LineBreak;
 			}
 			break;
-		case Comment:
+		case State::Comment:
 			if (inChar == '\n')
-				St = Letter;
+				St = State::Letter;
 			break;
-		case LineBreak:
+		case State::LineBreak:
 			if ((inChar) == '\n')
-				St = End;
+				St = State::End;
 		}
 	}
 
