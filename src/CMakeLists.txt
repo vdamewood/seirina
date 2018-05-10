@@ -29,7 +29,5 @@ install(TARGETS ${LIBNAME}
   FRAMEWORK     DESTINATION ${FRAMEWORK_INSTALL_PATH}
   PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH}/${LIBNAME})
 
-add_executable(cmaj ${LIBPHDRS} cmaj.cc)
-target_link_libraries(cmaj ${LIBNAME})
 add_executable(genwav ${LIBPHDRS} InputParser.cc genwav.cc)
 target_link_libraries(genwav ${LIBNAME})
