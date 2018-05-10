@@ -1,10 +1,6 @@
-*.o
 *.wav
 *.mp3
 *.m4a
 *.ogg
 *.flac
-Build
-build
-cmaj
-mary
+/[Bb]uild*
