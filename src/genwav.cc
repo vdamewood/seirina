@@ -20,27 +20,20 @@
 
 #include "InputParser.h"
 #include "WaveFile.h"
-#include "Waves.h"
+#include "Timbre.h"
 
-#define BeatLength 18900 // 140 BPM: 44100*60/140
-
-void NoteOut(fpWave wave, float note, int duration, OutputStream* stream)
+void NoteOut(Note note, Timbre timbre, OutputStream* stream)
 {
-	for (int i = 0; i < duration; i++)
-	{
-		unsigned int total = (wave(phase(note, i)) * 0x7FFF);
-
-		stream->WriteFrame(total);
-	}
+	const int BeatLength = 18900; // 140 BPM: 44100*60/140
+	for (int i = 0; i < BeatLength * note.Duration(); i++)
+		stream->WriteFrame(timbre.Sample(note, i) * 0x7FFF);
 }
 
 int main(int argc, char *argv[])
 {
-	fpWave wave = sine;
 	std::string WaveName("sine");
 	std::string InFileName("input.txt");
 	std::string OutFileName("output.wav");
-
 
 	for (int arg = 1; arg < argc; arg++)
 	{
@@ -58,35 +51,7 @@ int main(int argc, char *argv[])
 				break;
 			case 'w':
 				arg++;
-				if (std::strcmp(argv[arg], "sine") == 0)
-				{
-					wave = sine;
-					WaveName = "sine";
-				}
-				else if (std::strcmp(argv[arg], "square") == 0)
-				{
-					wave = square;
-					WaveName = "square";
-				}
-				else if (std::strcmp(argv[arg], "absine") == 0)
-				{
-					wave = absine;
-					WaveName = "absine";
-				}
-				else if (std::strcmp(argv[arg], "saw") == 0)
-				{
-					wave = saw;
-					WaveName = "saw";
-				}
-				else if (std::strcmp(argv[arg], "triangle") == 0)
-				{
-					wave = triangle;
-					WaveName = "triangle";
-				}
-				else
-				{
-					exit(1);
-				}
+				WaveName = argv[arg];
 				break;
 			default:
 				exit(1);
@@ -98,14 +63,16 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	Timbre MyTimbre(WaveName.c_str());
 	InputParser Input(InFileName.c_str());
 	WaveFile myWaveFile(OutFileName.c_str());
+
 	while (1)
 	{
 		Note innote = Input.Fetch();
 		if (innote.Pitch().Class() == PitchClass::None)
 			break;
 		else
-			NoteOut(wave, innote.Pitch().Frequency(), BeatLength*innote.Duration(), &myWaveFile);
+			NoteOut(innote, MyTimbre, &myWaveFile);
 	}
 }

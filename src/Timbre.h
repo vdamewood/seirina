@@ -1,6 +1,7 @@
-/* waves.h: Various waveforms
+/* Timbre.h: Sound timbre handling
  *
- * Copyright 2016 Vincent Damewood
+ * Copyright 2016, 2018 Vincent Damewood
+
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +19,16 @@
 #ifndef WAVES_H
 #define WAVES_H
 
-typedef double (*fpWave)(double);
+#include "Note.h"
 
-float phase(float frequency, int sample);
-
-double square(double phase);
-double sine(double phase);
-double absine(double phase);
-double saw(double phase);
-double triangle(double phase);
+class Timbre
+{
+public:
+	Timbre (const char* NewWaveform);
+	double Sample(Note note, int sequence);
+private:
+	class Pimpl;
+	Pimpl* p;
+};
 
 #endif /* WAVES_H */
