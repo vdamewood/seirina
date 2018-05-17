@@ -25,6 +25,7 @@ class Timbre
 {
 public:
 	Timbre (const char* NewWaveform);
+	~Timbre();
 	double Sample(Note note, int sequence);
 private:
 	class Pimpl;

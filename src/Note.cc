@@ -90,6 +90,11 @@ Pitch::Pitch(PitchClass newClass, int newOctave)
 {
 }
 
+Pitch::~Pitch()
+{
+	delete p;
+}
+
 PitchClass Pitch::Class() const
 {
 	return p->PitchClass;
@@ -121,6 +126,11 @@ Note::Note(class Pitch newPitch, int  newDuration)
 	: p(new Pimpl(newPitch, newDuration))
 {
 
+}
+
+Note::~Note()
+{
+	delete p;
 }
 
 const Pitch& Note::Pitch() const

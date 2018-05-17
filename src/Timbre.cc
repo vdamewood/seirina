@@ -82,6 +82,11 @@ Timbre::Timbre (const char* NewWaveFormName)
 	p = new Pimpl(NewWaveForm);
 }
 
+Timbre::~Timbre()
+{
+	delete p;
+}
+
 double Timbre::Sample(Note note, int sequence)
 {
 	return p->Waveform(phase(note.Pitch().Frequency(), sequence));
