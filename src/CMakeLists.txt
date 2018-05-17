@@ -15,7 +15,7 @@
 set(LIBNAME  Seirina)
 set(LIBPHDRS OutputStream.h WaveFile.h Timbre.h Note.h)
 set(LIBHDRS  ${LIBPHDRS})
-set(LIBSRCS  OutputStream.cc WaveFile.cc Timbre.cc Note.cc Mpc.cc)
+set(LIBSRCS  OutputStream.cc WaveFile.cc Timbre.cc Note.cc)
 
 add_library(${LIBNAME} ${LIBHDRS} ${LIBSRCS})
 set_target_properties(${LIBNAME}

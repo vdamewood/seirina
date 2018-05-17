@@ -48,6 +48,31 @@ std::map<PitchClass, double> PitchMap
 	{PitchClass::B_Sharp, 523.25},
 };
 
+PitchClass MakePitchClass(char Letter, char Accidental)
+{
+	if (Letter >= 'a' && Letter <= 'g')
+		Letter -= 'a' - 'A';
+
+	if (Letter < 'A' || Letter > 'G')
+		return PitchClass::None;
+
+	int Adjustment = 2;
+	switch (Accidental)
+	{
+		case '-':
+		case 'b':
+			Adjustment = 1;
+			break;
+		case '+':
+		case '#':
+			Adjustment = 3;
+			break;
+		default:
+			break;
+	}
+	return static_cast<PitchClass>((Letter - 'A')*3 + Adjustment);
+}
+
 class Pitch::Pimpl
 {
 public:
