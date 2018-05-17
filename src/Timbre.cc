@@ -76,10 +76,16 @@ public:
 	fpWave Waveform;
 };
 
-Timbre::Timbre (const char* NewWaveFormName)
+Timbre::Timbre(const char* NewWaveFormName)
 {
 	fpWave NewWaveForm = Waveforms[std::string(NewWaveFormName)];
 	p = new Pimpl(NewWaveForm);
+}
+
+Timbre::Timbre(const Timbre& src)
+	: p(new Pimpl(src.p->Waveform))
+{
+
 }
 
 Timbre::~Timbre()

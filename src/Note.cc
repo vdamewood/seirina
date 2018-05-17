@@ -90,6 +90,12 @@ Pitch::Pitch(PitchClass newClass, int newOctave)
 {
 }
 
+Pitch::Pitch(const Pitch& src)
+	: p(new Pimpl(src.p->PitchClass, src.p->Octave))
+{
+
+}
+
 Pitch::~Pitch()
 {
 	delete p;
@@ -126,6 +132,11 @@ Note::Note(class Pitch newPitch, int  newDuration)
 	: p(new Pimpl(newPitch, newDuration))
 {
 
+}
+
+Note::Note(const Note& src)
+	: p(new Pimpl(src.p->Pitch, src.p->Duration))
+{
 }
 
 Note::~Note()

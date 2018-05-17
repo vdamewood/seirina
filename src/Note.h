@@ -50,6 +50,7 @@ class Pitch
 {
 public:
 	Pitch(PitchClass, int Octave);
+	Pitch(const Pitch&);
 	PitchClass Class() const;
 	~Pitch();
 
@@ -66,6 +67,7 @@ class Note
 public:
 	// FIXME: Duration should probably be a rational
 	Note(class Pitch, int Duration);
+	Note(const Note&);
 	~Note();
 	const Pitch& Pitch() const;
 	int Duration() const;
