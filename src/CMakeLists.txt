@@ -1,4 +1,4 @@
-# Copyright 2016, 2018 Vincent Damewood
+# Copyright 2018 Vincent Damewood
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,9 @@
 # permissions and limitations under the License.
 
 set(LIBNAME  Seirina)
-set(LIBPHDRS OutputStream.h WaveFile.h Timbre.h Note.h)
+set(LIBPHDRS AudioFrame.h OutputStream.h WaveFile.h Timbre.h Note.h)
 set(LIBHDRS  ${LIBPHDRS})
-set(LIBSRCS  OutputStream.cc WaveFile.cc Timbre.cc Note.cc)
+set(LIBSRCS  AudioFrame.cc OutputStream.cc WaveFile.cc Timbre.cc Note.cc)
 
 add_library(${LIBNAME} ${LIBHDRS} ${LIBSRCS})
 set_target_properties(${LIBNAME}

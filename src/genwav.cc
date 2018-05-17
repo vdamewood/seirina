@@ -26,7 +26,7 @@ void NoteOut(Note note, Timbre timbre, OutputStream* stream)
 {
 	const int BeatLength = 18900; // 140 BPM: 44100*60/140
 	for (int i = 0; i < BeatLength * note.Duration(); i++)
-		stream->WriteFrame(timbre.Sample(note, i) * 0x7FFF);
+		stream->WriteFrame(timbre.GetFrame(note, i));
 }
 
 int main(int argc, char *argv[])

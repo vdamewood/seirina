@@ -1,7 +1,6 @@
-/* Timbre.h: Sound timbre handling
+/* AudioFrame.cc: Representation of momentary audio sample
  *
  * Copyright 2016, 2018 Vincent Damewood
-
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +15,21 @@
  * permissions and limitations under the License.
  */
 
-#ifndef WAVES_H
-#define WAVES_H
+#if !defined AUDIO_FRAME_H
+#define AUDIO_FRAME_H
 
-#include "AudioFrame.h"
-#include "Note.h"
-
-class Timbre
+class AudioFrame
 {
 public:
-	Timbre (const char* NewWaveform);
-	Timbre(const Timbre&);
-	~Timbre();
-	AudioFrame GetFrame(Note, int sequence);
+	AudioFrame(double); // mono
+	AudioFrame(double, double); //stereo
+	~AudioFrame();
+
+	double Left();
+	double Right();
 private:
 	class Pimpl;
 	Pimpl* p;
 };
 
-#endif /* WAVES_H */
+#endif /* AUDIO_FRAME_H */

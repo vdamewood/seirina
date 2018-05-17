@@ -80,14 +80,8 @@ WaveFile::~WaveFile()
 	delete d;
 }
 
-void WaveFile::WriteFrame(short input)
+void WaveFile::WriteFrame(AudioFrame frame)
 {
-	d->WriteSample(input);
-	d->WriteSample(input);
-}
-
-void WaveFile::WriteFrame(short left, short right)
-{
-	d->WriteSample(left);
-	d->WriteSample(right);
+	d->WriteSample(frame.Left() * 0x7FFF);
+	d->WriteSample(frame.Right() * 0x7FFF);
 }

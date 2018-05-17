@@ -98,7 +98,7 @@ Pitch::Pitch(const Pitch& src)
 
 Pitch::~Pitch()
 {
-	delete p;
+	//delete p;
 }
 
 PitchClass Pitch::Class() const
@@ -141,7 +141,7 @@ Note::Note(const Note& src)
 
 Note::~Note()
 {
-	delete p;
+	//delete p;
 }
 
 const Pitch& Note::Pitch() const

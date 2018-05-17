@@ -18,11 +18,12 @@
 #ifndef OUTPUT_STREAM_H
 #define OUTPUT_STREAM_H
 
+#include "AudioFrame.h"
+
 class OutputStream
 {
 public:
-	virtual void WriteFrame(short) = 0;
-	virtual void WriteFrame(short, short) = 0;
+	virtual void WriteFrame(AudioFrame) = 0;
 	virtual ~OutputStream();
 };
 

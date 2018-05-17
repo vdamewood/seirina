@@ -90,10 +90,10 @@ Timbre::Timbre(const Timbre& src)
 
 Timbre::~Timbre()
 {
-	delete p;
+	//delete p;
 }
 
-double Timbre::Sample(Note note, int sequence)
+AudioFrame Timbre::GetFrame(Note note, int sequence)
 {
-	return p->Waveform(phase(note.Pitch().Frequency(), sequence));
+	return AudioFrame(p->Waveform(phase(note.Pitch().Frequency(), sequence)));
 }

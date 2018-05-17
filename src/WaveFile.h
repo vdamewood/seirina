@@ -26,8 +26,7 @@ class WaveFile : public OutputStream
 {
 public:
 	WaveFile(const char* Filename);
-	virtual void WriteFrame(short);
-	virtual void WriteFrame(short, short);
+	virtual void WriteFrame(AudioFrame);
 	virtual ~WaveFile();
 private:
 	WaveFilePrivate *d;
