@@ -19,15 +19,9 @@
 #include <string>
 
 #include "InputParser.h"
+#include "PlayedNote.h"
 #include "WaveFile.h"
 #include "Timbre.h"
-
-void NoteOut(Note note, Timbre timbre, OutputStream* stream)
-{
-	const int BeatLength = 18900; // 140 BPM: 44100*60/140
-	for (int i = 0; i < BeatLength * note.Duration(); i++)
-		stream->WriteFrame(timbre.GetFrame(note, i));
-}
 
 int main(int argc, char *argv[])
 {
@@ -73,6 +67,10 @@ int main(int argc, char *argv[])
 		if (innote.Pitch().Class() == PitchClass::None)
 			break;
 		else
-			NoteOut(innote, MyTimbre, &myWaveFile);
+		{
+			PlayedNote pNote(innote, MyTimbre);
+			while (pNote.IsActive())
+				myWaveFile.WriteFrame(pNote.NextFrame());
+		}
 	}
 }
