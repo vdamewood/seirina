@@ -10,15 +10,15 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * permissions and limitations under the License.
  */
 
 #ifndef WAVE_FILE_H
 #define WAVE_FILE_H
 
-#include "OutputStream.hh"
+#include "OutputStream.h"
 
 class WaveFilePrivate;
 
@@ -26,8 +26,7 @@ class WaveFile : public OutputStream
 {
 public:
 	WaveFile(const char* Filename);
-	virtual void WriteFrame(short);
-	virtual void WriteFrame(short, short);
+	virtual void WriteFrame(AudioFrame);
 	virtual ~WaveFile();
 private:
 	WaveFilePrivate *d;

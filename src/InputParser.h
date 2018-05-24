@@ -1,6 +1,6 @@
-/* OutputStream.cc: Interface for outputting audio data
+/* InputParser.h: Parser for music input files
  *
- * Copyright 2016 Vincent Damewood
+ * Copyright 2018 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,22 @@
  * permissions and limitations under the License.
  */
 
-#include "OutputStream.h"
+#if !defined INPUT_PARSER_H
+#define INPUT_PARSER_H
 
-OutputStream::~OutputStream() { }
+#include "Note.h"
+
+class InputParserPrivate;
+class InputParser
+{
+public:
+	InputParser(const char* FileName);
+	~InputParser();
+
+	Note Fetch();
+
+private:
+	InputParserPrivate* d;
+};
+
+#endif // INPUT_PARSER_H

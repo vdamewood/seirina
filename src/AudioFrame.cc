@@ -1,6 +1,6 @@
-/* OutputStream.cc: Interface for outputting audio data
+/* AudioFrame.cc: Representation of momentary audio sample
  *
- * Copyright 2016 Vincent Damewood
+ * Copyright 2018 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,39 @@
  * permissions and limitations under the License.
  */
 
-#include "OutputStream.h"
+#include "AudioFrame.h"
 
-OutputStream::~OutputStream() { }
+class AudioFrame::Pimpl
+{
+public:
+	double left;
+	double right;
+};
+
+AudioFrame::AudioFrame(double input)
+{
+	p = new Pimpl();
+	p->left = p->right = input;
+}
+
+AudioFrame::AudioFrame(double left, double right)
+{
+	p = new Pimpl();
+	p->left = left;
+	p->right = right;
+}
+
+AudioFrame::~AudioFrame()
+{
+	delete p;
+}
+
+double AudioFrame::Left()
+{
+	return p->left;
+}
+
+double AudioFrame::Right()
+{
+	return p->right;
+}

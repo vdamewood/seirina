@@ -1,6 +1,7 @@
-/* OutputStream.cc: Interface for outputting audio data
+/* Timbre.h: Sound timbre handling
  *
- * Copyright 2016 Vincent Damewood
+ * Copyright 2016, 2018 Vincent Damewood
+
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +16,22 @@
  * permissions and limitations under the License.
  */
 
-#include "OutputStream.h"
+#ifndef WAVES_H
+#define WAVES_H
 
-OutputStream::~OutputStream() { }
+#include "AudioFrame.h"
+#include "Note.h"
+
+class Timbre
+{
+public:
+	Timbre (const char* NewWaveform);
+	Timbre(const Timbre&);
+	~Timbre();
+	AudioFrame GetFrame(Note, int sequence);
+private:
+	class Pimpl;
+	Pimpl* p;
+};
+
+#endif /* WAVES_H */

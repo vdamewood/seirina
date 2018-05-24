@@ -1,4 +1,4 @@
-# Copyright 2016 Vincent Damewood
+# Copyright 2018 Vincent Damewood
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -8,14 +8,14 @@
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied. See the License for the specific language governing
+# permissions and limitations under the License.
 
 set(LIBNAME  Seirina)
-set(LIBPHDRS OutputStream.hh WaveFile.hh waves.hh adsr.h)
+set(LIBPHDRS AudioFrame.h OutputStream.h WaveFile.h Timbre.h Note.h PlayedNote.h adsr.h)
 set(LIBHDRS  ${LIBPHDRS})
-set(LIBSRCS  OutputStream.cc WaveFile.cc waves.cc adsr.cc)
+set(LIBSRCS  AudioFrame.cc OutputStream.cc WaveFile.cc Timbre.cc Note.cc PlayedNote.cc adsr.cc)
 
 add_library(${LIBNAME} ${LIBHDRS} ${LIBSRCS})
 set_target_properties(${LIBNAME}
@@ -29,7 +29,5 @@ install(TARGETS ${LIBNAME}
   FRAMEWORK     DESTINATION ${FRAMEWORK_INSTALL_PATH}
   PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH}/${LIBNAME})
 
-add_executable(cmaj ${LIBPHDRS} cmaj.cc)
-target_link_libraries(cmaj ${LIBNAME})
-add_executable(mary ${LIBPHDRS} mary.cc)
-target_link_libraries(mary ${LIBNAME})
+add_executable(genwav ${LIBPHDRS} InputParser.cc genwav.cc)
+target_link_libraries(genwav ${LIBNAME})

@@ -10,14 +10,14 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * permissions and limitations under the License.
  */
 
 #include <fstream>
 
-#include "WaveFile.hh"
+#include "WaveFile.h"
 
 class WaveFilePrivate
 {
@@ -80,14 +80,8 @@ WaveFile::~WaveFile()
 	delete d;
 }
 
-void WaveFile::WriteFrame(short input)
+void WaveFile::WriteFrame(AudioFrame frame)
 {
-	d->WriteSample(input);
-	d->WriteSample(input);
-}
-
-void WaveFile::WriteFrame(short left, short right)
-{
-	d->WriteSample(left);
-	d->WriteSample(right);
+	d->WriteSample(frame.Left() * 0x7FFF);
+	d->WriteSample(frame.Right() * 0x7FFF);
 }

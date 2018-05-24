@@ -1,6 +1,6 @@
-/* OutputStream.cc: Interface for outputting audio data
+/* PlayedNote.h: A note with timbre
  *
- * Copyright 2016 Vincent Damewood
+ * Copyright 2018 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,24 @@
  * permissions and limitations under the License.
  */
 
-#include "OutputStream.h"
+#if !defined PLAYED_NOTE_H
+#define PLAYED_NOTE_H
 
-OutputStream::~OutputStream() { }
+#include "AudioFrame.h"
+#include "Note.h"
+#include "Timbre.h"
+
+class PlayedNote
+{
+public:
+	PlayedNote(Note, Timbre);
+	PlayedNote(const PlayedNote&);
+	~PlayedNote();
+	AudioFrame NextFrame();
+	bool IsActive() const;
+private:
+	class Pimpl;
+	Pimpl* p;
+};
+
+#endif // PLAYED_NOTE_H
