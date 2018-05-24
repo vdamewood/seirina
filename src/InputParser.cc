@@ -42,6 +42,7 @@ enum class State
 {
 	EndOfFile = 0,
 	Letter = 1,
+	Accidental,
 	Octave,
 	Duration,
 	LineBreak,
@@ -79,7 +80,18 @@ Note InputParser::Fetch()
 					NoteLetter = inChar;
 					break;
 			}
-			if (St != State::Comment) St = State::Octave; // FIXME: Accidental
+			if (St != State::Comment) St = State::Accidental;
+			break;
+		case State::Accidental:
+			switch (inChar)
+			{
+				case '-':
+				case '+':
+				case 'b':
+				case '#':
+					NoteAccidental = inChar;
+			}
+			St = State::Octave;
 			break;
 		case State::Octave:
 			NoteOctave = inChar - '0';
