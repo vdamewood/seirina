@@ -65,12 +65,12 @@ private:
 class Note
 {
 public:
-	// FIXME: Duration should probably be a rational
-	Note(class Pitch, int Duration);
+	Note(class Pitch, int DurationNumerator=1,
+		int DurationDenominator=1);
 	Note(const Note&);
 	~Note();
 	const Pitch& Pitch() const;
-	int Duration() const;
+	double Duration() const;
 private:
 	class Pimpl;
 	Pimpl* p;

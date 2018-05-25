@@ -38,88 +38,102 @@ InputParser::~InputParser()
 	delete d;
 }
 
-enum class State
-{
-	EndOfFile = 0,
-	Letter = 1,
-	Accidental,
-	Octave,
-	Duration,
-	LineBreak,
-	Comment,
-	End
-};
-
 Note InputParser::Fetch()
 {
 	char NoteLetter = ' ';
 	char NoteAccidental = ' ';
 	int NoteOctave = 4;
-	int NoteDuration = 1;
-	State St = State::Letter;
-	while (St != State::End)
+	int DurationDenominator = 1;
+	int DurationNumerator = 1;
+
+	int inChar = d->File->get();
+
+	if (inChar == EOF)
+		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+
+
+	if (inChar == '=')
 	{
-		int inChar = d->File->get();
-		if (inChar == EOF)
-			break;
-		switch (St)
-		{
-		case State::Letter:
-			switch (inChar)
-			{
-				case '=':
-					St = State::Comment;
-					break;
-				case 'A':
-				case 'B':
-				case 'C':
-				case 'D':
-				case 'E':
-				case 'F':
-				case 'G':
-					NoteLetter = inChar;
-					break;
-			}
-			if (St != State::Comment) St = State::Accidental;
-			break;
-		case State::Accidental:
-			switch (inChar)
-			{
-				case '-':
-				case '+':
-				case 'b':
-				case '#':
-					NoteAccidental = inChar;
-			}
-			St = State::Octave;
-			break;
-		case State::Octave:
-			NoteOctave = inChar - '0';
-			St = State::Duration;
-			break;
-		case State::Duration:
-			switch (inChar)
-			{
-				case ',':
-					break;
-				default:
-					NoteDuration = inChar - '0';
-					St = State::LineBreak;
-			}
-			break;
-		case State::Comment:
-			if (inChar == '\n')
-				St = State::Letter;
-			break;
-		case State::LineBreak:
-			if ((inChar) == '\n')
-				St = State::End;
-		}
+		while((inChar = d->File->get()) != '\n');
+		return Fetch();
 	}
+
+
+	switch (inChar)
+	{
+	case 'A':
+	case 'B':
+	case 'C':
+	case 'D':
+	case 'E':
+	case 'F':
+	case 'G':
+		NoteLetter = inChar;
+		break;
+	case 'a':
+	case 'b':
+	case 'c':
+	case 'd':
+	case 'e':
+	case 'f':
+	case 'g':
+		NoteLetter = inChar - ('a' - 'A');
+		break;
+	default:
+		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+	}
+
+
+	switch (inChar = d->File->get())
+	{
+		case '-':
+		case '+':
+		case 'b':
+		case '#':
+		case ' ':
+			NoteAccidental = inChar;
+			inChar = d->File->get();
+	}
+
+
+	NoteOctave = inChar - '0';
+	if (inChar < '0' || inChar > '9')
+		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+	NoteOctave = inChar - '0';
+
+
+	inChar = d->File->get();
+	if (inChar != '-')
+		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+
+
+	inChar = d->File->get();
+	if (inChar < '0' || inChar > '9')
+		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+	DurationNumerator = inChar - '0';
+
+
+	inChar = d->File->get();
+	if (inChar == '/')
+	{
+		inChar = d->File->get();
+		if (inChar < '1' || inChar > '9')
+			return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+		DurationDenominator = inChar - '0';
+		inChar = d->File->get();
+	}
+
+
+	if (inChar == '\r')
+		inChar = d->File->get();
+	if (inChar != '\n')
+		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+
 
 	return Note(
 		Pitch(
 			MakePitchClass(NoteLetter, NoteAccidental),
 			NoteOctave),
-		NoteDuration);
+		DurationNumerator,
+		DurationDenominator);
 }
