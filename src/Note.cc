@@ -119,23 +119,28 @@ double  Pitch::Frequency() const
 class Note::Pimpl
 {
 public:
-	inline Pimpl(class Pitch newPitch, int newDuration)
-	: Pitch(newPitch), Duration(newDuration)
+	inline Pimpl(class Pitch newPitch,
+		int newDurationNumerator, int newDurationDenominator)
+	: Pitch(newPitch), DurationNumerator(newDurationNumerator),
+		DurationDenominator(newDurationDenominator)
 	{
 	}
 
 	class Pitch Pitch;
-	int Duration;
+	int DurationNumerator;
+	int DurationDenominator;
 };
 
-Note::Note(class Pitch newPitch, int  newDuration)
-	: p(new Pimpl(newPitch, newDuration))
+Note::Note(class Pitch newPitch, int  newDurationNumerator,
+		int newDurationDenominator)
+	: p(new Pimpl(newPitch, newDurationNumerator,
+		newDurationDenominator))
 {
-
 }
 
 Note::Note(const Note& src)
-	: p(new Pimpl(src.p->Pitch, src.p->Duration))
+	: p(new Pimpl(src.p->Pitch,
+		src.p->DurationNumerator, src.p->DurationDenominator))
 {
 }
 
@@ -149,7 +154,8 @@ const Pitch& Note::Pitch() const
 	return p->Pitch;
 }
 
-int Note::Duration() const
+double Note::Duration() const
 {
-	return p->Duration;
+	return static_cast<double>(p->DurationNumerator)
+		/ static_cast<double>(p->DurationDenominator);
 }
