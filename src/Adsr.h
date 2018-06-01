@@ -1,6 +1,6 @@
 /* adsr.cc: Attack/Decay/Sustain/Release Envelops
  *
- * Copyright 2017 Vincent Damewood
+ * Copyright 2017, 2018 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,10 @@ public:
 	AdsrEnvelope(int newAttack, int newDecay, double newSustain, int newRelease);
 	double GetSample(int position, int duration);
 private:
-	int attack;
-	int decay;
-	double sustain;
-	int release;
+	class Pimpl;
+	Pimpl* p;
+	//int attack;
+	//int decay;
+	//double sustain;
+	//int release;
 };
