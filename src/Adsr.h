@@ -23,8 +23,4 @@ public:
 private:
 	class Pimpl;
 	Pimpl* p;
-	//int attack;
-	//int decay;
-	//double sustain;
-	//int release;
 };
