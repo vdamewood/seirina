@@ -23,10 +23,12 @@ class AudioFrame
 public:
 	AudioFrame(double); // mono
 	AudioFrame(double, double); //stereo
+
 	~AudioFrame();
 
-	double Left();
-	double Right();
+	double Left() const;
+	double Right() const;
+	AudioFrame Transform(double transformation) const;
 private:
 	class Pimpl;
 	Pimpl* p;

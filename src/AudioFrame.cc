@@ -42,12 +42,17 @@ AudioFrame::~AudioFrame()
 	delete p;
 }
 
-double AudioFrame::Left()
+double AudioFrame::Left() const
 {
 	return p->left;
 }
 
-double AudioFrame::Right()
+double AudioFrame::Right() const
 {
 	return p->right;
+}
+
+AudioFrame AudioFrame::Transform(double transformation) const
+{
+	return AudioFrame(p->left * transformation, p->right * transformation);
 }

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-#include "adsr.h"
+#include "Adsr.h"
 
 AdsrEnvelope::AdsrEnvelope(
 	int newAttack,
@@ -31,9 +31,9 @@ AdsrEnvelope::AdsrEnvelope(
 
 double AdsrEnvelope::GetSample(int position, int duration)
 {
-	if (position <= attack)
+	if (position < attack)
 		return static_cast<double>(position)/static_cast<double>(attack);
-	else if (position <= (attack+decay))
+	else if (position < (attack+decay))
 		return 1.0
 			- static_cast<double>(position - attack)
 			* (1.0 - sustain)
@@ -41,14 +41,6 @@ double AdsrEnvelope::GetSample(int position, int duration)
 	else if (position <= duration)
 		return sustain;
 	else
-		return sustain * static_cast<double>(position-duration)
-			/ static_cast<double>(release);
+		return sustain * 1.0 - (static_cast<double>(position-duration)
+			/ static_cast<double>(release));
 }
-
-
-
-
-
-
-
-

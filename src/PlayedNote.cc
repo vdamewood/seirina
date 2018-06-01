@@ -15,25 +15,29 @@
  * permissions and limitations under the License.
  */
 
+#include "Adsr.h"
 #include "Note.h"
 #include "Timbre.h"
 
 #include "PlayedNote.h"
 
+// FIXME: these shouldn't be constants here
+const int BeatLength = 18900; // 140 BPM: 44100*60/140
+const int ReleaseLength = BeatLength/4;
+
 class PlayedNote::Pimpl
 {
 public:
 	Pimpl(Note newNote, Timbre newTimbre)
-		: note(newNote), timbre(newTimbre)
+		: note(newNote), timbre(newTimbre), adsr(0, 0, 1.0, ReleaseLength)
 	{ }
 	Note note;
 	Timbre timbre;
+	AdsrEnvelope adsr;
 	int framePosition = 0;
 	int frameLength = 0;
 };
 
-// FIXME: this shouldn't be a constant here
-const int BeatLength = 18900; // 140 BPM: 44100*60/140
 PlayedNote::PlayedNote(Note newNote, Timbre newTimbre)
 	: p(new Pimpl(newNote, newTimbre))
 {
@@ -54,7 +58,10 @@ PlayedNote::~PlayedNote()
 
 AudioFrame PlayedNote::NextFrame()
 {
-	return p->timbre.GetFrame(p->note, p->framePosition++);
+	double framePosition = p->framePosition++;
+	AudioFrame f = p->timbre.GetFrame(p->note, framePosition);
+	double s = p->adsr.GetSample(framePosition, p->frameLength - ReleaseLength);
+	return f.Transform(s);
 }
 
 bool PlayedNote::IsActive() const
