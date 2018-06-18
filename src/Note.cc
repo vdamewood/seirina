@@ -15,6 +15,7 @@
  * permissions and limitations under the License.
  */
 
+#include <cmath>
 #include <map>
 
 #include "Note.h"
@@ -113,7 +114,7 @@ int Pitch::Octave() const
 
 double  Pitch::Frequency() const
 {
-	return PitchMap[p->PitchClass] * (1<<(p->Octave-4));
+	return PitchMap[p->PitchClass] * std::pow(2.0, p->Octave - 4);
 }
 
 class Note::Pimpl
