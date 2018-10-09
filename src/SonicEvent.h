@@ -1,4 +1,4 @@
-/* PlayedNote.h: A note with timbre
+/* SonicEvent.h: Interface for things that make sound
  *
  * Copyright 2018 Vincent Damewood
  *
@@ -15,26 +15,19 @@
  * permissions and limitations under the License.
  */
 
-#if !defined PLAYED_NOTE_H
-#define PLAYED_NOTE_H
+#include "AudioFrame.h"
 
-#include "SonicEvent.h"
-#include "Note.h"
-#include "Timbre.h"
+#if !defined SONIC_EVENT_H
+#define SONIC_EVENT_H
 
-class PlayedNote : public SonicEvent
+class SonicEvent
 {
 public:
-	PlayedNote(Note, Timbre);
-	PlayedNote(const PlayedNote&);
-	~PlayedNote() override;
-
-public: // SonicEvent
-	AudioFrame NextFrame() override;
-	bool IsActive() const override;
-private:
-	class Pimpl;
-	Pimpl* p;
+	virtual ~SonicEvent();
+	virtual AudioFrame NextFrame() = 0;
+	virtual bool IsActive() const = 0;
 };
 
-#endif // PLAYED_NOTE_H
+inline SonicEvent::~SonicEvent() { }
+
+#endif /* SONIC_EVENT_H */

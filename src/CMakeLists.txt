@@ -13,7 +13,7 @@
 # permissions and limitations under the License.
 
 set(LIBNAME  Seirina)
-set(LIBPHDRS AudioFrame.h OutputStream.h WaveFile.h Timbre.h Note.h PlayedNote.h Adsr.h)
+set(LIBPHDRS AudioFrame.h OutputStream.h WaveFile.h Timbre.h Note.h PlayedNote.h Adsr.h SonicEvent.h)
 set(LIBHDRS  ${LIBPHDRS})
 set(LIBSRCS  AudioFrame.cc OutputStream.cc WaveFile.cc Timbre.cc Note.cc PlayedNote.cc Adsr.cc)
 
