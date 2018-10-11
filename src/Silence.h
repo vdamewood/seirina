@@ -1,4 +1,4 @@
-/* Rest.h: Play silence
+/* Silence.h: Play silence
  *
  * Copyright 2018 Vincent Damewood
  *
@@ -15,17 +15,17 @@
  * permissions and limitations under the License.
  */
 
-#if !defined REST_H
-#define REST_H
+#if !defined SILENCE_H
+#define SILENCE_H
 
 #include "SonicEvent.h"
 
-class Rest : public SonicEvent
+class Silence : public SonicEvent
 {
 public:
-	Rest(double Duration);
-	Rest(const Rest&);
-	~Rest() override;
+	Silence(double Duration);
+	Silence(const Silence&);
+	~Silence() override;
 
 public: // SonicEvent
 	AudioFrame NextFrame() override;
@@ -35,4 +35,4 @@ private:
 	Pimpl* p;
 };
 
-#endif // PLAYED_NOTE_H
+#endif // SILENCE_H

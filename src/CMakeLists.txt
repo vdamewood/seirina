@@ -13,9 +13,9 @@
 # permissions and limitations under the License.
 
 set(LIBNAME  Seirina)
-set(LIBPHDRS AudioFrame.h OutputStream.h WaveFile.h Timbre.h Note.h PlayedNote.h Adsr.h SonicEvent.h Rest.h)
+set(LIBPHDRS AudioFrame.h OutputStream.h WaveFile.h Timbre.h Note.h PlayedNote.h Adsr.h SonicEvent.h Silence.h)
 set(LIBHDRS  ${LIBPHDRS})
-set(LIBSRCS  AudioFrame.cc OutputStream.cc WaveFile.cc Timbre.cc Note.cc PlayedNote.cc Adsr.cc Rest.cc)
+set(LIBSRCS  AudioFrame.cc OutputStream.cc WaveFile.cc Timbre.cc Note.cc PlayedNote.cc Adsr.cc Silence.cc)
 
 add_library(${LIBNAME} ${LIBHDRS} ${LIBSRCS})
 set_target_properties(${LIBNAME}

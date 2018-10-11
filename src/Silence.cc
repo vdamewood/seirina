@@ -1,4 +1,4 @@
-/* Rest.cc: Play silence
+/* Silence.cc: Play silence
  *
  * Copyright 2018 Vincent Damewood
  *
@@ -15,12 +15,12 @@
  * permissions and limitations under the License.
  */
 
-#include "Rest.h"
+#include "Silence.h"
 
 // FIXME: these shouldn't be constants here
 const int BeatLength = 18900; // 140 BPM: 44100*60/140
 
-class Rest::Pimpl
+class Silence::Pimpl
 {
 public:
 	Pimpl(double newDuration)
@@ -31,30 +31,29 @@ public:
 	int frameLength = 0;
 };
 
-Rest::Rest(double newDuration)
+Silence::Silence(double newDuration)
 	: p(new Pimpl(newDuration))
 {
 	p->frameLength = BeatLength * p->duration;
 }
 
-Rest::Rest(const Rest& src)
+Silence::Silence(const Silence& src)
 	: p(new Pimpl(src.p->duration))
 {
 }
 
-Rest::~Rest()
+Silence::~Silence()
 {
 	delete p;
 }
 
-AudioFrame Rest::NextFrame()
+AudioFrame Silence::NextFrame()
 {
 	p->framePosition++;
 	return AudioFrame(0.0, 0.0);
 }
 
-bool Rest::IsActive() const
+bool Silence::IsActive() const
 {
 	return p->framePosition < p->frameLength;
-
 }
