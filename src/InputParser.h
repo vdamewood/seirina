@@ -18,7 +18,24 @@
 #if !defined INPUT_PARSER_H
 #define INPUT_PARSER_H
 
+#include <memory>
+
 #include "Note.h"
+
+class ParserToken
+{
+public:
+	ParserToken ();
+	ParserToken (std::unique_ptr<Note>);
+	~ParserToken();
+
+	bool hasEvent();
+	std::unique_ptr<Note> ExtractNote();
+
+private:
+	class Pimpl;
+	Pimpl* p;
+};
 
 class InputParserPrivate;
 class InputParser
@@ -27,7 +44,7 @@ public:
 	InputParser(const char* FileName);
 	~InputParser();
 
-	Note Fetch();
+	ParserToken Fetch();
 
 private:
 	InputParserPrivate* d;

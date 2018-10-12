@@ -17,6 +17,7 @@
 
 #include <cstring>
 #include <string>
+#include <iostream>
 
 #include "InputParser.h"
 #include "PlayedNote.h"
@@ -61,16 +62,18 @@ int main(int argc, char *argv[])
 	InputParser Input(InFileName.c_str());
 	WaveFile myWaveFile(OutFileName.c_str());
 
+	int i = 0;
 	while (1)
 	{
-		Note innote = Input.Fetch();
-		if (innote.Pitch().Class() == PitchClass::None)
-			break;
-		else
+		ParserToken token = Input.Fetch();
+		if (token.hasEvent())
 		{
-			PlayedNote pNote(innote, MyTimbre);
+			std::unique_ptr<Note> innote = token.ExtractNote();
+			PlayedNote pNote(*innote, MyTimbre);
 			while (pNote.IsActive())
 				myWaveFile.WriteFrame(pNote.NextFrame());
 		}
+		else
+			break;
 	}
 }

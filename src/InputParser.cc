@@ -17,7 +17,38 @@
 
 #include <fstream>
 
+#include "Note.h"
+
 #include "InputParser.h"
+
+class ParserToken::Pimpl
+{
+public:
+	Pimpl() {};
+	Pimpl(std::unique_ptr<Note> newNote) {note = std::move(newNote);}
+	std::unique_ptr<Note> note = nullptr;
+};
+
+ParserToken::ParserToken ()
+	: p(new Pimpl){};
+
+ParserToken::ParserToken (std::unique_ptr<Note> newNote)
+	: p(new Pimpl(std::move(newNote))){};
+
+ParserToken::~ParserToken()
+{
+	delete(p);
+}
+
+bool ParserToken::hasEvent()
+{
+	return p->note != nullptr;
+}
+
+std::unique_ptr<Note> ParserToken::ExtractNote()
+{
+	return std::move(p->note);
+}
 
 class InputParserPrivate
 {
@@ -38,7 +69,7 @@ InputParser::~InputParser()
 	delete d;
 }
 
-Note InputParser::Fetch()
+ParserToken InputParser::Fetch()
 {
 	char NoteLetter = ' ';
 	char NoteAccidental = ' ';
@@ -49,7 +80,7 @@ Note InputParser::Fetch()
 	int inChar = d->File->get();
 
 	if (inChar == EOF)
-		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+		return ParserToken();
 
 
 	if (inChar == '=')
@@ -80,7 +111,7 @@ Note InputParser::Fetch()
 		NoteLetter = inChar - ('a' - 'A');
 		break;
 	default:
-		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+		return ParserToken();
 	}
 
 
@@ -98,18 +129,18 @@ Note InputParser::Fetch()
 
 	NoteOctave = inChar - '0';
 	if (inChar < '0' || inChar > '9')
-		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+		return ParserToken();
 	NoteOctave = inChar - '0';
 
 
 	inChar = d->File->get();
 	if (inChar != '-')
-		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+		return ParserToken();
 
 
 	inChar = d->File->get();
 	if (inChar < '0' || inChar > '9')
-		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+		return ParserToken();
 	DurationNumerator = inChar - '0';
 
 
@@ -118,7 +149,7 @@ Note InputParser::Fetch()
 	{
 		inChar = d->File->get();
 		if (inChar < '1' || inChar > '9')
-			return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+			return ParserToken();
 		DurationDenominator = inChar - '0';
 		inChar = d->File->get();
 	}
@@ -127,13 +158,13 @@ Note InputParser::Fetch()
 	if (inChar == '\r')
 		inChar = d->File->get();
 	if (inChar != '\n')
-		return Note(Pitch(MakePitchClass(' ', ' '), 4), 1);
+		return ParserToken();
 
 
-	return Note(
+	return ParserToken(std::unique_ptr<Note>(new Note(
 		Pitch(
 			MakePitchClass(NoteLetter, NoteAccidental),
 			NoteOctave),
 		DurationNumerator,
-		DurationDenominator);
+		DurationDenominator)));
 }
