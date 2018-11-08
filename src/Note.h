@@ -76,4 +76,16 @@ private:
 	Pimpl* p;
 };
 
+class Rest
+{
+public:
+	Rest(int DurationNumerator=1,int DurationDenominator=1);
+	Rest(const Rest&);
+	~Rest();
+	double Duration() const;
+private:
+	class Pimpl;
+	Pimpl* p;
+};
+
 #endif // NOTE_H
