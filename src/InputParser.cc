@@ -99,6 +99,7 @@ ParserToken InputParser::Fetch()
 	case 'E':
 	case 'F':
 	case 'G':
+	case 'R':
 		NoteLetter = inChar;
 		break;
 	case 'a':
@@ -108,30 +109,32 @@ ParserToken InputParser::Fetch()
 	case 'e':
 	case 'f':
 	case 'g':
+	case 'r':
 		NoteLetter = inChar - ('a' - 'A');
 		break;
 	default:
 		return ParserToken();
 	}
 
-
-	switch (inChar = d->File->get())
+	if (NoteLetter != 'R')
 	{
-		case '-':
-		case '+':
-		case 'b':
-		case '#':
-		case ' ':
-			NoteAccidental = inChar;
-			inChar = d->File->get();
+		switch (inChar = d->File->get())
+		{
+			case '-':
+			case '+':
+			case 'b':
+			case '#':
+			case ' ':
+				NoteAccidental = inChar;
+				inChar = d->File->get();
+		}
+
+
+		NoteOctave = inChar - '0';
+		if (inChar < '0' || inChar > '9')
+			return ParserToken();
+		NoteOctave = inChar - '0';
 	}
-
-
-	NoteOctave = inChar - '0';
-	if (inChar < '0' || inChar > '9')
-		return ParserToken();
-	NoteOctave = inChar - '0';
-
 
 	inChar = d->File->get();
 	if (inChar != '-')
@@ -160,11 +163,16 @@ ParserToken InputParser::Fetch()
 	if (inChar != '\n')
 		return ParserToken();
 
-
-	return ParserToken(std::unique_ptr<Note>(new Note(
-		Pitch(
-			MakePitchClass(NoteLetter, NoteAccidental),
-			NoteOctave),
-		DurationNumerator,
-		DurationDenominator)));
+	if (NoteLetter != 'R')
+		return ParserToken(std::unique_ptr<Note>(new Note(
+			Pitch(
+				MakePitchClass(NoteLetter, NoteAccidental),
+				NoteOctave),
+			DurationNumerator,
+			DurationDenominator)));
+	else
+		return ParserToken();
+		//return ParserToken(std::unique_ptr<Rest>(new Rest(
+		//	DurationNumerator,
+		//	DurationDenominator)));
 }
