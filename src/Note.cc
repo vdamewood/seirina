@@ -160,3 +160,37 @@ double Note::Duration() const
 	return static_cast<double>(p->DurationNumerator)
 		/ static_cast<double>(p->DurationDenominator);
 }
+
+class Rest::Pimpl
+{
+public:
+	inline Pimpl(int newDurationNumerator, int newDurationDenominator)
+	: DurationNumerator(newDurationNumerator),
+		DurationDenominator(newDurationDenominator)
+	{
+	}
+
+	int DurationNumerator;
+	int DurationDenominator;
+};
+
+Rest::Rest(int DurationNumerator, int DurationDenominator)
+	: p(new Pimpl(DurationNumerator, DurationNumerator))
+{
+}
+
+Rest::Rest(const Rest& rhs)
+	: p(new Pimpl(rhs.p->DurationNumerator, rhs.p->DurationNumerator))
+{
+}
+
+Rest::~Rest()
+{
+	delete p;
+}
+
+double Rest::Duration() const
+{
+	return static_cast<double>(p->DurationNumerator)
+		/ static_cast<double>(p->DurationDenominator);
+}
