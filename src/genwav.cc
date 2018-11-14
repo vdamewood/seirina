@@ -21,6 +21,7 @@
 
 #include "InputParser.h"
 #include "PlayedNote.h"
+#include "Silence.h"
 #include "WaveFile.h"
 #include "Timbre.h"
 
@@ -66,12 +67,19 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		ParserToken token = Input.Fetch();
-		if (token.hasEvent())
+		if (token.IsNote())
 		{
 			std::unique_ptr<Note> innote = token.ExtractNote();
 			PlayedNote pNote(*innote, MyTimbre);
 			while (pNote.IsActive())
 				myWaveFile.WriteFrame(pNote.NextFrame());
+		}
+		else if (token.IsRest())
+		{
+			std::unique_ptr<Rest> inrest = token.ExtractRest();
+			Silence s(inrest->Duration());
+			while (s.IsActive())
+				myWaveFile.WriteFrame(s.NextFrame());
 		}
 		else
 			break;

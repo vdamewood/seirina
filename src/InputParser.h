@@ -27,11 +27,13 @@ class ParserToken
 public:
 	ParserToken ();
 	ParserToken (std::unique_ptr<Note>);
+	ParserToken (std::unique_ptr<Rest>);
 	~ParserToken();
 
-	bool hasEvent();
+	bool IsNote();
+	bool IsRest();
 	std::unique_ptr<Note> ExtractNote();
-
+	std::unique_ptr<Rest> ExtractRest();
 private:
 	class Pimpl;
 	Pimpl* p;

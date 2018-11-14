@@ -26,7 +26,9 @@ class ParserToken::Pimpl
 public:
 	Pimpl() {};
 	Pimpl(std::unique_ptr<Note> newNote) {note = std::move(newNote);}
+	Pimpl(std::unique_ptr<Rest> newRest) {rest = std::move(newRest);}
 	std::unique_ptr<Note> note = nullptr;
+	std::unique_ptr<Rest> rest = nullptr;
 };
 
 ParserToken::ParserToken ()
@@ -35,19 +37,32 @@ ParserToken::ParserToken ()
 ParserToken::ParserToken (std::unique_ptr<Note> newNote)
 	: p(new Pimpl(std::move(newNote))){};
 
+ParserToken::ParserToken (std::unique_ptr<Rest> newRest)
+	: p(new Pimpl(std::move(newRest))){};
+
 ParserToken::~ParserToken()
 {
 	delete(p);
 }
 
-bool ParserToken::hasEvent()
+bool ParserToken::IsNote()
 {
 	return p->note != nullptr;
+}
+
+bool ParserToken::IsRest()
+{
+	return p->rest != nullptr;
 }
 
 std::unique_ptr<Note> ParserToken::ExtractNote()
 {
 	return std::move(p->note);
+}
+
+std::unique_ptr<Rest> ParserToken::ExtractRest()
+{
+	return std::move(p->rest);
 }
 
 class InputParserPrivate
@@ -171,8 +186,7 @@ ParserToken InputParser::Fetch()
 			DurationNumerator,
 			DurationDenominator)));
 	else
-		return ParserToken();
-		//return ParserToken(std::unique_ptr<Rest>(new Rest(
-		//	DurationNumerator,
-		//	DurationDenominator)));
+		return ParserToken(std::unique_ptr<Rest>(new Rest(
+			DurationNumerator,
+			DurationDenominator)));
 }
