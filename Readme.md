@@ -7,7 +7,7 @@ Seirina is a project to develop code to generate audio files of
 synthesized music. Currently, it supports generating a single-channel
 stream of a single wave form with a fixed ADSR envelop.
 
-Seirina uses Cmake for its build system. Make a directly, called
+Seirina uses Cmake for its build system. Make a directory, called
 `build`, `cd` into it, and run `cmake ..`, then `make`, to build
 Seirina.
 
