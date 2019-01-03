@@ -1,6 +1,6 @@
 # Seirina
 
-Copyrigh 2018 Vincent Damewood
+Copyright 2018, 2019 Vincent Damewood  
 Seirina is licensed under the terms of the Apache License 2.0.
 
 Seirina is a project to develop code to generate audio files of
