@@ -19,6 +19,8 @@ set(Seirina_VERSION_MAJOR 0)
 set(Seirina_VERSION_MINOR 0)
 set(Seirina_VERSION_PATCH 0)
 
+set (CMAKE_CXX_STANDARD 11)
+
 #######################
 # Dependency Searches #
 #######################
@@ -64,18 +66,6 @@ elseif(UNIX)
   set(HEADER_INSTALL_PATH    include)
   set(SHARE_INSTALL_PATH     share/Seirina)
   set(DOC_INSTALL_PATH       share/Seirina/docs)
-endif()
-
-#############################
-# Compiler-dependent values #
-#############################
-
-if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang"
-  OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "AppleClang"
-  OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU"
-  OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "SunPro")
-
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
 ###########################
