@@ -1,4 +1,4 @@
-# Copyright 2016 Vincent Damewood
+# Copyright 2016, 2019 Vincent Damewood
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,4 +82,5 @@ endif()
 # Subdirectory Inclusions #
 ###########################
 
-add_subdirectory(src)
+add_subdirectory(library)
+add_subdirectory(genwav)

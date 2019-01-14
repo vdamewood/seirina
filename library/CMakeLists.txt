@@ -1,4 +1,4 @@
-# Copyright 2018 Vincent Damewood
+# Copyright 2018, 2019 Vincent Damewood
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,5 +29,6 @@ install(TARGETS ${LIBNAME}
   FRAMEWORK     DESTINATION ${FRAMEWORK_INSTALL_PATH}
   PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH}/${LIBNAME})
 
-add_executable(genwav ${LIBPHDRS} InputParser.cc genwav.cc)
-target_link_libraries(genwav ${LIBNAME})
+set(LIBRARY ${LIBNAME} PARENT_SCOPE)
+set(LIBRARY_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR} PARENT_SCOPE)
+set(LIBRARY_HEADERS ${LIBPHDRS} PARENT_SCOPE)
