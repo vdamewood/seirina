@@ -11,17 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 # implied. See the License for the specific language governing
 # permissions and limitations under the License.
+
 set(TARGET genwav)
 
-set(HDRS
+set(SOURCES
   InputParser.h
-)
-
-set(SRCS
   genwav.cc
   InputParser.cc
 )
 
-include_directories(${LIBRARY_INCLUDE_PATH})
-add_executable(${TARGET} ${SRCS} ${HDRS})
-target_link_libraries(${TARGET} ${LIBRARY})
+include_directories(${PROJECT_SOURCE_DIR}/library)
+add_executable(${TARGET} ${SOURCES})
+target_link_libraries(${TARGET} Seirina)

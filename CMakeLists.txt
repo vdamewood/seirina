@@ -12,13 +12,13 @@
 # implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.12.0)
 
-project(Seirina)
-set(Seirina_VERSION_MAJOR 0)
-set(Seirina_VERSION_MINOR 0)
-set(Seirina_VERSION_PATCH 0)
-
+project(Seirina
+  VERSION       0.0.0
+  DESCRIPTION   "Music synthesis library and utilities"
+  LANGUAGES     CXX
+)
 set (CMAKE_CXX_STANDARD 11)
 
 ###########################
