@@ -21,20 +21,6 @@ set(Seirina_VERSION_PATCH 0)
 
 set (CMAKE_CXX_STANDARD 11)
 
-#######################
-# Dependency Searches #
-#######################
-
-# Detect if system has separate math library (libm)
-message("-- Finding Math Library")
-find_library(MATH m)
-if(${MATH} STREQUAL "MATH-NOTFOUND")
-    message("-- Finding Math Library - not needed")
-    set(MATH "")
-else()
-    message("-- Finding Math Library - found")
-endif()
-
 ###########################
 # System-dependent Values #
 ###########################
