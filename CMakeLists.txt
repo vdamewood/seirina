@@ -58,5 +58,5 @@ endif()
 # Subdirectory Inclusions #
 ###########################
 
-add_subdirectory(library)
+add_subdirectory(Seirina)
 add_subdirectory(genwav)
