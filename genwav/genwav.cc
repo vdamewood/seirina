@@ -1,6 +1,6 @@
 /* genwav.cc: Generate music as a wav file
  *
- * Copyright 2016, 2018 Vincent Damewood
+ * Copyright 2016, 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,12 @@
 #include <string>
 #include <iostream>
 
+#include <Seirina/PlayedNote.h>
+#include <Seirina/Silence.h>
+#include <Seirina/WaveFile.h>
+#include <Seirina/Timbre.h>
+
 #include "InputParser.h"
-#include "PlayedNote.h"
-#include "Silence.h"
-#include "WaveFile.h"
-#include "Timbre.h"
 
 int main(int argc, char *argv[])
 {

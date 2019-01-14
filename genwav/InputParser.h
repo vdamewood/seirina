@@ -1,6 +1,6 @@
 /* InputParser.h: Parser for music input files
  *
- * Copyright 2018 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 #include <memory>
 
-#include "Note.h"
+#include <Seirina/Note.h>
 
 class ParserToken
 {

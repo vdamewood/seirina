@@ -20,6 +20,6 @@ set(SOURCES
   InputParser.cc
 )
 
-include_directories(${PROJECT_SOURCE_DIR}/Seirina)
+include_directories(${PROJECT_SOURCE_DIR})
 add_executable(${TARGET} ${SOURCES})
 target_link_libraries(${TARGET} Seirina)
