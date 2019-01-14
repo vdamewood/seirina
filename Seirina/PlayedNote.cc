@@ -18,7 +18,7 @@
 #include "Adsr.h"
 #include "Note.h"
 #include "Timbre.h"
-
+#include "SampleRate.h"
 #include "PlayedNote.h"
 
 // FIXME: these shouldn't be constants here

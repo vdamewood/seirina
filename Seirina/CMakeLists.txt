@@ -22,6 +22,7 @@ set(PUBLIC_HEADERS
   PlayedNote.h
   Adsr.h
   SonicEvent.h
+  SampleRate.h
   Silence.h
 )
 set(SOURCES
@@ -33,6 +34,7 @@ set(SOURCES
   Note.cc
   PlayedNote.cc
   Adsr.cc
+  SampleRate.cc
   Silence.cc
 )
 

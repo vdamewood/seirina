@@ -19,6 +19,7 @@
 #include <map>
 #include <string>
 
+#include "SampleRate.h"
 #include "Timbre.h"
 
 typedef double (*fpWave)(double);
@@ -60,8 +61,8 @@ static std::map<std::string, fpWave> Waveforms
 
 double phase(double frequency, int sample)
 {
-	const int SampleRate = 44100;
-	double CycleLength = SampleRate/frequency;
+	using Seirina::Audio::SampleRate;
+	double CycleLength = SampleRate::Cd/frequency;
 	return std::fmod(sample, CycleLength)/CycleLength;
 }
 

@@ -17,7 +17,10 @@
 
 #include <fstream>
 
+#include "SampleRate.h"
 #include "WaveFile.h"
+
+using Seirina::Audio::SampleRate;
 
 class WaveFilePrivate
 {
@@ -50,7 +53,7 @@ public:
 		Output32(16);            // Size of remaining section
 		Output16(1);             // PCM
 		Output16(2);             // Count of Channles (2 = stereo)
-		Output32(44100);         // Sample frequency
+		Output32(SampleRate::Cd); // Sample frequency
 		Output32(176400);        // Bytes per second
 		Output16(4);             // Bytes per sample for all channels
 		Output16(16);            // Bits per sample
