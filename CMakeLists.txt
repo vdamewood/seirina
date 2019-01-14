@@ -19,7 +19,7 @@ project(Seirina
   DESCRIPTION   "Music synthesis library and utilities"
   LANGUAGES     CXX
 )
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 17)
 
 ###########################
 # System-dependent Values #
