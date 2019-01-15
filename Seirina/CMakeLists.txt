@@ -36,6 +36,15 @@ set(SOURCES
   Silence.cc
 )
 
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+  set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+  set(DOXYGEN_HTML_OUTPUT Docs)
+  doxygen_add_docs(Docs ALL
+      ${PUBLIC_HEADERS}
+  )
+endif()
+
 add_library(${TARGET} SHARED ${SOURCES})
 set_target_properties(${TARGET}
   PROPERTIES
