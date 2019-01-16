@@ -25,7 +25,10 @@ namespace Seirina::Audio
     class SampleRate
     {
     public:
+        /*! Construct a SampleRate object */
         SampleRate(int);
+
+        /*! Convert SampleRate to `int` */
         operator int() const;
 
         /*! CD-quality sampling rate (44100 Hz). */
