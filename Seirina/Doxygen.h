@@ -14,3 +14,23 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+
+/*! \namespace Seirina
+ *  \brief The Seirina backend music syenthesis library
+ */
+
+/*! \namespace Seirina::Audio
+ *  \brief Types and objects used for audio data
+ */
+
+/*! \namespace Seirina::Midi
+ *  \brief Types and objects used to represent MIDI data
+ */
+
+/*! \namespace Seirina::Notation
+ *  \brief Types and objects used for representing musical notation
+ */
+
+/*! \namespace Seirina::Output
+ *  \brief Interfaces for outputing audio data to streams or devices
+ */
