@@ -48,6 +48,8 @@ find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
   set(DOXYGEN_HTML_OUTPUT Docs)
+  set(DOXYGEN_REPEAT_BRIEF No)
+  set(DOXYGEN_QT_AUTOBRIEF Yes)
   doxygen_add_docs(Docs ALL
       ${DOXY_HEADERS}
   )
