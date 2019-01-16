@@ -17,6 +17,14 @@
 
 #include "AudioFrame.h"
 
+inline double clip(double i)
+{
+	return
+		i < 0.0 ? 0.0
+		: i > 1.0 ? 1.0
+		: i;
+}
+
 namespace Seirina::Audio
 {
 	//! @private
@@ -29,14 +37,14 @@ namespace Seirina::Audio
 	Frame::Frame(double input)
 		: p(new FramePrivate())
 	{
-		p->channels[0] = p->channels[1] = input;
+		p->channels[0] = p->channels[1] = clip(input);
 	}
 
 	Frame::Frame(double left, double right)
 		: p(new FramePrivate())
 	{
-		p->channels[0] = left;
-		p->channels[1] = right;
+		p->channels[0] = clip(left);
+		p->channels[1] = clip(right);
 	}
 
 	Frame::~Frame()
