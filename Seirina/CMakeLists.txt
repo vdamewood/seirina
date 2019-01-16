@@ -35,13 +35,17 @@ set(SOURCES
   Adsr.cc
   Silence.cc
 )
+set(DOXY_SOURCES
+  ${PUBLIC_HEADERS}
+  Doxygen.h
+)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
   set(DOXYGEN_HTML_OUTPUT Docs)
   doxygen_add_docs(Docs ALL
-      ${PUBLIC_HEADERS}
+      ${DOXY_HEADERS}
   )
 endif()
 
