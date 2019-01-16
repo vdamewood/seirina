@@ -15,6 +15,7 @@
 set(TARGET Seirina)
 set(PUBLIC_HEADERS
   AudioFrame.h
+  Frequency.h
   OutputStream.h
   WaveFile.h
   Timbre.h
@@ -28,6 +29,7 @@ set(PUBLIC_HEADERS
 set(SOURCES
   ${PUBLIC_HEADERS}
   AudioFrame.cc
+  Frequency.cc
   OutputStream.cc
   WaveFile.cc
   Timbre.cc
