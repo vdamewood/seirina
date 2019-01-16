@@ -20,7 +20,7 @@
 
 namespace Seirina::Audio
 {
-    /*! \brief Represents the frequency of a sound wave
+    /*! Represents the frequency of a sound wave.
      */
     class Frequency
     {
