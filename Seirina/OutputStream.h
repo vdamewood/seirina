@@ -23,7 +23,7 @@
 class OutputStream
 {
 public:
-	virtual void WriteFrame(AudioFrame) = 0;
+	virtual void WriteFrame(Seirina::Audio::Frame) = 0;
 	virtual ~OutputStream();
 };
 

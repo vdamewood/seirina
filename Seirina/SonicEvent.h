@@ -24,7 +24,7 @@ class SonicEvent
 {
 public:
 	virtual ~SonicEvent();
-	virtual AudioFrame NextFrame() = 0;
+	virtual Seirina::Audio::Frame NextFrame() = 0;
 	virtual bool IsActive() const = 0;
 };
 

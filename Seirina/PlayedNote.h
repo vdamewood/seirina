@@ -30,7 +30,7 @@ public:
 	~PlayedNote() override;
 
 public: // SonicEvent
-	AudioFrame NextFrame() override;
+	Seirina::Audio::Frame NextFrame() override;
 	bool IsActive() const override;
 private:
 	class Pimpl;

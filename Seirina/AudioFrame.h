@@ -18,20 +18,34 @@
 #if !defined AUDIO_FRAME_H
 #define AUDIO_FRAME_H
 
-class AudioFrame
+namespace Seirina::Audio
 {
-public:
-	AudioFrame(double); // mono
-	AudioFrame(double, double); //stereo
+	class FramePrivate;
 
-	~AudioFrame();
+	/*! Represent a frame of audio date. */
+	class Frame
+	{
+	public:
+		/*! Construct a monaural audio frame. */
+		Frame(double mono);
+		/*! Construct a binaural (stereo) audio frame. */
+		Frame(double left, double right);
+		~Frame();
 
-	double Left() const;
-	double Right() const;
-	AudioFrame Transform(double transformation) const;
-private:
-	class Pimpl;
-	Pimpl* p;
+		/*! Access the left-channel value. */
+		double Left() const;
+
+		/*! Access the right-channel value. */
+		double Right() const;
+
+		/*! Access the monaural value. */
+		double Mono() const;
+
+		/*! Multiply the Frame object by a particular double. */
+		Frame operator*(double right_hand_side) const;
+	private:
+		FramePrivate* const p;
+	};
 };
 
 #endif /* AUDIO_FRAME_H */

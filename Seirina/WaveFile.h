@@ -26,7 +26,7 @@ class WaveFile : public OutputStream
 {
 public:
 	WaveFile(const char* Filename);
-	virtual void WriteFrame(AudioFrame);
+	virtual void WriteFrame(Seirina::Audio::Frame);
 	virtual ~WaveFile();
 private:
 	WaveFilePrivate *d;

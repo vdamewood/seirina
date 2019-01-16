@@ -83,7 +83,8 @@ WaveFile::~WaveFile()
 	delete d;
 }
 
-void WaveFile::WriteFrame(AudioFrame frame)
+using Seirina::Audio::Frame;
+void WaveFile::WriteFrame(Frame frame)
 {
 	d->WriteSample(frame.Left() * 0x7FFF);
 	d->WriteSample(frame.Right() * 0x7FFF);

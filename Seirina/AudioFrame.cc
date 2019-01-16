@@ -17,42 +17,50 @@
 
 #include "AudioFrame.h"
 
-class AudioFrame::Pimpl
+namespace Seirina::Audio
 {
-public:
-	double left;
-	double right;
+	//! @private
+	class FramePrivate
+	{
+	public:
+		double channels[2];
+	};
+
+	Frame::Frame(double input)
+		: p(new FramePrivate())
+	{
+		p->channels[0] = p->channels[1] = input;
+	}
+
+	Frame::Frame(double left, double right)
+		: p(new FramePrivate())
+	{
+		p->channels[0] = left;
+		p->channels[1] = right;
+	}
+
+	Frame::~Frame()
+	{
+		delete p;
+	}
+
+	double Frame::Left() const
+	{
+		return p->channels[0];
+	}
+
+	double Frame::Right() const
+	{
+		return p->channels[1];
+	}
+
+	double Frame::Mono() const
+	{
+		return (p->channels[0] + p->channels[1]) / 2;
+	}
+
+	Frame Frame::operator*(double op) const
+	{
+		return Frame(p->channels[0] * op, p->channels[1] * op);
+	}
 };
-
-AudioFrame::AudioFrame(double input)
-{
-	p = new Pimpl();
-	p->left = p->right = input;
-}
-
-AudioFrame::AudioFrame(double left, double right)
-{
-	p = new Pimpl();
-	p->left = left;
-	p->right = right;
-}
-
-AudioFrame::~AudioFrame()
-{
-	delete p;
-}
-
-double AudioFrame::Left() const
-{
-	return p->left;
-}
-
-double AudioFrame::Right() const
-{
-	return p->right;
-}
-
-AudioFrame AudioFrame::Transform(double transformation) const
-{
-	return AudioFrame(p->left * transformation, p->right * transformation);
-}
