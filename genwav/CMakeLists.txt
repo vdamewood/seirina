@@ -15,9 +15,9 @@
 set(TARGET genwav)
 
 set(SOURCES
-  InputParser.h
-  genwav.cc
-  InputParser.cc
+	genwav.cc
+	InputParser.h
+	InputParser.cc
 )
 
 include_directories(${PROJECT_SOURCE_DIR})

@@ -14,65 +14,62 @@
 
 set(TARGET Seirina)
 set(PUBLIC_HEADERS
-  AudioFrame.h
-  Frequency.h
-  OutputStream.h
-  WaveFile.h
-  Timbre.h
-  Note.h
-  PlayedNote.h
-  Adsr.h
-  Octave.h
-  PitchClass.h
-  SonicEvent.h
-  SampleRate.h
-  Silence.h
-  Tempo.h
+	Adsr.h
+	AudioFrame.h
+	Frequency.h
+	Note.h
+	Octave.h
+	OutputStream.h
+	PitchClass.h
+	PlayedNote.h
+	SampleRate.h
+	Silence.h
+	SonicEvent.h
+	Tempo.h
+	Timbre.h
+	WaveFile.h
 )
 set(SOURCES
-  ${PUBLIC_HEADERS}
-  AudioFrame.cc
-  Frequency.cc
-  OutputStream.cc
-  WaveFile.cc
-  Timbre.cc
-  Note.cc
-  PlayedNote.cc
-  Adsr.cc
-  Octave.cc
-  PitchClass.cc
-  SampleRate.cc
-  Silence.cc
-  Tempo.cc
+	${PUBLIC_HEADERS}
+	Adsr.cc
+	AudioFrame.cc
+	Frequency.cc
+	Note.cc
+	Octave.cc
+	OutputStream.cc
+	PitchClass.cc
+	PlayedNote.cc
+	SampleRate.cc
+	Silence.cc
+	Tempo.cc
+	Timbre.cc
+	WaveFile.cc
 )
 set(DOXY_SOURCES
-  ${PUBLIC_HEADERS}
-  Doxygen.h
+	${PUBLIC_HEADERS}
+	Doxygen.h
 )
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-  set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
-  set(DOXYGEN_HTML_OUTPUT Docs)
-  set(DOXYGEN_REPEAT_BRIEF No)
-  set(DOXYGEN_QT_AUTOBRIEF Yes)
-  doxygen_add_docs(Docs ALL
-      ${DOXY_SOURCES}
-  )
+	set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+	set(DOXYGEN_HTML_OUTPUT Docs)
+	set(DOXYGEN_REPEAT_BRIEF No)
+	set(DOXYGEN_QT_AUTOBRIEF Yes)
+	doxygen_add_docs(Docs ALL ${DOXY_SOURCES})
 endif()
 
 add_library(${TARGET} SHARED ${SOURCES})
-set_target_properties(${TARGET}
-  PROPERTIES
-    FRAMEWORK      TRUE
-    PUBLIC_HEADER  "${PUBLIC_HEADERS}"
-    VERSION        ${PROJECT_VERSION}
-    SOVERSION      ${PROJECT_VERSION_MAJOR}
+set_target_properties(${TARGET} PROPERTIES
+	FRAMEWORK      TRUE
+	PUBLIC_HEADER  "${PUBLIC_HEADERS}"
+	VERSION        ${PROJECT_VERSION}
+	SOVERSION      ${PROJECT_VERSION_MAJOR}
 )
 install(TARGETS ${TARGET}
-  RUNTIME       DESTINATION ${RUNTIME_INSTALL_PATH}
-  ARCHIVE       DESTINATION ${ARCHIVE_INSTALL_PATH}
-  LIBRARY       DESTINATION ${LIBRARY_INSTALL_PATH}
-  FRAMEWORK     DESTINATION ${FRAMEWORK_INSTALL_PATH}
-  PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH}/${TARGET}
+	RUNTIME       DESTINATION ${RUNTIME_INSTALL_PATH}
+	ARCHIVE       DESTINATION ${ARCHIVE_INSTALL_PATH}
+	LIBRARY       DESTINATION ${LIBRARY_INSTALL_PATH}
+	FRAMEWORK     DESTINATION ${FRAMEWORK_INSTALL_PATH}
+	PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH}/${TARGET}
 )

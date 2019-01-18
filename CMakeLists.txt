@@ -15,9 +15,9 @@
 cmake_minimum_required(VERSION 3.12.0)
 
 project(Seirina
-  VERSION       0.0.0
-  DESCRIPTION   "Music synthesis library and utilities"
-  LANGUAGES     CXX
+	VERSION       0.0.0
+	DESCRIPTION   "Music synthesis library and utilities"
+	LANGUAGES     CXX
 )
 set (CMAKE_CXX_STANDARD 17)
 
@@ -25,33 +25,33 @@ set (CMAKE_CXX_STANDARD 17)
 # System-dependent Values #
 ###########################
 
-if(WIN32)
-  set(RUNTIME_INSTALL_PATH   .)
-  set(ARCHIVE_INSTALL_PATH   .)
-  set(LIBRARY_INSTALL_PATH   .)
-  set(BUNDLE_INSTALL_PATH    Error)
-  set(FRAMEWORK_INSTALL_PATH Error)
-  set(HEADER_INSTALL_PATH    ./include)
-  set(SHARE_INSTALL_PATH     .)
-  set(DOC_INSTALL_PATH       .)
-elseif(APPLE)
-  set(RUNTIME_INSTALL_PATH   bin)
-  set(ARCHIVE_INSTALL_PATH   Error)
-  set(LIBRARY_INSTALL_PATH   Error)
-  set(BUNDLE_INSTALL_PATH    .)
-  set(FRAMEWORK_INSTALL_PATH .)
-  set(HEADER_INSTALL_PATH    Error)
-  set(SHARE_INSTALL_PATH     Error)
-  set(DOC_INSTALL_PATH       .)
+if(APPLE)
+	set(RUNTIME_INSTALL_PATH   bin)
+	set(ARCHIVE_INSTALL_PATH   Error)
+	set(LIBRARY_INSTALL_PATH   Error)
+	set(BUNDLE_INSTALL_PATH    .)
+	set(FRAMEWORK_INSTALL_PATH .)
+	set(HEADER_INSTALL_PATH    Error)
+	set(SHARE_INSTALL_PATH     Error)
+	set(DOC_INSTALL_PATH       .)
+elseif(WIN32)
+	set(RUNTIME_INSTALL_PATH   .)
+	set(ARCHIVE_INSTALL_PATH   .)
+	set(LIBRARY_INSTALL_PATH   .)
+	set(BUNDLE_INSTALL_PATH    Error)
+	set(FRAMEWORK_INSTALL_PATH Error)
+	set(HEADER_INSTALL_PATH    ./include)
+	set(SHARE_INSTALL_PATH     .)
+	set(DOC_INSTALL_PATH       .)
 else()
-  set(RUNTIME_INSTALL_PATH   bin)
-  set(ARCHIVE_INSTALL_PATH   lib)
-  set(LIBRARY_INSTALL_PATH   lib)
-  set(BUNDLE_INSTALL_PATH    share/Seirina/error)
-  set(FRAMEWORK_INSTALL_PATH share/Seirina/error)
-  set(HEADER_INSTALL_PATH    include)
-  set(SHARE_INSTALL_PATH     share/Seirina)
-  set(DOC_INSTALL_PATH       share/Seirina/docs)
+	set(RUNTIME_INSTALL_PATH   bin)
+	set(ARCHIVE_INSTALL_PATH   lib)
+	set(LIBRARY_INSTALL_PATH   lib)
+	set(BUNDLE_INSTALL_PATH    share/Seirina/error)
+	set(FRAMEWORK_INSTALL_PATH share/Seirina/error)
+	set(HEADER_INSTALL_PATH    include)
+	set(SHARE_INSTALL_PATH     share/Seirina)
+	set(DOC_INSTALL_PATH       share/Seirina/docs)
 endif()
 
 ###########################
