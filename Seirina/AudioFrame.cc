@@ -27,7 +27,6 @@ inline double clip(double i)
 
 namespace Seirina::Audio
 {
-	//! @private
 	class FramePrivate
 	{
 	public:
