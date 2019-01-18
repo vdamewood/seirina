@@ -37,7 +37,6 @@ set(SOURCES
 	Frequency.cc
 	Note.cc
 	Octave.cc
-	OutputStream.cc
 	Phase.cc
 	PitchClass.cc
 	PlayedNote.cc

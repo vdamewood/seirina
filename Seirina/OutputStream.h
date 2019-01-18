@@ -27,5 +27,6 @@ public:
 	virtual ~OutputStream();
 };
 
+inline OutputStream::~OutputStream() { }
 
 #endif /* OUTPUT_STREAM_H */
