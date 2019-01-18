@@ -25,6 +25,7 @@
 #define ROOT12_OF_2 1.0594630943592951988208028
 #define CONCERT_A 440.0
 
+using Seirina::Notation::Octave;
 using Seirina::Notation::PitchClass;
 
 std::map<PitchClass, double> PitchMap
@@ -55,16 +56,16 @@ std::map<PitchClass, double> PitchMap
 class Pitch::Pimpl
 {
 public:
-	inline Pimpl(PitchClass newClass, int newOctave)
+	inline Pimpl(PitchClass newClass, class Octave newOctave)
 	: PitchClass(newClass), Octave(newOctave)
 	{
 	}
 
 	PitchClass PitchClass;
-	int Octave;
+	class Octave Octave;
 };
 
-Pitch::Pitch(PitchClass newClass, int newOctave)
+Pitch::Pitch(PitchClass newClass, class Octave newOctave)
 	: p(new Pimpl(newClass, newOctave))
 {
 }
@@ -85,7 +86,7 @@ PitchClass Pitch::Class() const
 	return p->PitchClass;
 }
 
-int Pitch::Octave() const
+Octave Pitch::Octave() const
 {
 	return p->Octave;
 }

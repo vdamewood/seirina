@@ -22,6 +22,7 @@ set(PUBLIC_HEADERS
   Note.h
   PlayedNote.h
   Adsr.h
+  Octave.h
   PitchClass.h
   SonicEvent.h
   SampleRate.h
@@ -37,6 +38,7 @@ set(SOURCES
   Note.cc
   PlayedNote.cc
   Adsr.cc
+  Octave.cc
   PitchClass.cc
   SampleRate.cc
   Silence.cc

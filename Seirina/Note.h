@@ -18,17 +18,18 @@
 #if !defined NOTE_H
 #define NOTE_H
 
+#include "Octave.h"
 #include "PitchClass.h"
 
 class Pitch
 {
 public:
-	Pitch(Seirina::Notation::PitchClass, int Octave);
+	Pitch(Seirina::Notation::PitchClass, Seirina::Notation::Octave);
 	Pitch(const Pitch&);
 	Seirina::Notation::PitchClass Class() const;
 	~Pitch();
 
-	int Octave() const;
+	Seirina::Notation::Octave Octave() const;
 	double Frequency() const;
 private:
 	class Pimpl;
