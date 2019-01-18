@@ -19,35 +19,38 @@
 #include <map>
 #include <string>
 
+#include "Phase.h"
 #include "SampleRate.h"
 #include "Timbre.h"
 
-typedef double (*fpWave)(double);
+using Seirina::Audio::Phase;
 
-static double square(double phase)
+typedef double (*fpWave)(Phase);
+
+static double square(Phase phase)
 {
 	return phase < 0.5 ? 1.0 : -1.0;
 }
 
-static double sine(double phase)
+static double sine(Phase phase)
 {
 	return sin(phase * M_PI * 2);
 }
 
-static double absine(double phase)
+static double absine(Phase phase)
 {
 	return fabs(sin((phase+1.0/6.0) * M_PI)) * 2.0 - 1.0;
 }
 
-static double saw(double phase)
+static double saw(Phase phase)
 {
 	return fmod(phase + 0.5, 1.0) * 2.0 - 1.0;
 }
 
-static double triangle(double phase)
+static double triangle(Phase phase)
 {
-	phase = fmod(phase + 0.25, 1.0);
-	return (phase <= 0.5 ? phase : 1.0 - phase) * 4.0 - 1.0;
+	double d = fmod(phase + 0.25, 1.0);
+	return (d <= 0.5 ? d : 1.0 - d) * 4.0 - 1.0;
 }
 
 static std::map<std::string, fpWave> Waveforms

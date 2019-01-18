@@ -20,6 +20,7 @@ set(PUBLIC_HEADERS
 	Note.h
 	Octave.h
 	OutputStream.h
+	Phase.h
 	PitchClass.h
 	PlayedNote.h
 	SampleRate.h
@@ -37,6 +38,7 @@ set(SOURCES
 	Note.cc
 	Octave.cc
 	OutputStream.cc
+	Phase.cc
 	PitchClass.cc
 	PlayedNote.cc
 	SampleRate.cc
