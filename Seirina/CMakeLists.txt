@@ -53,7 +53,7 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_REPEAT_BRIEF No)
   set(DOXYGEN_QT_AUTOBRIEF Yes)
   doxygen_add_docs(Docs ALL
-      ${DOXY_HEADERS}
+      ${DOXY_SOURCES}
   )
 endif()
 
