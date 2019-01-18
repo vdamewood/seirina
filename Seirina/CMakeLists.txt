@@ -27,6 +27,7 @@ set(PUBLIC_HEADERS
   SonicEvent.h
   SampleRate.h
   Silence.h
+  Tempo.h
 )
 set(SOURCES
   ${PUBLIC_HEADERS}
@@ -42,6 +43,7 @@ set(SOURCES
   PitchClass.cc
   SampleRate.cc
   Silence.cc
+  Tempo.cc
 )
 set(DOXY_SOURCES
   ${PUBLIC_HEADERS}
