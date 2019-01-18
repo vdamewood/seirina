@@ -1,6 +1,6 @@
 /* Note.cc: Types for a Musical Note
  *
- * Copyright 2018 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,14 @@
 #include <cmath>
 #include <map>
 
+#include "PitchClass.h"
 #include "Note.h"
 
 // This might be useful later
 #define ROOT12_OF_2 1.0594630943592951988208028
 #define CONCERT_A 440.0
+
+using Seirina::Notation::PitchClass;
 
 std::map<PitchClass, double> PitchMap
 {
@@ -48,31 +51,6 @@ std::map<PitchClass, double> PitchMap
 	{PitchClass::B,       493.88},
 	{PitchClass::B_Sharp, 523.25},
 };
-
-PitchClass MakePitchClass(char Letter, char Accidental)
-{
-	if (Letter >= 'a' && Letter <= 'g')
-		Letter -= 'a' - 'A';
-
-	if (Letter < 'A' || Letter > 'G')
-		return PitchClass::None;
-
-	int Adjustment = 2;
-	switch (Accidental)
-	{
-		case '-':
-		case 'b':
-			Adjustment = 1;
-			break;
-		case '+':
-		case '#':
-			Adjustment = 3;
-			break;
-		default:
-			break;
-	}
-	return static_cast<PitchClass>((Letter - 'A')*3 + Adjustment);
-}
 
 class Pitch::Pimpl
 {

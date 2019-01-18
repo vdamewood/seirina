@@ -17,9 +17,13 @@
 
 #include <fstream>
 
+#include <Seirina/PitchClass.h>
 #include <Seirina/Note.h>
 
 #include "InputParser.h"
+
+using Seirina::Notation::PitchClass;
+using Seirina::Notation::MakePitchClass;
 
 class ParserToken::Pimpl
 {

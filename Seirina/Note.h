@@ -1,6 +1,6 @@
 /* Note.h: Types for a Musical Note
  *
- * Copyright 2018 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,40 +18,14 @@
 #if !defined NOTE_H
 #define NOTE_H
 
-enum class PitchClass
-{
-	None,
-	A_Flat,
-	A,
-	A_Sharp,
-	B_Flat,
-	B,
-	B_Sharp,
-	C_Flat,
-	C,
-	C_Sharp,
-	D_Flat,
-	D,
-	D_Sharp,
-	E_Flat,
-	E,
-	E_Sharp,
-	F_Flat,
-	F,
-	F_Sharp,
-	G_Flat,
-	G,
-	G_Sharp,
-};
-
-PitchClass MakePitchClass(char Letter, char Accidental);
+#include "PitchClass.h"
 
 class Pitch
 {
 public:
-	Pitch(PitchClass, int Octave);
+	Pitch(Seirina::Notation::PitchClass, int Octave);
 	Pitch(const Pitch&);
-	PitchClass Class() const;
+	Seirina::Notation::PitchClass Class() const;
 	~Pitch();
 
 	int Octave() const;
