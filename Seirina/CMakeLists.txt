@@ -31,6 +31,7 @@ set(PUBLIC_HEADERS
 	Tempo.h
 	Timbre.h
 	WaveFile.h
+	WaveForm.h
 )
 set(SOURCES
 	${PUBLIC_HEADERS}
