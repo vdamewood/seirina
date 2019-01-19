@@ -53,7 +53,7 @@ set(SOURCES
 )
 set(DOXY_SOURCES
 	${PUBLIC_HEADERS}
-	Doxygen.h
+	Doxygen.dox
 )
 
 find_package(Doxygen)
