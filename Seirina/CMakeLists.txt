@@ -25,6 +25,7 @@ set(PUBLIC_HEADERS
 	Phase.h
 	PitchClass.h
 	PlayedNote.h
+	SampleIndex.h
 	SampleRate.h
 	Silence.h
 	SimpleWaves.h
@@ -46,6 +47,7 @@ set(SOURCES
 	Phase.cc
 	PitchClass.cc
 	PlayedNote.cc
+	SampleIndex.cc
 	SampleRate.cc
 	Silence.cc
 	SimpleWaves.cc
