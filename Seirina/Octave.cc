@@ -17,7 +17,7 @@
 
 #include "Octave.h"
 
-inline int clip(int i)
+static inline int clip(int i)
 {
 	return
 		i < 0 ? 0

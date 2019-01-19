@@ -17,10 +17,10 @@
 
 #include "AudioSample.h"
 
-inline double clip(double i)
+static inline double clip(double i)
 {
 	return
-		i < -1.0 ? 1.0
+		i < -1.0 ? -1.0
 		: i > 1.0 ? 1.0
 		: i;
 }
