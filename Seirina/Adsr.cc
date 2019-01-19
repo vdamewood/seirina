@@ -19,41 +19,41 @@
 
 namespace Seirina::Audio
 {
-class AdsrEnvelopePrivate
-{
-public:
-	AdsrEnvelopePrivate(int a, int d, double s, int r)
-		: attack(a), decay(d), sustain(s), release(r)
+	class AdsrEnvelopePrivate
+	{
+	public:
+		AdsrEnvelopePrivate(int a, int d, double s, int r)
+			: attack(a), decay(d), sustain(s), release(r)
+		{
+		}
+		int attack;
+		int decay;
+		double sustain;
+		int release;
+	};
+
+	AdsrEnvelope::AdsrEnvelope(
+		int newAttack,
+		int newDecay,
+		double newSustain,
+		int newRelease)
+		: p(new AdsrEnvelopePrivate(newAttack, newDecay, newSustain, newRelease))
 	{
 	}
-	int attack;
-	int decay;
-	double sustain;
-	int release;
-};
 
-AdsrEnvelope::AdsrEnvelope(
-	int newAttack,
-	int newDecay,
-	double newSustain,
-	int newRelease)
-	: p(new AdsrEnvelopePrivate(newAttack, newDecay, newSustain, newRelease))
-{
-}
-
-AdsrTransform AdsrEnvelope::GetTransform(int position, int duration)
-{
-	if (position < p->attack)
-		return static_cast<double>(position)/static_cast<double>(p->attack);
-	else if (position < (p->attack+p->decay))
-		return 1.0
-			- static_cast<double>(position - p->attack)
-			* (1.0 - p->sustain)
-			/ static_cast<double>(p->decay);
-	else if (position <= duration)
-		return p->sustain;
-	else
-		return p->sustain * 1.0 - (static_cast<double>(position-duration)
-			/ static_cast<double>(p->release));
-}
+	AdsrTransform AdsrEnvelope::GetTransform(int position, int duration)
+	{
+		if (position < p->attack)
+			return static_cast<double>(position)/static_cast<double>(p->attack);
+		else if (position < (p->attack+p->decay))
+			return 1.0
+				- static_cast<double>(position - p->attack)
+				* (1.0 - p->sustain)
+				/ static_cast<double>(p->decay);
+		else if (position <= duration)
+			return p->sustain;
+		else
+			return p->sustain * 1.0 - (static_cast<double>(position-duration)
+				/ static_cast<double>(p->release));
+	}
 };
