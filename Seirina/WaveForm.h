@@ -20,7 +20,7 @@
 #define SEIRINA_WAVE_FORM_H
 
 #include "Phase.h"
-#include "Sample.h"
+#include "AudioSample.h"
 
 namespace Seirina::Audio
 {

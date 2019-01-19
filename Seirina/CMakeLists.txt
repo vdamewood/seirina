@@ -27,6 +27,7 @@ set(PUBLIC_HEADERS
 	PlayedNote.h
 	SampleRate.h
 	Silence.h
+	SimpleWaves.h
 	SonicEvent.h
 	Tempo.h
 	Timbre.h
@@ -47,6 +48,7 @@ set(SOURCES
 	PlayedNote.cc
 	SampleRate.cc
 	Silence.cc
+	SimpleWaves.cc
 	Tempo.cc
 	Timbre.cc
 	WaveFile.cc
