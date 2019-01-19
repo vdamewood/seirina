@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined PHASE_H
-#define PHASE_H
+#if !defined SEIRINA_PHASE_H
+#define SEIRINA_PHASE_H
 
 namespace Seirina::Audio
 {
@@ -34,4 +34,4 @@ namespace Seirina::Audio
 	};
 };
 
-#endif /* PHASE_H */
+#endif // SEIRINA_PHASE_H

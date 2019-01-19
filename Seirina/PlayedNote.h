@@ -1,6 +1,6 @@
 /* PlayedNote.h: A note with timbre
  *
- * Copyright 2018 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined PLAYED_NOTE_H
-#define PLAYED_NOTE_H
+#if !defined SEIRINA_PLAYED_NOTE_H
+#define SEIRINA_PLAYED_NOTE_H
 
 #include "SonicEvent.h"
 #include "Note.h"
@@ -37,4 +37,4 @@ private:
 	Pimpl* p;
 };
 
-#endif // PLAYED_NOTE_H
+#endif // SEIRINA_PLAYED_NOTE_H

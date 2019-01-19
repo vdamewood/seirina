@@ -15,6 +15,9 @@
  * permissions and limitations under the License.
  */
 
+#if !defined SEIRINA_ADSR_H
+#define SEIRINA_ADSR_H
+
 #include "AdsrTransform.h"
 
 namespace Seirina::Audio
@@ -37,3 +40,5 @@ namespace Seirina::Audio
 		AdsrEnvelopePrivate* p;
 	};
 }
+
+#endif // SEIRINA_ADSR_H

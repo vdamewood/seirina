@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined AUDIO_SAMPLE_H
-#define AUDIO_SAMPLE_H
+#if !defined SEIRINA_AUDIO_SAMPLE_H
+#define SEIRINA_AUDIO_SAMPLE_H
 
 namespace Seirina::Audio
 {
@@ -36,4 +36,4 @@ namespace Seirina::Audio
 	};
 };
 
-#endif /* AUDIO_SAMPLE_H */
+#endif // SEIRINA_AUDIO_SAMPLE_H

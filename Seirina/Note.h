@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined NOTE_H
-#define NOTE_H
+#if !defined SEIRINA_NOTE_H
+#define SEIRINA_NOTE_H
 
 #include "Octave.h"
 #include "PitchClass.h"
@@ -63,4 +63,4 @@ private:
 	Pimpl* p;
 };
 
-#endif // NOTE_H
+#endif // SEIRINA_NOTE_H

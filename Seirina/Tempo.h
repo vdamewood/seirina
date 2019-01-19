@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined TEMPO_H
-#define TEMPO_H
+#if !defined SEIRINA_TEMPO_H
+#define SEIRINA_TEMPO_H
 
 namespace Seirina::Notation
 {
@@ -34,4 +34,4 @@ namespace Seirina::Notation
 	};
 };
 
-#endif /* TEMPO_H */
+#endif // SEIRINA_TEMPO_H

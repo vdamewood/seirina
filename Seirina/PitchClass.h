@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined PITCH_CLASS_H
-#define PITCH_CLASS_H
+#if !defined SEIRINA_PITCH_CLASS_H
+#define SEIRINA_PITCH_CLASS_H
 
 namespace Seirina::Notation
 {
@@ -53,4 +53,4 @@ namespace Seirina::Notation
 	PitchClass MakePitchClass(char Letter, char Accidental);
 }
 
-#endif // PITCH_CLASS_H
+#endif // SEIRINA_PITCH_CLASS_H

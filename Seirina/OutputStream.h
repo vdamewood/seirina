@@ -1,6 +1,6 @@
 /* OutputStream.h: Interface for outputting audio data
  *
- * Copyright 2016 Vincent Damewood
+ * Copyright 2016, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#ifndef OUTPUT_STREAM_H
-#define OUTPUT_STREAM_H
+#ifndef SEIRINA_OUTPUT_STREAM_H
+#define SEIRINA_OUTPUT_STREAM_H
 
 #include "AudioFrame.h"
 
@@ -29,4 +29,4 @@ public:
 
 inline OutputStream::~OutputStream() { }
 
-#endif /* OUTPUT_STREAM_H */
+#endif // SEIRINA_OUTPUT_STREAM_H

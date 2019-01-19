@@ -1,6 +1,6 @@
 /* SonicEvent.h: Interface for things that make sound
  *
- * Copyright 2018 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 
 #include "AudioFrame.h"
 
-#if !defined SONIC_EVENT_H
-#define SONIC_EVENT_H
+#if !defined SEIRINA_SONIC_EVENT_H
+#define SEIRINA_SONIC_EVENT_H
 
 class SonicEvent
 {
@@ -30,4 +30,4 @@ public:
 
 inline SonicEvent::~SonicEvent() { }
 
-#endif /* SONIC_EVENT_H */
+#endif // SEIRINA_SONIC_EVENT_H

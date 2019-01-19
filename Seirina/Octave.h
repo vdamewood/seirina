@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined OCTAVE_H
-#define OCTAVE_H
+#if !defined SEIRINA_OCTAVE_H
+#define SEIRINA_OCTAVE_H
 
 namespace Seirina::Notation
 {
@@ -35,4 +35,4 @@ namespace Seirina::Notation
 	};
 };
 
-#endif /* OCTAVE_H */
+#endif // SEIRINA_OCTAVE_H

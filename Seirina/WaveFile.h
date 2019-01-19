@@ -1,6 +1,6 @@
 /* WaveFile.h: Output to .wav file
  *
- * Copyright 2016 Vincent Damewood
+ * Copyright 2016, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#ifndef WAVE_FILE_H
-#define WAVE_FILE_H
+#ifndef SEIRINA_WAVE_FILE_H
+#define SEIRINA_WAVE_FILE_H
 
 #include "OutputStream.h"
 
@@ -32,4 +32,4 @@ private:
 	WaveFilePrivate *d;
 };
 
-#endif /* WAVE_FILE_H */
+#endif // SEIRINA_WAVE_FILE_H

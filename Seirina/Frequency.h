@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined FREQUENCY_H
-#define FREQUENCY_H
+#if !defined SEIRINA_FREQUENCY_H
+#define SEIRINA_FREQUENCY_H
 
 namespace Seirina::Audio
 {
@@ -34,4 +34,4 @@ namespace Seirina::Audio
 	};
 };
 
-#endif /* FREQUENCY_H */
+#endif // SEIRINA_FREQUENCY_H

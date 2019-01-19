@@ -1,6 +1,6 @@
 /* Timbre.h: Sound timbre handling
  *
- * Copyright 2016, 2018 Vincent Damewood
+ * Copyright 2016, 2018, 2019 Vincent Damewood
 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +16,8 @@
  * permissions and limitations under the License.
  */
 
-#ifndef WAVES_H
-#define WAVES_H
+#ifndef SEIRINA_TIMBRE_H
+#define SEIRINA_TIMBRE_H
 
 #include "AudioFrame.h"
 #include "Note.h"
@@ -34,4 +34,4 @@ private:
 	Pimpl* p;
 };
 
-#endif /* WAVES_H */
+#endif // SEIRINA_TIMBRE_H

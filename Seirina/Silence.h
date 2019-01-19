@@ -1,6 +1,6 @@
 /* Silence.h: Play silence
  *
- * Copyright 2018 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SILENCE_H
-#define SILENCE_H
+#if !defined SEIRINA_SILENCE_H
+#define SEIRINA_SILENCE_H
 
 #include "SonicEvent.h"
 
@@ -35,4 +35,4 @@ private:
 	Pimpl* p;
 };
 
-#endif // SILENCE_H
+#endif // SEIRINA_SILENCE_H

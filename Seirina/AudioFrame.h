@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined AUDIO_FRAME_H
-#define AUDIO_FRAME_H
+#if !defined SEIRINA_AUDIO_FRAME_H
+#define SEIRINA_AUDIO_FRAME_H
 
 #include "AudioSample.h"
 
@@ -46,4 +46,4 @@ namespace Seirina::Audio
 	};
 };
 
-#endif /* AUDIO_FRAME_H */
+#endif // SEIRINA_AUDIO_FRAME_H

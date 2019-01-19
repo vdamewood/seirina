@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined ADSR_TRANSFORM_H
-#define ADSR_TRANSFORM_H
+#if !defined SEIRINA_ADSR_TRANSFORM_H
+#define SEIRINA_ADSR_TRANSFORM_H
 
 namespace Seirina::Audio
 {
@@ -35,4 +35,4 @@ namespace Seirina::Audio
 	};
 };
 
-#endif /* ADSR_TRANSFORM_H */
+#endif // SEIRINA_ADSR_TRANSFORM_H
