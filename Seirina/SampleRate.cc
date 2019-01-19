@@ -19,16 +19,16 @@
 
 namespace Seirina::Audio
 {
-    SampleRate::SampleRate(int newValue)
-    {
-        value = newValue;
-    }
+	SampleRate::SampleRate(int newValue)
+	{
+		value = newValue;
+	}
 
-    SampleRate::operator int() const
-    {
-        return value;
-    }
+	SampleRate::operator int() const
+	{
+		return value;
+	}
 
-    const SampleRate SampleRate::Cd = SampleRate(44100);
-    const SampleRate SampleRate::Dvd = SampleRate(48000);
+	const SampleRate SampleRate::Cd = SampleRate(44100);
+	const SampleRate SampleRate::Dvd = SampleRate(48000);
 }

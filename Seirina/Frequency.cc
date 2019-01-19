@@ -19,13 +19,13 @@
 
 namespace Seirina::Audio
 {
-    Frequency::Frequency(double newValue)
-    {
-        value = newValue;
-    }
+	Frequency::Frequency(double newValue)
+	{
+		value = newValue;
+	}
 
-    Frequency::operator double() const
-    {
-        return value;
-    }
+	Frequency::operator double() const
+	{
+		return value;
+	}
 };

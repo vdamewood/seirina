@@ -19,13 +19,13 @@
 
 namespace Seirina::Notation
 {
-    Tempo::Tempo(int newValue)
-    {
-        value = newValue;
-    }
+	Tempo::Tempo(int newValue)
+	{
+		value = newValue;
+	}
 
-    Tempo::operator int() const
-    {
-        return value;
-    }
+	Tempo::operator int() const
+	{
+		return value;
+	}
 };

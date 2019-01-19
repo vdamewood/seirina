@@ -27,13 +27,13 @@ static inline int clip(int i)
 
 namespace Seirina::Notation
 {
-    Octave::Octave(int newValue)
-    {
-        value = clip(newValue);
-    }
+	Octave::Octave(int newValue)
+	{
+		value = clip(newValue);
+	}
 
-    Octave::operator int() const
-    {
-        return value;
-    }
+	Octave::operator int() const
+	{
+		return value;
+	}
 }

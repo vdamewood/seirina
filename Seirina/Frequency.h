@@ -20,18 +20,18 @@
 
 namespace Seirina::Audio
 {
-    /*! Represents the frequency of a sound wave. */
-    class Frequency
-    {
-    public:
-        /*! Construct a Frequency object. */
-        Frequency(double value);
+	/*! Represents the frequency of a sound wave. */
+	class Frequency
+	{
+	public:
+		/*! Construct a Frequency object. */
+		Frequency(double value);
 
-        /*! Convert to a double. */
-        operator double() const;
-    private:
-        double value;
-    };
+		/*! Convert to a double. */
+		operator double() const;
+	private:
+		double value;
+	};
 };
 
 #endif /* FREQUENCY_H */

@@ -20,18 +20,18 @@
 
 namespace Seirina::Audio
 {
-    /*! Represents the phase of a sound wave. */
-    class Phase
-    {
-    public:
-        /*! Construct a Phase object. */
-        Phase(double value);
+	/*! Represents the phase of a sound wave. */
+	class Phase
+	{
+	public:
+		/*! Construct a Phase object. */
+		Phase(double value);
 
-        /*! Convert to a double. */
-        operator double() const;
-    private:
-        double value;
-    };
+		/*! Convert to a double. */
+		operator double() const;
+	private:
+		double value;
+	};
 };
 
 #endif /* PHASE_H */

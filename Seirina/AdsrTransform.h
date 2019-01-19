@@ -20,19 +20,19 @@
 
 namespace Seirina::Audio
 {
-    /*! Represents the transform applied to a sound wave by an ADSR
-     *  envelope. */
-    class AdsrTransform
-    {
-    public:
-        /*! Construct an AdsrTransorm object. */
-        AdsrTransform(double value);
+	/*! Represents the transform applied to a sound wave by an ADSR
+	*  envelope. */
+	class AdsrTransform
+	{
+		public:
+		/*! Construct an AdsrTransorm object. */
+		AdsrTransform(double value);
 
-        /*! Convert to a double. */
-        operator double() const;
-    private:
-        double value;
-    };
+		/*! Convert to a double. */
+		operator double() const;
+	private:
+		double value;
+	};
 };
 
 #endif /* ADSR_TRANSFORM_H */

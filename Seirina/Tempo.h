@@ -20,18 +20,18 @@
 
 namespace Seirina::Notation
 {
-    /*! Represents the tempo of a song in beats per minute. */
-    class Tempo
-    {
-    public:
-        /*! Construct a Tempo object. */
-        Tempo(int);
+	/*! Represents the tempo of a song in beats per minute. */
+	class Tempo
+	{
+	public:
+		/*! Construct a Tempo object. */
+		Tempo(int);
 
-        /*! Convert to an `int`. */
-        operator int() const;
-    private:
-        double value;
-    };
+		/*! Convert to an `int`. */
+		operator int() const;
+	private:
+		double value;
+	};
 };
 
 #endif /* TEMPO_H */

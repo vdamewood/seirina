@@ -20,24 +20,24 @@
 
 namespace Seirina::Audio
 {
-    /*! Represents the sampling rate of audio data.
-     */
-    class SampleRate
-    {
-    public:
-        /*! Construct a SampleRate object */
-        SampleRate(int);
+	/*! Represents the sampling rate of audio data.
+	*/
+	class SampleRate
+	{
+	public:
+		/*! Construct a SampleRate object */
+		SampleRate(int);
 
-        /*! Convert SampleRate to `int` */
-        operator int() const;
+		/*! Convert SampleRate to `int` */
+		operator int() const;
 
-        /*! CD-quality sampling rate (44100 Hz). */
-        static const SampleRate Cd;
-        /*! DVD-quality sampling rate (48000 Hz). */
-        static const SampleRate Dvd;
-    private:
-        int value;
-    };
+		/*! CD-quality sampling rate (44100 Hz). */
+		static const SampleRate Cd;
+		/*! DVD-quality sampling rate (48000 Hz). */
+		static const SampleRate Dvd;
+	private:
+		int value;
+	};
 };
 
 #endif /* SAMPLE_RATE_H */
