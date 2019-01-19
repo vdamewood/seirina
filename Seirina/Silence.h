@@ -28,7 +28,7 @@ public:
 	~Silence() override;
 
 public: // SonicEvent
-	Seirina::Audio::Frame NextFrame() override;
+	Seirina::Audio::Sample NextSample() override;
 	bool IsActive() const override;
 private:
 	class Pimpl;

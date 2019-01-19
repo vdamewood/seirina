@@ -28,7 +28,7 @@ public:
 	Timbre (const char* NewWaveform);
 	Timbre(const Timbre&);
 	~Timbre();
-	Seirina::Audio::Frame GetFrame(Note, int sequence);
+	Seirina::Audio::Sample GetSample(Note, int sequence);
 private:
 	class Pimpl;
 	Pimpl* p;

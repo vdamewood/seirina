@@ -1,6 +1,6 @@
-/* AudioFrame.cc: Representation of momentary audio sample
+/* AudioFrame.h: Collection of audio samples
  *
- * Copyright 2016, 2018 Vincent Damewood
+ * Copyright 2016, 2018. 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@
 #if !defined AUDIO_FRAME_H
 #define AUDIO_FRAME_H
 
+#include "AudioSample.h"
+
 namespace Seirina::Audio
 {
 	class FramePrivate;
@@ -27,22 +29,18 @@ namespace Seirina::Audio
 	{
 	public:
 		/*! Construct a monaural audio frame. */
-		Frame(double mono);
+		Frame(Seirina::Audio::Sample);
 		/*! Construct a binaural (stereo) audio frame. */
-		Frame(double left, double right);
+		Frame(
+			Seirina::Audio::Sample left,
+			Seirina::Audio::Sample right);
 		~Frame();
 
-		/*! Access the left-channel value. */
-		double Left() const;
+		/*! Get number of channels in frame. */
+		int FrameCount();
 
-		/*! Access the right-channel value. */
-		double Right() const;
-
-		/*! Access the monaural value. */
-		double Mono() const;
-
-		/*! Multiply the Frame object by a particular double. */
-		Frame operator*(double right_hand_side) const;
+		/*! Access a specific channel value. */
+		Seirina::Audio::Sample operator[](int) const;
 	private:
 		FramePrivate* const p;
 	};

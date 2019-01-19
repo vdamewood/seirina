@@ -97,8 +97,8 @@ Timbre::~Timbre()
 	//delete p;
 }
 
-Seirina::Audio::Frame Timbre::GetFrame(Note note, int sequence)
+Seirina::Audio::Sample Timbre::GetSample(Note note, int sequence)
 {
-	return Seirina::Audio::Frame(
+	return Seirina::Audio::Sample(
 		p->Waveform(phase(note.Pitch().Frequency(), sequence)));
 }

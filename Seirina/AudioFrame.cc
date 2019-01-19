@@ -1,6 +1,6 @@
-/* AudioFrame.cc: Representation of momentary audio sample
+/* AudioFrame.cc: Collection of audio samples
  *
- * Copyright 2018 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,35 +15,37 @@
  * permissions and limitations under the License.
  */
 
+#include <vector>
+
 #include "AudioFrame.h"
 
-inline double clip(double i)
-{
-	return
-		i < -1.0 ? 1.0
-		: i > 1.0 ? 1.0
-		: i;
-}
+using Seirina::Audio::Sample;
 
 namespace Seirina::Audio
 {
 	class FramePrivate
 	{
 	public:
-		double channels[2];
+		FramePrivate(size_t size)
+		{
+			channels.reserve(size);
+		}
+		std::vector<Sample> channels;
 	};
 
-	Frame::Frame(double input)
-		: p(new FramePrivate())
+	Frame::Frame(Sample input)
+		: p(new FramePrivate(1))
 	{
-		p->channels[0] = p->channels[1] = clip(input);
+		//p->channels.reserve(1);
+		p->channels.push_back(input);
 	}
 
-	Frame::Frame(double left, double right)
-		: p(new FramePrivate())
+	Frame::Frame(Sample left, Sample right)
+		: p(new FramePrivate(2))
 	{
-		p->channels[0] = clip(left);
-		p->channels[1] = clip(right);
+		//p->channels.reserve(2);
+		p->channels.push_back(left);
+		p->channels.push_back(right);
 	}
 
 	Frame::~Frame()
@@ -51,23 +53,8 @@ namespace Seirina::Audio
 		delete p;
 	}
 
-	double Frame::Left() const
+	Sample Frame::operator[] (int idx) const
 	{
-		return p->channels[0];
-	}
-
-	double Frame::Right() const
-	{
-		return p->channels[1];
-	}
-
-	double Frame::Mono() const
-	{
-		return (p->channels[0] + p->channels[1]) / 2;
-	}
-
-	Frame Frame::operator*(double op) const
-	{
-		return Frame(p->channels[0] * op, p->channels[1] * op);
+		return p->channels[idx];
 	}
 };

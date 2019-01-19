@@ -57,10 +57,10 @@ PlayedNote::~PlayedNote()
 	delete p;
 }
 
-Seirina::Audio::Frame PlayedNote::NextFrame()
+Seirina::Audio::Sample PlayedNote::NextSample()
 {
 	double framePosition = p->framePosition++;
-	return p->timbre.GetFrame(p->note, framePosition)
+	return p->timbre.GetSample(p->note, framePosition)
 		* p->adsr.GetTransform(framePosition, p->frameLength - ReleaseLength);
 }
 

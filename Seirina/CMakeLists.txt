@@ -17,6 +17,7 @@ set(PUBLIC_HEADERS
 	Adsr.h
 	AdsrTransform.h
 	AudioFrame.h
+	AudioSample.h
 	Frequency.h
 	Note.h
 	Octave.h
@@ -36,6 +37,7 @@ set(SOURCES
 	Adsr.cc
 	AdsrTransform.cc
 	AudioFrame.cc
+	AudioSample.cc
 	Frequency.cc
 	Note.cc
 	Octave.cc

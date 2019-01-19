@@ -17,7 +17,6 @@
 
 #include <cstring>
 #include <string>
-#include <iostream>
 
 #include <Seirina/PlayedNote.h>
 #include <Seirina/Silence.h>
@@ -73,14 +72,24 @@ int main(int argc, char *argv[])
 			std::unique_ptr<Note> innote = token.ExtractNote();
 			PlayedNote pNote(*innote, MyTimbre);
 			while (pNote.IsActive())
-				myWaveFile.WriteFrame(pNote.NextFrame());
+			{
+				Seirina::Audio::Sample sample = pNote.NextSample();
+				myWaveFile.WriteFrame(
+					Seirina::Audio::Frame(sample, sample)
+				);
+			}
 		}
 		else if (token.IsRest())
 		{
 			std::unique_ptr<Rest> inrest = token.ExtractRest();
 			Silence s(inrest->Duration());
 			while (s.IsActive())
-				myWaveFile.WriteFrame(s.NextFrame());
+			{
+				Seirina::Audio::Sample sample = s.NextSample();
+				myWaveFile.WriteFrame(
+					Seirina::Audio::Frame(sample, sample)
+				);
+			}
 		}
 		else
 			break;

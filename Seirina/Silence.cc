@@ -47,10 +47,10 @@ Silence::~Silence()
 	delete p;
 }
 
-Seirina::Audio::Frame Silence::NextFrame()
+Seirina::Audio::Sample Silence::NextSample()
 {
 	p->framePosition++;
-	return Seirina::Audio::Frame(0.0, 0.0);
+	return 0.0;
 }
 
 bool Silence::IsActive() const
