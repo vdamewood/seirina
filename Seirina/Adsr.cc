@@ -17,10 +17,12 @@
 
 #include "Adsr.h"
 
-class AdsrEnvelope::Pimpl
+namespace Seirina::Audio
+{
+class AdsrEnvelopePrivate
 {
 public:
-	Pimpl(int a, int d, double s, int r)
+	AdsrEnvelopePrivate(int a, int d, double s, int r)
 		: attack(a), decay(d), sustain(s), release(r)
 	{
 	}
@@ -35,11 +37,11 @@ AdsrEnvelope::AdsrEnvelope(
 	int newDecay,
 	double newSustain,
 	int newRelease)
-	: p(new Pimpl(newAttack, newDecay, newSustain, newRelease))
+	: p(new AdsrEnvelopePrivate(newAttack, newDecay, newSustain, newRelease))
 {
 }
 
-double AdsrEnvelope::GetSample(int position, int duration)
+AdsrTransform AdsrEnvelope::GetTransform(int position, int duration)
 {
 	if (position < p->attack)
 		return static_cast<double>(position)/static_cast<double>(p->attack);
@@ -54,3 +56,4 @@ double AdsrEnvelope::GetSample(int position, int duration)
 		return p->sustain * 1.0 - (static_cast<double>(position-duration)
 			/ static_cast<double>(p->release));
 }
+};

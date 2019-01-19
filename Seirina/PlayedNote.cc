@@ -24,6 +24,7 @@
 // FIXME: these shouldn't be constants here
 const int BeatLength = 18900; // 140 BPM: 44100*60/140
 const int ReleaseLength = BeatLength/4;
+using Seirina::Audio::AdsrEnvelope;
 
 class PlayedNote::Pimpl
 {
@@ -60,7 +61,7 @@ Seirina::Audio::Frame PlayedNote::NextFrame()
 {
 	double framePosition = p->framePosition++;
 	return p->timbre.GetFrame(p->note, framePosition)
-		* p->adsr.GetSample(framePosition, p->frameLength - ReleaseLength);
+		* p->adsr.GetTransform(framePosition, p->frameLength - ReleaseLength);
 }
 
 bool PlayedNote::IsActive() const

@@ -1,6 +1,6 @@
-/* adsr.cc: Attack/Decay/Sustain/Release Envelops
+/* AdsrTransform.cc: The transoform applied by and ADSR envelope
  *
- * Copyright 2017, 2018, 2019 Vincent Damewood
+ * Copyright 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,24 @@
  * permissions and limitations under the License.
  */
 
-#include "AdsrTransform.h"
+#if !defined ADSR_TRANSFORM_H
+#define ADSR_TRANSFORM_H
 
 namespace Seirina::Audio
 {
-	class AdsrEnvelopePrivate;
+    /*! Represents the transform applied to a sound wave by an ADSR
+     *  envelope. */
+    class AdsrTransform
+    {
+    public:
+        /*! Construct an AdsrTransorm object. */
+        AdsrTransform(double value);
 
-	/*! Represents the attack, decay, sustain, and release of a note
-	 *  played in music. */
-	class AdsrEnvelope
-	{
-	public:
-		/*! Constust a new ADSR Envelope. */
-		AdsrEnvelope(int Attack, int Decay,
-			double Sustain, int Release);
+        /*! Convert to a double. */
+        operator double() const;
+    private:
+        double value;
+    };
+};
 
-		/*! Get the value to transform the sound wave by at a particular
-			position in the playing. */
-		AdsrTransform GetTransform(int position, int duration);
-	private:
-		AdsrEnvelopePrivate* p;
-	};
-}
+#endif /* ADSR_TRANSFORM_H */

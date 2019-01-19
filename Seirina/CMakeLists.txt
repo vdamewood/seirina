@@ -15,6 +15,7 @@
 set(TARGET Seirina)
 set(PUBLIC_HEADERS
 	Adsr.h
+	AdsrTransform.h
 	AudioFrame.h
 	Frequency.h
 	Note.h
@@ -33,6 +34,7 @@ set(PUBLIC_HEADERS
 set(SOURCES
 	${PUBLIC_HEADERS}
 	Adsr.cc
+	AdsrTransform.cc
 	AudioFrame.cc
 	Frequency.cc
 	Note.cc
