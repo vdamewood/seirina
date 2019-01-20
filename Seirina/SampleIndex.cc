@@ -17,7 +17,7 @@
 
 #include "SampleIndex.h"
 
-static inline double clip(double i)
+static inline int clip(int i)
 {
 	return i < 0 ? 0 : i;
 }
