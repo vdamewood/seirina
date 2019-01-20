@@ -16,6 +16,8 @@
  */
 
 #include <cmath>
+#include <map>
+#include <string>
 
 #include "SimpleWaves.h"
 
@@ -46,4 +48,25 @@ namespace Seirina::Audio
 		double d = fmod(phase + 0.25, 1.0);
 		return (d <= 0.5 ? d : 1.0 - d) * 4.0 - 1.0;
 	}
-}
+
+	static std::map<std::string, WaveForm*> Waveforms
+	{
+		{std::string("sine"), new SineWave()},
+		{std::string("absine"), new AbsineWave()},
+		{std::string("saw"), new SawtoothWave()},
+		{std::string("square"), new SquareWave()},
+		{std::string("triangle"), new TriangleWave()},
+	};
+
+	WaveForm* GetWave(const char *WaveName)
+	{
+		try
+		{
+			return Waveforms.at(std::string(WaveName));
+		}
+		catch(std::out_of_range&)
+		{
+			return nullptr;
+		}
+	}
+};

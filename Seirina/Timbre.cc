@@ -25,27 +25,7 @@
 #include "Timbre.h"
 
 using Seirina::Audio::WaveForm;
-using Seirina::Audio::AbsineWave;
-using Seirina::Audio::SineWave;
-using Seirina::Audio::SquareWave;
-using Seirina::Audio::TriangleWave;
-using Seirina::Audio::SawtoothWave;
 
-static std::map<std::string, WaveForm*> Waveforms
-{
-	{std::string("sine"), new SineWave()},
-	{std::string("absine"), new AbsineWave()},
-	{std::string("saw"), new SawtoothWave()},
-	{std::string("square"), new SquareWave()},
-	{std::string("triangle"), new TriangleWave()},
-};
-
-double phase(double frequency, int sample)
-{
-	using Seirina::Audio::SampleRate;
-	double CycleLength = SampleRate::Cd/frequency;
-	return std::fmod(sample, CycleLength)/CycleLength;
-}
 
 class Timbre::Pimpl
 {
@@ -59,10 +39,8 @@ public:
 };
 
 Timbre::Timbre(const char* NewWaveFormName)
-	: p(new Pimpl(Waveforms[std::string(NewWaveFormName)]))
+	: p(new Pimpl(Seirina::Audio::GetWave(NewWaveFormName)))
 {
-	//WaveForm* NewWaveForm = ;
-	//p = ;
 }
 
 Timbre::Timbre(const Timbre& src)
@@ -74,6 +52,13 @@ Timbre::Timbre(const Timbre& src)
 Timbre::~Timbre()
 {
 	//delete p;
+}
+
+double phase(double frequency, int sample)
+{
+	using Seirina::Audio::SampleRate;
+	double CycleLength = SampleRate::Cd/frequency;
+	return std::fmod(sample, CycleLength)/CycleLength;
 }
 
 Seirina::Audio::Sample Timbre::GetSample(Note note, int sequence)

@@ -61,6 +61,9 @@ namespace Seirina::Audio
 		/*! Get the sample at a particular phase of the triangle wave. */
 		virtual Sample GetSample(Phase) override;
 	};
+
+	/*! Look up simple waveform by name */
+	WaveForm* GetWave(const char *WaveName);
 };
 
 #endif // SEIRINA_SIMPLE_WAVES_H
