@@ -18,11 +18,11 @@
 #if !defined SEIRINA_PLAYED_NOTE_H
 #define SEIRINA_PLAYED_NOTE_H
 
-#include "SonicEvent.h"
+#include "AudioEvent.h"
 #include "Note.h"
 #include "WaveForm.h"
 
-class PlayedNote : public SonicEvent
+class PlayedNote : public Seirina::Audio::Event
 {
 public:
 	PlayedNote(Note, Seirina::Audio::WaveForm*);

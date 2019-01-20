@@ -18,9 +18,9 @@
 #if !defined SEIRINA_SILENCE_H
 #define SEIRINA_SILENCE_H
 
-#include "SonicEvent.h"
+#include "AudioEvent.h"
 
-class Silence : public SonicEvent
+class Silence : public Seirina::Audio::Event
 {
 public:
 	Silence(double Duration);

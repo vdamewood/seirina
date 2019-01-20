@@ -1,4 +1,4 @@
-/* SonicEvent.h: Interface for things that make sound
+/* AudioEvent.h: Interface for things that make sound
  *
  * Copyright 2018, 2019 Vincent Damewood
  *
@@ -15,19 +15,27 @@
  * permissions and limitations under the License.
  */
 
-#include "AudioFrame.h"
+#if !defined SEIRINA_AUDIO_EVENT_H
+#define SEIRINA_AUDIO_EVENT_H
 
-#if !defined SEIRINA_SONIC_EVENT_H
-#define SEIRINA_SONIC_EVENT_H
+#include "AudioSample.h"
 
-class SonicEvent
+namespace Seirina::Audio
 {
-public:
-	virtual ~SonicEvent();
-	virtual Seirina::Audio::Sample NextSample() = 0;
-	virtual bool IsActive() const = 0;
+	/*! Represents some occurance of sound */
+	class Event
+	{
+	public:
+		/*! Destroy Event object */
+		virtual ~Event() { };
+
+		/*! Get the current sample from the event, and advance to the
+			next sample. */
+		virtual Seirina::Audio::Sample NextSample() = 0;
+
+		/*! Indicate if the event still has samples to return. */
+		virtual bool IsActive() const = 0;
+	};
 };
 
-inline SonicEvent::~SonicEvent() { }
-
-#endif // SEIRINA_SONIC_EVENT_H
+#endif // SEIRINA_AUDIO_EVENT_H

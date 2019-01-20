@@ -16,6 +16,7 @@ set(TARGET Seirina)
 set(PUBLIC_HEADERS
 	Adsr.h
 	AdsrTransform.h
+	AudioEvent.h
 	AudioFrame.h
 	AudioSample.h
 	Frequency.h
@@ -29,7 +30,6 @@ set(PUBLIC_HEADERS
 	SampleRate.h
 	Silence.h
 	SimpleWaves.h
-	SonicEvent.h
 	Tempo.h
 	WaveFile.h
 	WaveForm.h
