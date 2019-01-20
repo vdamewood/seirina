@@ -29,6 +29,9 @@ namespace Seirina::Audio
 
 		/*! Convert to integer. */
 		operator int() const;
+		/*! Post increment */
+		SampleIndex operator++(int);
+
 	private:
 		int value;
 	};

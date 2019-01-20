@@ -18,18 +18,28 @@
 #if !defined SEIRINA_PLAYED_NOTE_H
 #define SEIRINA_PLAYED_NOTE_H
 
+#include "Adsr.h"
 #include "AudioEvent.h"
-#include "Note.h"
+#include "Frequency.h"
+//#include "Note.h"
+#include "SampleIndex.h"
+#include "SampleRate.h"
+#include "PlayedNote.h"
 #include "WaveForm.h"
 
 class PlayedNote : public Seirina::Audio::Event
 {
 public:
-	PlayedNote(Note, Seirina::Audio::WaveForm*);
+	PlayedNote(
+		Seirina::Audio::Frequency,
+		int new_duration,
+		Seirina::Audio::AdsrEnvelope,
+		Seirina::Audio::WaveForm*,
+		Seirina::Audio::SampleRate);
 	PlayedNote(const PlayedNote&);
 	~PlayedNote() override;
 
-public: // SonicEvent
+public: // Event
 	Seirina::Audio::Sample NextSample() override;
 	bool IsActive() const override;
 private:

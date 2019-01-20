@@ -43,6 +43,7 @@ namespace Seirina::Audio
 
 	AdsrTransform AdsrEnvelope::GetTransform(int position, int duration)
 	{
+		duration -= p->release;
 		if (position < p->attack)
 			return static_cast<double>(position)/static_cast<double>(p->attack);
 		else if (position < (p->attack+p->decay))

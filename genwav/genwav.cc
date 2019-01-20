@@ -25,6 +25,10 @@
 
 #include "InputParser.h"
 
+// FIXME: these shouldn't be constants here
+const int BeatLength = 18900; // 140 BPM: 44100*60/140
+const int ReleaseLength = BeatLength/4;
+
 int main(int argc, char *argv[])
 {
 	std::string WaveName("sine");
@@ -71,7 +75,12 @@ int main(int argc, char *argv[])
 		if (token.IsNote())
 		{
 			std::unique_ptr<Note> innote = token.ExtractNote();
-			PlayedNote pNote(*innote, MyWave);
+			PlayedNote pNote(
+				innote->Pitch().Frequency(),
+				BeatLength * innote->Duration(),
+				Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength),
+				MyWave,
+				Seirina::Audio::SampleRate::Cd);
 			while (pNote.IsActive())
 			{
 				Seirina::Audio::Sample sample = pNote.NextSample();

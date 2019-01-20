@@ -33,4 +33,9 @@ namespace Seirina::Audio
 	{
 		return value;
 	}
+
+	SampleIndex SampleIndex::operator++(int)
+	{
+		return value++;
+	}
 };
