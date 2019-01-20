@@ -16,6 +16,7 @@
  */
 
 #include "Adsr.h"
+#include "SampleDuration.h"
 
 namespace Seirina::Audio
 {
@@ -41,7 +42,7 @@ namespace Seirina::Audio
 	{
 	}
 
-	AdsrTransform AdsrEnvelope::GetTransform(int position, int duration)
+	AdsrTransform AdsrEnvelope::GetTransform(SampleIndex position, SampleDuration duration)
 	{
 		duration -= p->release;
 		if (position < p->attack)

@@ -26,6 +26,7 @@
 
 using Seirina::Audio::AdsrEnvelope;
 using Seirina::Audio::Frequency;
+using Seirina::Audio::SampleDuration;
 using Seirina::Audio::SampleIndex;
 using Seirina::Audio::SampleRate;
 using Seirina::Audio::WaveForm;
@@ -35,34 +36,34 @@ class PlayedNote::Pimpl
 public:
 	Pimpl(
 		Frequency new_frequency,
-		int new_duration,
+		SampleDuration new_duration,
 		AdsrEnvelope new_adsr,
 		WaveForm* new_waveform,
 		SampleRate new_sample_rate,
-		SampleIndex new_idx=0)
+		SampleIndex new_position=0)
 		: frequency(new_frequency),
-		frameLength(new_duration),
+		duration(new_duration),
 		adsr(new_adsr),
 		waveform(new_waveform),
 		sampleRate(new_sample_rate),
-		CycleLength(new_sample_rate/new_frequency),
-		framePosition(new_idx)
+		cycleLength(new_sample_rate/new_frequency),
+		position(new_position)
 	{ }
 
 	// Note: frequency and sampleRate are only used to calculate
 	//  CycleLength at the moment, but might be useful later.
 	AdsrEnvelope adsr;
-	float CycleLength;
+	float cycleLength;
 	WaveForm* waveform;
 	SampleRate sampleRate;
-	int frameLength;
+	SampleDuration duration;
 	Frequency frequency;
-	SampleIndex framePosition;
+	SampleIndex position;
 };
 
 PlayedNote::PlayedNote(
 	Frequency new_frequency,
-	int new_duration,
+	SampleDuration new_duration,
 	AdsrEnvelope new_adsr,
 	WaveForm* new_waveform,
 	SampleRate new_sample_rate)
@@ -78,11 +79,11 @@ PlayedNote::PlayedNote(
 PlayedNote::PlayedNote(const PlayedNote& src)
 	: p(new Pimpl(
 		src.p->frequency,
-		src.p->frameLength,
+		src.p->duration,
 		src.p->adsr,
 		src.p->waveform,
 		src.p->sampleRate,
-		src.p->framePosition))
+		src.p->position))
 {
 }
 
@@ -93,13 +94,13 @@ PlayedNote::~PlayedNote()
 
 Seirina::Audio::Sample PlayedNote::NextSample()
 {
-	SampleIndex idx = p->framePosition++;
+	SampleIndex idx = p->position++;
 	return
-		p->waveform->GetSample(std::fmod(idx, p->CycleLength)/p->CycleLength)
-		* p->adsr.GetTransform(idx, p->frameLength);
+		p->waveform->GetSample(std::fmod(idx, p->cycleLength)/p->cycleLength)
+		* p->adsr.GetTransform(idx, p->duration);
 }
 
 bool PlayedNote::IsActive() const
 {
-	return p->framePosition < p->frameLength;
+	return p->position < p->duration;
 }

@@ -32,7 +32,7 @@ class PlayedNote : public Seirina::Audio::Event
 public:
 	PlayedNote(
 		Seirina::Audio::Frequency,
-		int new_duration,
+		Seirina::Audio::SampleDuration,
 		Seirina::Audio::AdsrEnvelope,
 		Seirina::Audio::WaveForm*,
 		Seirina::Audio::SampleRate);

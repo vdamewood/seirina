@@ -19,6 +19,8 @@
 #define SEIRINA_ADSR_H
 
 #include "AdsrTransform.h"
+#include "SampleDuration.h"
+#include "SampleIndex.h"
 
 namespace Seirina::Audio
 {
@@ -35,7 +37,7 @@ namespace Seirina::Audio
 
 		/*! Get the value to transform the sound wave by at a particular
 			position in the playing. */
-		AdsrTransform GetTransform(int position, int duration);
+		AdsrTransform GetTransform(SampleIndex, SampleDuration);
 	private:
 		AdsrEnvelopePrivate* p;
 	};
