@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 		else if (token.IsRest())
 		{
 			std::unique_ptr<Rest> inrest = token.ExtractRest();
-			Silence s(inrest->Duration());
+			Silence s(BeatLength * inrest->Duration());
 			while (s.IsActive())
 			{
 				Seirina::Audio::Sample sample = s.NextSample();

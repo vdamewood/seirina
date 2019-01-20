@@ -1,6 +1,6 @@
 /* Silence.cc: Play silence
  *
- * Copyright 2018 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,6 @@
 
 #include "Silence.h"
 
-// FIXME: these shouldn't be constants here
-const int BeatLength = 18900; // 140 BPM: 44100*60/140
-
 class Silence::Pimpl
 {
 public:
@@ -34,7 +31,7 @@ public:
 Silence::Silence(double newDuration)
 	: p(new Pimpl(newDuration))
 {
-	p->frameLength = BeatLength * p->duration;
+	p->frameLength = p->duration;
 }
 
 Silence::Silence(const Silence& src)
