@@ -37,8 +37,8 @@ namespace Seirina::Audio
 		return value;
 	}
 
-	Sample Sample::operator*(double op) const
+	Sample Sample::operator*(AdsrTransform transform) const
 	{
-		return Sample(value * op);
+		return value * transform;
 	}
 };

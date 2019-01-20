@@ -18,6 +18,8 @@
 #if !defined SEIRINA_AUDIO_SAMPLE_H
 #define SEIRINA_AUDIO_SAMPLE_H
 
+#include "AdsrTransform.h"
+
 namespace Seirina::Audio
 {
 	/*! Represent a sample of audio date. */
@@ -29,8 +31,8 @@ namespace Seirina::Audio
 
 		/*! Convert to double. */
 		operator double() const;
-		/*! Multiply the Frame object by a particular double. */
-		Sample operator*(double right_hand_side) const;
+		/*! Transform the sample with an ADSR value. */
+		Sample operator*(AdsrTransform) const;
 	private:
 		double value;
 	};
