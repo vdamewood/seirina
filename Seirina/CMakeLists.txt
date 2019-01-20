@@ -31,7 +31,6 @@ set(PUBLIC_HEADERS
 	SimpleWaves.h
 	SonicEvent.h
 	Tempo.h
-	Timbre.h
 	WaveFile.h
 	WaveForm.h
 )
@@ -52,7 +51,6 @@ set(SOURCES
 	Silence.cc
 	SimpleWaves.cc
 	Tempo.cc
-	Timbre.cc
 	WaveFile.cc
 )
 set(DOXY_SOURCES

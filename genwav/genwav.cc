@@ -21,7 +21,7 @@
 #include <Seirina/PlayedNote.h>
 #include <Seirina/Silence.h>
 #include <Seirina/WaveFile.h>
-#include <Seirina/Timbre.h>
+#include <Seirina/SimpleWaves.h>
 
 #include "InputParser.h"
 
@@ -59,7 +59,8 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	Timbre MyTimbre(WaveName.c_str());
+	Seirina::Audio::WaveForm* MyWave =
+		Seirina::Audio::GetWave(WaveName.c_str());
 	InputParser Input(InFileName.c_str());
 	WaveFile myWaveFile(OutFileName.c_str());
 
@@ -70,7 +71,7 @@ int main(int argc, char *argv[])
 		if (token.IsNote())
 		{
 			std::unique_ptr<Note> innote = token.ExtractNote();
-			PlayedNote pNote(*innote, MyTimbre);
+			PlayedNote pNote(*innote, MyWave);
 			while (pNote.IsActive())
 			{
 				Seirina::Audio::Sample sample = pNote.NextSample();

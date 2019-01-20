@@ -20,12 +20,12 @@
 
 #include "SonicEvent.h"
 #include "Note.h"
-#include "Timbre.h"
+#include "WaveForm.h"
 
 class PlayedNote : public SonicEvent
 {
 public:
-	PlayedNote(Note, Timbre);
+	PlayedNote(Note, Seirina::Audio::WaveForm*);
 	PlayedNote(const PlayedNote&);
 	~PlayedNote() override;
 

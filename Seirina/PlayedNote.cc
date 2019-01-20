@@ -15,38 +15,44 @@
  * permissions and limitations under the License.
  */
 
+#include <cmath>
+
 #include "Adsr.h"
+#include "Frequency.h"
 #include "Note.h"
-#include "Timbre.h"
+#include "SampleIndex.h"
 #include "SampleRate.h"
 #include "PlayedNote.h"
 
 // FIXME: these shouldn't be constants here
 const int BeatLength = 18900; // 140 BPM: 44100*60/140
 const int ReleaseLength = BeatLength/4;
+
 using Seirina::Audio::AdsrEnvelope;
+using Seirina::Audio::SampleIndex;
+using Seirina::Audio::SampleRate;
 
 class PlayedNote::Pimpl
 {
 public:
-	Pimpl(Note newNote, Timbre newTimbre)
-		: note(newNote), timbre(newTimbre), adsr(0, 0, 1.0, ReleaseLength)
+	Pimpl(Note newNote, Seirina::Audio::WaveForm* newForm)
+		: note(newNote), waveform(newForm), adsr(0, 0, 1.0, ReleaseLength)
 	{ }
 	Note note;
-	Timbre timbre;
+	Seirina::Audio::WaveForm* waveform;
 	AdsrEnvelope adsr;
 	int framePosition = 0;
 	int frameLength = 0;
 };
 
-PlayedNote::PlayedNote(Note newNote, Timbre newTimbre)
-	: p(new Pimpl(newNote, newTimbre))
+PlayedNote::PlayedNote(Note newNote, Seirina::Audio::WaveForm* newForm)
+	: p(new Pimpl(newNote, newForm))
 {
 	p->frameLength = BeatLength * p->note.Duration();
 }
 
 PlayedNote::PlayedNote(const PlayedNote& src)
-	: p(new Pimpl(src.p->note, src.p->timbre))
+	: p(new Pimpl(src.p->note, src.p->waveform))
 {
 	p->frameLength = src.p->frameLength;
 	p->framePosition = src.p->framePosition;
@@ -59,8 +65,14 @@ PlayedNote::~PlayedNote()
 
 Seirina::Audio::Sample PlayedNote::NextSample()
 {
+	// FIXME: This needs to be cleaned up
 	double framePosition = p->framePosition++;
-	return p->timbre.GetSample(p->note, framePosition)
+	Seirina::Audio::Frequency frequency = p->note.Pitch().Frequency();
+	double CycleLength = SampleRate::Cd/frequency;
+	double phase = 	std::fmod(framePosition, CycleLength)/CycleLength;
+
+	return
+		p->waveform->GetSample(phase)
 		* p->adsr.GetTransform(framePosition, p->frameLength - ReleaseLength);
 }
 
