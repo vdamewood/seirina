@@ -48,7 +48,6 @@ namespace Seirina::Audio
 		Sample NextSample() override;
 		bool IsActive() const override;
 	private:
-		class Pimpl;
 		SynthNotePrivate* p;
 	};
 };
