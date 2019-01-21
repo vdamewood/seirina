@@ -23,20 +23,20 @@ namespace Seirina::Audio
 	class AdsrEnvelopePrivate
 	{
 	public:
-		AdsrEnvelopePrivate(SampleDuration a, SampleDuration d, double s, SampleDuration r)
+		AdsrEnvelopePrivate(SampleDuration a, SampleDuration d, AdsrTransform s, SampleDuration r)
 			: attack(a), decay(d), sustain(s), release(r)
 		{
 		}
 		int attack;
 		int decay;
-		double sustain;
+		AdsrTransform sustain;
 		int release;
 	};
 
 	AdsrEnvelope::AdsrEnvelope(
 		SampleDuration newAttack,
 		SampleDuration newDecay,
-		double newSustain,
+		AdsrTransform newSustain,
 		SampleDuration newRelease)
 		: p(new AdsrEnvelopePrivate(newAttack, newDecay, newSustain, newRelease))
 	{
