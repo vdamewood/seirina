@@ -19,7 +19,7 @@
 #include <string>
 
 #include <Seirina/Audio/SynthNote.h>
-#include <Seirina/Silence.h>
+#include <Seirina/Audio/Silence.h>
 #include <Seirina/WaveFile.h>
 #include <Seirina/Audio/SimpleWaves.h>
 
@@ -29,6 +29,7 @@
 const int BeatLength = 18900; // 140 BPM: 44100*60/140
 const int ReleaseLength = BeatLength/4;
 
+using Seirina::Audio::Silence;
 using Seirina::Audio::SynthNote;
 
 int main(int argc, char *argv[])

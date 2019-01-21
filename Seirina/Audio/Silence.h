@@ -1,4 +1,4 @@
-/* Silence.cc: Play silence
+/* Silence.h: Play silence
  *
  * Copyright 2018, 2019 Vincent Damewood
  *
@@ -15,42 +15,32 @@
  * permissions and limitations under the License.
  */
 
-#include "Silence.h"
+#if !defined SEIRINA_AUDIO_SILENCE_H
+#define SEIRINA_AUDIO_SILENCE_H
 
-class Silence::Pimpl
+#include "AudioEvent.h"
+
+namespace Seirina::Audio
 {
-public:
-	Pimpl(double newDuration)
-		: duration(newDuration)
-	{ }
-	double duration;
-	int framePosition = 0;
-	int frameLength = 0;
+	class SilencePrivate;
+
+	/*! Represents a period of silence. */
+	class Silence : public Seirina::Audio::Event
+	{
+	public:
+		/*! Construct a Silence object. */
+		Silence(double Duration);
+		/*! Copyconstructor. */
+		Silence(const Silence&);
+		/*! Destructor. */
+		~Silence() override;
+
+	public: // Event
+		Seirina::Audio::Sample NextSample() override;
+		bool IsActive() const override;
+	private:
+		SilencePrivate* p;
+	};
 };
 
-Silence::Silence(double newDuration)
-	: p(new Pimpl(newDuration))
-{
-	p->frameLength = p->duration;
-}
-
-Silence::Silence(const Silence& src)
-	: p(new Pimpl(src.p->duration))
-{
-}
-
-Silence::~Silence()
-{
-	delete p;
-}
-
-Seirina::Audio::Sample Silence::NextSample()
-{
-	p->framePosition++;
-	return 0.0;
-}
-
-bool Silence::IsActive() const
-{
-	return p->framePosition < p->frameLength;
-}
+#endif // SEIRINA_AUDIO_SILENCE_H

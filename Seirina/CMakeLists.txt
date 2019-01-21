@@ -29,7 +29,7 @@ set(PUBLIC_HEADERS
 	Audio/SampleDuration.h
 	Audio/SampleIndex.h
 	Audio/SampleRate.h
-	Silence.h
+	Audio/Silence.h
 	Audio/SimpleWaves.h
 	Audio/SynthNote.h
 	Notation/Tempo.h
@@ -51,7 +51,7 @@ set(SOURCES
 	Audio/SampleDuration.cc
 	Audio/SampleIndex.cc
 	Audio/SampleRate.cc
-	Silence.cc
+	Audio/Silence.cc
 	Audio/SimpleWaves.cc
 	Audio/SynthNote.cc
 	Notation/Tempo.cc
