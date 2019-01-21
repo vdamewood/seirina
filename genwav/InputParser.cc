@@ -18,12 +18,13 @@
 #include <fstream>
 
 #include <Seirina/Notation/PitchClass.h>
-#include <Seirina/Note.h>
 
 #include "InputParser.h"
 
 using Seirina::Notation::PitchClass;
 using Seirina::Notation::MakePitchClass;
+using Seirina::Notation::Note;
+using Seirina::Notation::Rest;
 
 class ParserToken::Pimpl
 {
@@ -184,9 +185,8 @@ ParserToken InputParser::Fetch()
 
 	if (NoteLetter != 'R')
 		return ParserToken(std::unique_ptr<Note>(new Note(
-			Pitch(
-				MakePitchClass(NoteLetter, NoteAccidental),
-				NoteOctave),
+			MakePitchClass(NoteLetter, NoteAccidental),
+			NoteOctave,
 			DurationNumerator,
 			DurationDenominator)));
 	else

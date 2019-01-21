@@ -20,11 +20,12 @@ set(PUBLIC_HEADERS
 	Audio/AudioFrame.h
 	Audio/AudioSample.h
 	Audio/Frequency.h
-	Note.h
+	Notation/Note.h
 	Notation/Octave.h
 	OutputStream.h
 	Audio/Phase.h
 	Notation/PitchClass.h
+	Notation/Rest.h
 	Audio/SampleDuration.h
 	Audio/SampleIndex.h
 	Audio/SampleRate.h
@@ -42,10 +43,11 @@ set(SOURCES
 	Audio/AudioFrame.cc
 	Audio/AudioSample.cc
 	Audio/Frequency.cc
-	Note.cc
+	Notation/Note.cc
 	Notation/Octave.cc
 	Audio/Phase.cc
 	Notation/PitchClass.cc
+	Notation/Rest.cc
 	Audio/SampleDuration.cc
 	Audio/SampleIndex.cc
 	Audio/SampleRate.cc

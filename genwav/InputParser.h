@@ -20,7 +20,11 @@
 
 #include <memory>
 
-#include <Seirina/Note.h>
+#include <Seirina/Notation/Note.h>
+#include <Seirina/Notation/Rest.h>
+
+using Seirina::Notation::Note;
+using Seirina::Notation::Rest;
 
 class ParserToken
 {

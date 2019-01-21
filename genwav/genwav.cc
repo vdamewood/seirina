@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 		{
 			std::unique_ptr<Note> innote = token.ExtractNote();
 			SynthNote pNote(
-				innote->Pitch().Frequency(),
+				innote->Frequency(),
 				BeatLength * innote->Duration(),
 				Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength),
 				MyWave,
