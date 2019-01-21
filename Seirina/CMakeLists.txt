@@ -21,17 +21,17 @@ set(PUBLIC_HEADERS
 	Audio/AudioSample.h
 	Audio/Frequency.h
 	Note.h
-	Octave.h
+	Notation/Octave.h
 	OutputStream.h
 	Audio/Phase.h
-	PitchClass.h
+	Notation/PitchClass.h
 	Audio/SampleDuration.h
 	Audio/SampleIndex.h
 	Audio/SampleRate.h
 	Silence.h
 	Audio/SimpleWaves.h
 	Audio/SynthNote.h
-	Tempo.h
+	Notation/Tempo.h
 	WaveFile.h
 	Audio/WaveForm.h
 )
@@ -43,16 +43,16 @@ set(SOURCES
 	Audio/AudioSample.cc
 	Audio/Frequency.cc
 	Note.cc
-	Octave.cc
+	Notation/Octave.cc
 	Audio/Phase.cc
-	PitchClass.cc
+	Notation/PitchClass.cc
 	Audio/SampleDuration.cc
 	Audio/SampleIndex.cc
 	Audio/SampleRate.cc
 	Silence.cc
 	Audio/SimpleWaves.cc
 	Audio/SynthNote.cc
-	Tempo.cc
+	Notation/Tempo.cc
 	WaveFile.cc
 )
 set(DOXY_SOURCES

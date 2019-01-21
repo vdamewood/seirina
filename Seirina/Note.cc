@@ -18,7 +18,7 @@
 #include <cmath>
 #include <map>
 
-#include "PitchClass.h"
+#include "Notation/PitchClass.h"
 #include "Note.h"
 
 // This might be useful later

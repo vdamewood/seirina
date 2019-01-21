@@ -18,8 +18,8 @@
 #if !defined SEIRINA_NOTE_H
 #define SEIRINA_NOTE_H
 
-#include "Octave.h"
-#include "PitchClass.h"
+#include "Notation/Octave.h"
+#include "Notation/PitchClass.h"
 
 class Pitch
 {
