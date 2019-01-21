@@ -25,6 +25,7 @@ using Seirina::Notation::PitchClass;
 using Seirina::Notation::MakePitchClass;
 using Seirina::Notation::Note;
 using Seirina::Notation::Rest;
+using Seirina::Notation::Duration;
 
 class ParserToken::Pimpl
 {
@@ -186,11 +187,12 @@ ParserToken InputParser::Fetch()
 	if (NoteLetter != 'R')
 		return ParserToken(std::unique_ptr<Note>(new Note(
 			MakePitchClass(NoteLetter, NoteAccidental),
-			NoteOctave,
+			NoteOctave, Duration(
 			DurationNumerator,
-			DurationDenominator)));
+			DurationDenominator))));
 	else
 		return ParserToken(std::unique_ptr<Rest>(new Rest(
-			DurationNumerator,
-			DurationDenominator)));
+			Duration(
+				DurationNumerator,
+				DurationDenominator))));
 }

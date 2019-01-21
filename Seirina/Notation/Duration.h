@@ -1,4 +1,4 @@
-/* Rest.h: Musical rest
+/* Duration.h: Musical duration
  *
  * Copyright 2018, 2019 Vincent Damewood
  *
@@ -15,33 +15,31 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_NOTATION_REST_H
-#define SEIRINA_NOTATION_REST_H
-
-#include "../Audio/Frequency.h"
-#include "Octave.h"
-#include "PitchClass.h"
-#include "Duration.h"
+#if !defined SEIRINA_NOTATION_DURATION_H
+#define SEIRINA_NOTATION_DURATION_H
 
 namespace Seirina::Notation
 {
-	class RestPrivate;
-	/*! A rest in musical notation */
-	class Rest
+	class DurationPrivate;
+
+	/*! A note in musical notation */
+	class Duration
 	{
 	public:
-		/*! Construct a Rest object */
-		Rest(Duration);
+		/*! Construct a duration */
+		Duration(int numerator, int denominator=1);
 		/*! Copy constructor */
-		Rest(const Rest&);
-		/*! Destructor */
-		~Rest();
+		Duration(const Duration&);
 
-		/*! Get the duration of the Rest */
-		Duration Duration() const;
+		/*! Destructor */
+		~Duration();
+
+		/*! Get duration as a double */
+		operator double() const;
 	private:
-		RestPrivate* p;
+		int numerator;
+		int denominator;
 	};
 };
 
-#endif // SEIRINA_NOTATION_REST_H
+#endif // SEIRINA_NOTATION_DURATION_H

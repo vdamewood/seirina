@@ -22,23 +22,21 @@ namespace Seirina::Notation
 	class RestPrivate
 	{
 	public:
-		RestPrivate(int newDurationNumerator, int newDurationDenominator)
-		: DurationNumerator(newDurationNumerator),
-			DurationDenominator(newDurationDenominator)
+		RestPrivate(Duration newDuration)
+			: duration(newDuration)
 		{
 		}
 
-		int DurationNumerator;
-		int DurationDenominator;
+		Duration duration;
 	};
 
-	Rest::Rest(int DurationNumerator, int DurationDenominator)
-		: p(new RestPrivate(DurationNumerator, DurationNumerator))
+	Rest::Rest(class Duration newDuration)
+		: p(new RestPrivate(newDuration))
 	{
 	}
 
-	Rest::Rest(const Rest& rhs)
-		: p(new RestPrivate(rhs.p->DurationNumerator, rhs.p->DurationNumerator))
+	Rest::Rest(const Rest& src)
+		: p(new RestPrivate(src.p->duration))
 	{
 	}
 
@@ -47,9 +45,8 @@ namespace Seirina::Notation
 		delete p;
 	}
 
-	double Rest::Duration() const
+	Duration Rest::Duration() const
 	{
-		return static_cast<double>(p->DurationNumerator)
-			/ static_cast<double>(p->DurationDenominator);
+		return p->duration;
 	}
 };

@@ -21,6 +21,7 @@
 #include "../Audio/Frequency.h"
 #include "Octave.h"
 #include "PitchClass.h"
+#include "Duration.h"
 
 namespace Seirina::Notation
 {
@@ -34,8 +35,7 @@ namespace Seirina::Notation
 		Note(
 			Seirina::Notation::PitchClass,
 			Seirina::Notation::Octave,
-			int DurationNumerator=1,
-			int DurationDenominator=1);
+			Duration);
 		/*! Copy constructor */
 		Note(const Note&);
 
@@ -52,7 +52,7 @@ namespace Seirina::Notation
 		Seirina::Audio::Frequency Frequency() const;
 
 		/*! Fetch the Duration of the note */
-		double Duration() const;
+		Duration Duration() const;
 	private:
 		NotePrivate* p;
 	};

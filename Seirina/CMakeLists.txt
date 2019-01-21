@@ -19,6 +19,7 @@ set(PUBLIC_HEADERS
 	Audio/AudioEvent.h
 	Audio/AudioFrame.h
 	Audio/AudioSample.h
+	Notation/Duration.h
 	Audio/Frequency.h
 	Notation/Note.h
 	Notation/Octave.h
@@ -42,6 +43,7 @@ set(SOURCES
 	Audio/AdsrTransform.cc
 	Audio/AudioFrame.cc
 	Audio/AudioSample.cc
+	Notation/Duration.cc
 	Audio/Frequency.cc
 	Notation/Note.cc
 	Notation/Octave.cc

@@ -61,31 +61,26 @@ namespace Seirina::Notation
 		NotePrivate(
 			PitchClass newPitchClass,
 			Octave newOctave,
-			int newDurationNumerator,
-			int newDurationDenominator)
+			Duration newDuration)
 		: pitchClass(newPitchClass),
 			octave(newOctave),
-			DurationNumerator(newDurationNumerator),
-			DurationDenominator(newDurationDenominator)
+			duration(newDuration)
 		{
 		}
 
 		PitchClass pitchClass;
 		Octave octave;
-		int DurationNumerator;
-		int DurationDenominator;
+		Duration duration;
 	};
 
 	Note::Note(
 			enum PitchClass newPitchClass,
 			class Octave newOctave,
-			int newDurationNumerator,
-			int newDurationDenominator)
+			class Duration newDuration)
 		: p(new NotePrivate(
 			newPitchClass,
 			newOctave,
-			newDurationNumerator,
-			newDurationDenominator))
+			newDuration))
 	{
 	}
 
@@ -93,8 +88,7 @@ namespace Seirina::Notation
 		: p(new NotePrivate(
 			src.p->pitchClass,
 			src.p->octave,
-			src.p->DurationNumerator,
-			src.p->DurationDenominator))
+			src.p->duration))
 	{
 	}
 
@@ -119,9 +113,8 @@ namespace Seirina::Notation
 	}
 
 
-	double Note::Duration() const
+	Duration Note::Duration() const
 	{
-		return static_cast<double>(p->DurationNumerator)
-			/ static_cast<double>(p->DurationDenominator);
+		return p->duration;
 	}
 };
