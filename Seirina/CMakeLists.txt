@@ -14,44 +14,44 @@
 
 set(TARGET Seirina)
 set(PUBLIC_HEADERS
-	Adsr.h
-	AdsrTransform.h
-	AudioEvent.h
-	AudioFrame.h
-	AudioSample.h
-	Frequency.h
+	Audio/Adsr.h
+	Audio/AdsrTransform.h
+	Audio/AudioEvent.h
+	Audio/AudioFrame.h
+	Audio/AudioSample.h
+	Audio/Frequency.h
 	Note.h
 	Octave.h
 	OutputStream.h
-	Phase.h
+	Audio/Phase.h
 	PitchClass.h
-	SampleDuration.h
-	SampleIndex.h
-	SampleRate.h
+	Audio/SampleDuration.h
+	Audio/SampleIndex.h
+	Audio/SampleRate.h
 	Silence.h
-	SimpleWaves.h
-	SynthNote.h
+	Audio/SimpleWaves.h
+	Audio/SynthNote.h
 	Tempo.h
 	WaveFile.h
-	WaveForm.h
+	Audio/WaveForm.h
 )
 set(SOURCES
 	${PUBLIC_HEADERS}
-	Adsr.cc
-	AdsrTransform.cc
-	AudioFrame.cc
-	AudioSample.cc
-	Frequency.cc
+	Audio/Adsr.cc
+	Audio/AdsrTransform.cc
+	Audio/AudioFrame.cc
+	Audio/AudioSample.cc
+	Audio/Frequency.cc
 	Note.cc
 	Octave.cc
-	Phase.cc
+	Audio/Phase.cc
 	PitchClass.cc
-	SampleDuration.cc
-	SampleIndex.cc
-	SampleRate.cc
+	Audio/SampleDuration.cc
+	Audio/SampleIndex.cc
+	Audio/SampleRate.cc
 	Silence.cc
-	SimpleWaves.cc
-	SynthNote.cc
+	Audio/SimpleWaves.cc
+	Audio/SynthNote.cc
 	Tempo.cc
 	WaveFile.cc
 )

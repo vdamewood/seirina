@@ -18,10 +18,10 @@
 #include <cstring>
 #include <string>
 
-#include <Seirina/SynthNote.h>
+#include <Seirina/Audio/SynthNote.h>
 #include <Seirina/Silence.h>
 #include <Seirina/WaveFile.h>
-#include <Seirina/SimpleWaves.h>
+#include <Seirina/Audio/SimpleWaves.h>
 
 #include "InputParser.h"
 

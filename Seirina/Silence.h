@@ -18,7 +18,7 @@
 #if !defined SEIRINA_SILENCE_H
 #define SEIRINA_SILENCE_H
 
-#include "AudioEvent.h"
+#include "Audio/AudioEvent.h"
 
 class Silence : public Seirina::Audio::Event
 {

@@ -17,7 +17,7 @@
 
 #include <fstream>
 
-#include "SampleRate.h"
+#include "Audio/SampleRate.h"
 #include "WaveFile.h"
 
 using Seirina::Audio::SampleRate;

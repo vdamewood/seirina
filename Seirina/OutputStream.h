@@ -18,7 +18,7 @@
 #ifndef SEIRINA_OUTPUT_STREAM_H
 #define SEIRINA_OUTPUT_STREAM_H
 
-#include "AudioFrame.h"
+#include "Audio/AudioFrame.h"
 
 class OutputStream
 {

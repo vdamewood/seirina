@@ -19,7 +19,6 @@
 
 #include "Adsr.h"
 #include "Frequency.h"
-#include "Note.h"
 #include "SampleIndex.h"
 #include "SampleRate.h"
 #include "SynthNote.h"
