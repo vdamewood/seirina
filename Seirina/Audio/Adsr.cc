@@ -23,7 +23,7 @@ namespace Seirina::Audio
 	class AdsrEnvelopePrivate
 	{
 	public:
-		AdsrEnvelopePrivate(int a, int d, double s, int r)
+		AdsrEnvelopePrivate(SampleDuration a, SampleDuration d, double s, SampleDuration r)
 			: attack(a), decay(d), sustain(s), release(r)
 		{
 		}
@@ -34,10 +34,10 @@ namespace Seirina::Audio
 	};
 
 	AdsrEnvelope::AdsrEnvelope(
-		int newAttack,
-		int newDecay,
+		SampleDuration newAttack,
+		SampleDuration newDecay,
 		double newSustain,
-		int newRelease)
+		SampleDuration newRelease)
 		: p(new AdsrEnvelopePrivate(newAttack, newDecay, newSustain, newRelease))
 	{
 	}
@@ -55,7 +55,7 @@ namespace Seirina::Audio
 		else if (position <= duration)
 			return p->sustain;
 		else
-			return p->sustain * 1.0 - (static_cast<double>(position-duration)
+			return p->sustain - (static_cast<double>(position-duration)
 				/ static_cast<double>(p->release));
 	}
 };

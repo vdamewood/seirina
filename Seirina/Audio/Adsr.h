@@ -32,8 +32,8 @@ namespace Seirina::Audio
 	{
 	public:
 		/*! Constust a new ADSR Envelope. */
-		AdsrEnvelope(int Attack, int Decay,
-			double Sustain, int Release);
+		AdsrEnvelope(SampleDuration Attack, SampleDuration Decay,
+			double Sustain, SampleDuration Release);
 
 		/*! Get the value to transform the sound wave by at a particular
 			position in the playing. */
