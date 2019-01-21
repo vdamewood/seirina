@@ -19,6 +19,7 @@
 #define SEIRINA_AUDIO_SILENCE_H
 
 #include "AudioEvent.h"
+#include "SampleDuration.h"
 
 namespace Seirina::Audio
 {
@@ -29,7 +30,7 @@ namespace Seirina::Audio
 	{
 	public:
 		/*! Construct a Silence object. */
-		Silence(double Duration);
+		Silence(SampleDuration);
 		/*! Copyconstructor. */
 		Silence(const Silence&);
 		/*! Destructor. */

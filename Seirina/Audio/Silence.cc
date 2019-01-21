@@ -15,6 +15,7 @@
  * permissions and limitations under the License.
  */
 
+#include "SampleIndex.h"
 #include "Silence.h"
 
 namespace Seirina::Audio
@@ -22,22 +23,22 @@ namespace Seirina::Audio
 	class SilencePrivate
 	{
 	public:
-		SilencePrivate(double newDuration)
-			: duration(newDuration)
-		{ }
-		double duration;
-		int framePosition = 0;
-		int frameLength = 0;
+		SilencePrivate(SampleDuration newDuration, SampleIndex newPosition = 0)
+			: duration(newDuration), position(newPosition)
+		{
+		}
+
+		SampleIndex position;
+		SampleDuration duration;
 	};
 
-	Silence::Silence(double newDuration)
+	Silence::Silence(SampleDuration newDuration)
 		: p(new SilencePrivate(newDuration))
 	{
-		p->frameLength = p->duration;
 	}
 
 	Silence::Silence(const Silence& src)
-		: p(new SilencePrivate(src.p->duration))
+		: p(new SilencePrivate(src.p->duration, src.p->position))
 	{
 	}
 
@@ -48,12 +49,12 @@ namespace Seirina::Audio
 
 	Seirina::Audio::Sample Silence::NextSample()
 	{
-		p->framePosition++;
+		p->position++;
 		return 0.0;
 	}
 
 	bool Silence::IsActive() const
 	{
-		return p->framePosition < p->frameLength;
+		return p->position < p->duration;
 	}
 };
