@@ -47,7 +47,7 @@ namespace Seirina::Audio
 		// Note: frequency and sampleRate are only used to calculate
 		//  CycleLength at the moment, but might be useful later.
 		AdsrEnvelope adsr;
-		float cycleLength;
+		double cycleLength;
 		WaveForm* waveform;
 		SampleRate sampleRate;
 		SampleDuration duration;

@@ -27,10 +27,10 @@ namespace Seirina::Audio
 			: attack(a), decay(d), sustain(s), release(r)
 		{
 		}
-		int attack;
-		int decay;
+		SampleDuration attack;
+		SampleDuration decay;
 		AdsrTransform sustain;
-		int release;
+		SampleDuration release;
 	};
 
 	AdsrEnvelope::AdsrEnvelope(
