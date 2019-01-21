@@ -21,30 +21,36 @@
 #include "Adsr.h"
 #include "AudioEvent.h"
 #include "Frequency.h"
-//#include "Note.h"
 #include "SampleIndex.h"
 #include "SampleRate.h"
-#include "PlayedNote.h"
 #include "WaveForm.h"
 
-class PlayedNote : public Seirina::Audio::Event
+namespace Seirina::Audio
 {
-public:
-	PlayedNote(
-		Seirina::Audio::Frequency,
-		Seirina::Audio::SampleDuration,
-		Seirina::Audio::AdsrEnvelope,
-		Seirina::Audio::WaveForm*,
-		Seirina::Audio::SampleRate);
-	PlayedNote(const PlayedNote&);
-	~PlayedNote() override;
+	class SynthNotePrivate;
+	/*! A note generated with synthesis */
+	class SynthNote : public Event
+	{
+	public:
+		/*! Construct a SynthNote object */
+		SynthNote(
+			Frequency,
+			SampleDuration,
+			AdsrEnvelope,
+			WaveForm*,
+			SampleRate);
+		/*! Copy constructor */
+		SynthNote(const SynthNote&);
+		/*! Destroy SynthNote object */
+		~SynthNote() override;
 
-public: // Event
-	Seirina::Audio::Sample NextSample() override;
-	bool IsActive() const override;
-private:
-	class Pimpl;
-	Pimpl* p;
+	public: // Event
+		Sample NextSample() override;
+		bool IsActive() const override;
+	private:
+		class Pimpl;
+		SynthNotePrivate* p;
+	};
 };
 
 #endif // SEIRINA_PLAYED_NOTE_H

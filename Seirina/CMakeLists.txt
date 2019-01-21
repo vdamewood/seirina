@@ -25,12 +25,12 @@ set(PUBLIC_HEADERS
 	OutputStream.h
 	Phase.h
 	PitchClass.h
-	PlayedNote.h
 	SampleDuration.h
 	SampleIndex.h
 	SampleRate.h
 	Silence.h
 	SimpleWaves.h
+	SynthNote.h
 	Tempo.h
 	WaveFile.h
 	WaveForm.h
@@ -46,12 +46,12 @@ set(SOURCES
 	Octave.cc
 	Phase.cc
 	PitchClass.cc
-	PlayedNote.cc
 	SampleDuration.cc
 	SampleIndex.cc
 	SampleRate.cc
 	Silence.cc
 	SimpleWaves.cc
+	SynthNote.cc
 	Tempo.cc
 	WaveFile.cc
 )

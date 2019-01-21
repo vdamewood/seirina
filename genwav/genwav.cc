@@ -18,7 +18,7 @@
 #include <cstring>
 #include <string>
 
-#include <Seirina/PlayedNote.h>
+#include <Seirina/SynthNote.h>
 #include <Seirina/Silence.h>
 #include <Seirina/WaveFile.h>
 #include <Seirina/SimpleWaves.h>
@@ -28,6 +28,8 @@
 // FIXME: these shouldn't be constants here
 const int BeatLength = 18900; // 140 BPM: 44100*60/140
 const int ReleaseLength = BeatLength/4;
+
+using Seirina::Audio::SynthNote;
 
 int main(int argc, char *argv[])
 {
@@ -75,7 +77,7 @@ int main(int argc, char *argv[])
 		if (token.IsNote())
 		{
 			std::unique_ptr<Note> innote = token.ExtractNote();
-			PlayedNote pNote(
+			SynthNote pNote(
 				innote->Pitch().Frequency(),
 				BeatLength * innote->Duration(),
 				Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength),
