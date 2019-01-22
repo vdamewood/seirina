@@ -36,14 +36,12 @@ namespace Seirina::Audio
 	Frame::Frame(Sample input)
 		: p(new FramePrivate(1))
 	{
-		//p->channels.reserve(1);
 		p->channels.push_back(input);
 	}
 
 	Frame::Frame(Sample left, Sample right)
 		: p(new FramePrivate(2))
 	{
-		//p->channels.reserve(2);
 		p->channels.push_back(left);
 		p->channels.push_back(right);
 	}
