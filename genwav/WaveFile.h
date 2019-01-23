@@ -18,11 +18,11 @@
 #ifndef SEIRINA_WAVE_FILE_H
 #define SEIRINA_WAVE_FILE_H
 
-#include <Seirina/OutputStream.h>
+#include <Seirina/Audio/Output.h>
 
 class WaveFilePrivate;
 
-class WaveFile : public Seirina::OutputStream
+class WaveFile : public Seirina::Audio::Output
 {
 public:
 	WaveFile(const char* Filename);

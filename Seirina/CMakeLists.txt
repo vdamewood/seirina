@@ -23,7 +23,7 @@ set(PUBLIC_HEADERS
 	Audio/Frequency.h
 	Notation/Note.h
 	Notation/Octave.h
-	OutputStream.h
+	Audio/Output.h
 	Audio/Phase.h
 	Notation/PitchClass.h
 	Notation/Rest.h

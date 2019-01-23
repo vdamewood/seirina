@@ -1,4 +1,4 @@
-/* OutputStream.h: Interface for outputting audio data
+/* Output.h: Interface for outputting audio data
  *
  * Copyright 2016, 2019 Vincent Damewood
  *
@@ -15,22 +15,22 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_OUTPUT_STREAM_H
-#define SEIRINA_OUTPUT_STREAM_H
+#ifndef SEIRINA_AUDIO_OUTPUT_H
+#define SEIRINA_AUDIO_OUTPUT_H
 
-#include "Audio/AudioFrame.h"
+#include "AudioFrame.h"
 
-namespace Seirina
+namespace Seirina::Audio
 {
 	/*! Interface for audio output */
-	class OutputStream
+	class Output
 	{
 	public:
-		/*! Output a frame of audio data to the output device */
-		virtual void WriteFrame(Seirina::Audio::Frame) = 0;
+		/*! Output a frame of audio data to the output */
+		virtual void WriteFrame(Frame) = 0;
 
-		/* destroy the output stream object */
-		virtual ~OutputStream() {};
+		/* destroy the output object */
+		virtual ~Output() {};
 	};
 };
 
