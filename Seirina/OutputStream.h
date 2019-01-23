@@ -20,13 +20,18 @@
 
 #include "Audio/AudioFrame.h"
 
-class OutputStream
+namespace Seirina
 {
-public:
-	virtual void WriteFrame(Seirina::Audio::Frame) = 0;
-	virtual ~OutputStream();
-};
+	/*! Interface for audio output */
+	class OutputStream
+	{
+	public:
+		/*! Output a frame of audio data to the output device */
+		virtual void WriteFrame(Seirina::Audio::Frame) = 0;
 
-inline OutputStream::~OutputStream() { }
+		/* destroy the output stream object */
+		virtual ~OutputStream() {};
+	};
+};
 
 #endif // SEIRINA_OUTPUT_STREAM_H

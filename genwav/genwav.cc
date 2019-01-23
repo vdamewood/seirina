@@ -20,10 +20,10 @@
 
 #include <Seirina/Audio/SynthNote.h>
 #include <Seirina/Audio/Silence.h>
-#include <Seirina/WaveFile.h>
 #include <Seirina/Audio/SimpleWaves.h>
 
 #include "InputParser.h"
+#include "WaveFile.h"
 
 // FIXME: these shouldn't be constants here
 const int BeatLength = 18900; // 140 BPM: 44100*60/140

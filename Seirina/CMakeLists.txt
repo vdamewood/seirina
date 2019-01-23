@@ -34,7 +34,6 @@ set(PUBLIC_HEADERS
 	Audio/SimpleWaves.h
 	Audio/SynthNote.h
 	Notation/Tempo.h
-	WaveFile.h
 	Audio/WaveForm.h
 )
 set(SOURCES
@@ -57,7 +56,6 @@ set(SOURCES
 	Audio/SimpleWaves.cc
 	Audio/SynthNote.cc
 	Notation/Tempo.cc
-	WaveFile.cc
 )
 set(DOXY_SOURCES
 	${PUBLIC_HEADERS}

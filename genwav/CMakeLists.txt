@@ -18,6 +18,8 @@ set(SOURCES
 	genwav.cc
 	InputParser.h
 	InputParser.cc
+	WaveFile.h
+	WaveFile.cc
 )
 
 include_directories(${PROJECT_SOURCE_DIR})
