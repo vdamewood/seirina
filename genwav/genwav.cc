@@ -21,6 +21,7 @@
 #include <Seirina/Audio/SynthNote.h>
 #include <Seirina/Audio/Silence.h>
 #include <Seirina/Audio/SimpleWaves.h>
+#include <Seirina/Notation/Tuning.h>
 
 #include "InputParser.h"
 #include "WaveFile.h"
@@ -71,6 +72,7 @@ int main(int argc, char *argv[])
 	InputParser Input(InFileName.c_str());
 	WaveFile myWaveFile(OutFileName.c_str());
 
+	Seirina::Notation::Tuning myTuning(Seirina::Notation::PitchClass::A, 440.0);
 	int i = 0;
 	while (1)
 	{
@@ -79,7 +81,7 @@ int main(int argc, char *argv[])
 		{
 			std::unique_ptr<Note> innote = token.ExtractNote();
 			SynthNote pNote(
-				innote->Frequency(),
+				innote->Frequency(myTuning),
 				BeatLength * innote->Duration(),
 				Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength),
 				MyWave,

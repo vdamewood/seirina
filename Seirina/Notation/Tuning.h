@@ -15,48 +15,41 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_NOTATION_NOTE_H
-#define SEIRINA_NOTATION_NOTE_H
+#if !defined SEIRINA_NOTATION_TUNING_H
+#define SEIRINA_NOTATION_TUNING_H
 
 #include "../Audio/Frequency.h"
 #include "Octave.h"
 #include "PitchClass.h"
 #include "Duration.h"
-#include "Tuning.h"
+//#include "Note.h"
 
 namespace Seirina::Notation
 {
-	class NotePrivate;
+	class TuningPrivate;
 
-	/*! A note in musical notation */
-	class Note
+	/*! A tuning for a musical scale */
+	class Tuning
 	{
 	public:
-		/*! Construct a note */
-		Note(
+		/*! Construct a Tuning */
+		Tuning(
 			Seirina::Notation::PitchClass,
-			Seirina::Notation::Octave,
-			Duration);
+			Seirina::Audio::Frequency);
 		/*! Copy constructor */
-		Note(const Note&);
+		Tuning(const Tuning&);
 
 		/*! Destructor */
-		~Note();
+		~Tuning();
 
-		/*! Fetch the PitchClass of the note */
-		const Seirina::Notation::PitchClass& PitchClass() const;
+		/*! Get a particular frequency based on a pitch class */
+		Seirina::Audio::Frequency operator[](PitchClass);
 
-		/*! Fetch the Octave of the note */
-		const Seirina::Notation::Octave& Octave() const;
-
-		/*! Fetch the Frequency of the note */
-		Seirina::Audio::Frequency Frequency(Tuning) const;
-
-		/*! Fetch the Duration of the note */
-		Duration Duration() const;
+		/* Get the frequency of a specific note in the Tuning */
+		//Seirina::Audio::Frequency Frequency(const Note) const;
 	private:
-		NotePrivate* p;
+		TuningPrivate* p;
 	};
 };
 
-#endif // SEIRINA_NOTATION_NOTE_H
+#endif // SEIRINA_NOTATION_TUNING_H

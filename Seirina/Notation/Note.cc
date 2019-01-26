@@ -21,37 +21,9 @@
 #include "Note.h"
 #include "PitchClass.h"
 
-// This might be useful later
-#define ROOT12_OF_2 1.0594630943592951988208028
-#define CONCERT_A 440.0
 
 using Seirina::Notation::Octave;
 using Seirina::Notation::PitchClass;
-
-std::map<PitchClass, double> PitchMap
-{
-	{PitchClass::C_Flat,  246.94},
-	{PitchClass::C,       261.63},
-	{PitchClass::C_Sharp, 277.18},
-	{PitchClass::D_Flat,  277.18},
-	{PitchClass::D,       293.66},
-	{PitchClass::D_Sharp, 311.13},
-	{PitchClass::E_Flat,  311.13},
-	{PitchClass::E,       329.63},
-	{PitchClass::E_Sharp, 349.23},
-	{PitchClass::F_Flat,  329.63},
-	{PitchClass::F,       349.23},
-	{PitchClass::F_Sharp, 369.99},
-	{PitchClass::G_Flat,  369.99},
-	{PitchClass::G,       392.00},
-	{PitchClass::G_Sharp, 415.30},
-	{PitchClass::A_Flat,  415.30},
-	{PitchClass::A,       440.00},
-	{PitchClass::A_Sharp, 466.16},
-	{PitchClass::B_Flat,  466.16},
-	{PitchClass::B,       493.88},
-	{PitchClass::B_Sharp, 523.25},
-};
 
 namespace Seirina::Notation
 {
@@ -107,9 +79,9 @@ namespace Seirina::Notation
 		return p->octave;
 	}
 
-	Seirina::Audio::Frequency  Note::Frequency() const
+	Seirina::Audio::Frequency Note::Frequency(Tuning inTuning) const
 	{
-		return PitchMap[p->pitchClass] * std::pow(2.0, p->octave - 4);
+		return inTuning[p->pitchClass] * std::pow(2.0, p->octave - 4);
 	}
 
 
