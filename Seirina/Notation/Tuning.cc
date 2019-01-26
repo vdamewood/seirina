@@ -89,8 +89,4 @@ namespace Seirina::Notation
 	{
 		return p->PitchMap[inClass];
 	}
-	/*Seirina::Audio::Frequency  Tuning::Frequency(Note inNote) const
-	{
-		return p->PitchMap[inNote.PitchClass()] * std::pow(2.0, inNote.Octave() - 4);
-	}*/
 };

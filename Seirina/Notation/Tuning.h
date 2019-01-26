@@ -32,7 +32,10 @@ namespace Seirina::Notation
 	class Tuning
 	{
 	public:
-		/*! Construct a Tuning */
+		/*! Construct a Tuning.
+		 *
+		 * Note: Currently, this always returns an A=440Hz tuning.
+		 */
 		Tuning(
 			Seirina::Notation::PitchClass,
 			Seirina::Audio::Frequency);
@@ -44,9 +47,6 @@ namespace Seirina::Notation
 
 		/*! Get a particular frequency based on a pitch class */
 		Seirina::Audio::Frequency operator[](PitchClass);
-
-		/* Get the frequency of a specific note in the Tuning */
-		//Seirina::Audio::Frequency Frequency(const Note) const;
 	private:
 		TuningPrivate* p;
 	};
