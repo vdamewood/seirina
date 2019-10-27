@@ -40,25 +40,25 @@ set(PUBLIC_HEADERS
 
 set(SOURCES
 	${PUBLIC_HEADERS}
-	src/Audio/Adsr.cc
-	src/Audio/AdsrTransform.cc
-	src/Audio/AudioFrame.cc
-	src/Audio/AudioSample.cc
-	src/Notation/Duration.cc
-	src/Audio/Frequency.cc
-	src/Notation/Note.cc
-	src/Notation/Octave.cc
-	src/Audio/Phase.cc
-	src/Notation/PitchClass.cc
-	src/Notation/Rest.cc
-	src/Audio/SampleDuration.cc
-	src/Audio/SampleIndex.cc
-	src/Audio/SampleRate.cc
-	src/Audio/Silence.cc
-	src/Audio/SimpleWaves.cc
-	src/Audio/SynthNote.cc
-	src/Notation/Tempo.cc
-	src/Notation/Tuning.cc
+	src/Adsr.cc
+	src/AdsrTransform.cc
+	src/AudioFrame.cc
+	src/AudioSample.cc
+	src/Duration.cc
+	src/Frequency.cc
+	src/Note.cc
+	src/Octave.cc
+	src/Phase.cc
+	src/PitchClass.cc
+	src/Rest.cc
+	src/SampleDuration.cc
+	src/SampleIndex.cc
+	src/SampleRate.cc
+	src/Silence.cc
+	src/SimpleWaves.cc
+	src/SynthNote.cc
+	src/Tempo.cc
+	src/Tuning.cc
 )
 set(DOXY_SOURCES
 	${PUBLIC_HEADERS}
