@@ -17,7 +17,7 @@
 
 #include <fstream>
 
-#include <Seirina/Notation/PitchClass.h>
+#include <Seirina/PitchClass.h>
 
 #include "InputParser.h"
 

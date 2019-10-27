@@ -1,6 +1,6 @@
-/* WaveFile.h: Output to .wav file
+/* SampleRate.cc: Sample rates
  *
- * Copyright 2016, 2019 Vincent Damewood
+ * Copyright 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,20 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#include <Seirina/SampleRate.h>
 
-#include <Seirina/Output.h>
-
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+namespace Seirina::Audio
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
-};
+	SampleRate::SampleRate(int newValue)
+	{
+		value = newValue;
+	}
 
-#endif // SEIRINA_WAVE_FILE_H
+	SampleRate::operator int() const
+	{
+		return value;
+	}
+
+	const SampleRate SampleRate::Cd = SampleRate(44100);
+	const SampleRate SampleRate::Dvd = SampleRate(48000);
+}

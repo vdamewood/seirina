@@ -1,6 +1,6 @@
-/* WaveFile.h: Output to .wav file
+/* SampleDuration.cc: Span of time in samples
  *
- * Copyright 2016, 2019 Vincent Damewood
+ * Copyright 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,27 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#include <Seirina/SampleDuration.h>
 
-#include <Seirina/Output.h>
-
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+static inline int clip(int i)
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
-};
+	return i < 0 ? 0 : i;
+}
 
-#endif // SEIRINA_WAVE_FILE_H
+namespace Seirina::Audio
+{
+	SampleDuration::SampleDuration(int newValue)
+		: value(clip(newValue))
+	{
+	}
+
+	SampleDuration::operator int() const
+	{
+		return value;
+	}
+
+	SampleDuration SampleDuration::operator-=(SampleDuration rhs)
+	{
+		return value -= rhs.value;
+	}
+};

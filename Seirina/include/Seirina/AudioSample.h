@@ -1,6 +1,6 @@
-/* WaveFile.h: Output to .wav file
+/* AudioSample.h: Momentary audio amplitude
  *
- * Copyright 2016, 2019 Vincent Damewood
+ * Copyright 2016, 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,27 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#if !defined SEIRINA_AUDIO_SAMPLE_H
+#define SEIRINA_AUDIO_SAMPLE_H
 
-#include <Seirina/Output.h>
+#include <Seirina/AdsrTransform.h>
 
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+namespace Seirina::Audio
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
+	/*! Represent a sample of audio date. */
+	class Sample
+	{
+	public:
+		/*! Construct a sample. */
+		Sample(double);
+
+		/*! Convert to double. */
+		operator double() const;
+		/*! Transform the sample with an ADSR value. */
+		Sample operator*(AdsrTransform) const;
+	private:
+		double value;
+	};
 };
 
-#endif // SEIRINA_WAVE_FILE_H
+#endif // SEIRINA_AUDIO_SAMPLE_H

@@ -20,8 +20,8 @@
 
 #include <memory>
 
-#include <Seirina/Notation/Note.h>
-#include <Seirina/Notation/Rest.h>
+#include <Seirina/Note.h>
+#include <Seirina/Rest.h>
 
 using Seirina::Notation::Note;
 using Seirina::Notation::Rest;

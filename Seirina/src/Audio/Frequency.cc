@@ -1,6 +1,6 @@
-/* WaveFile.h: Output to .wav file
+/* Frequency.cc: The frequency, in Hertz, of a sound wave
  *
- * Copyright 2016, 2019 Vincent Damewood
+ * Copyright 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,17 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#include <Seirina/Frequency.h>
 
-#include <Seirina/Output.h>
-
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+namespace Seirina::Audio
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
-};
+	Frequency::Frequency(double newValue)
+	{
+		value = newValue;
+	}
 
-#endif // SEIRINA_WAVE_FILE_H
+	Frequency::operator double() const
+	{
+		return value;
+	}
+};

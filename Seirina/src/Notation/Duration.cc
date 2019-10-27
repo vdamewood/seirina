@@ -1,6 +1,6 @@
-/* WaveFile.h: Output to .wav file
+/* Duration.cc: Musical duration
  *
- * Copyright 2016, 2019 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,29 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#include <Seirina/Duration.h>
 
-#include <Seirina/Output.h>
-
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+namespace Seirina::Notation
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
-};
+	Duration::Duration(int newNumerator, int newDenominator)
+		: numerator(newNumerator),
+			denominator(newDenominator)
+	{
+	}
 
-#endif // SEIRINA_WAVE_FILE_H
+	Duration::Duration(const Duration& src)
+		: numerator(src.numerator),
+			denominator(src.denominator)
+	{
+	}
+
+	Duration::~Duration()
+	{
+	}
+
+	Duration::operator double() const
+	{
+		return static_cast<double>(numerator)
+			/ static_cast<double>(denominator);
+	}
+};

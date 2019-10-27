@@ -1,4 +1,4 @@
-/* WaveFile.h: Output to .wav file
+/* Output.h: Interface for outputting audio data
  *
  * Copyright 2016, 2019 Vincent Damewood
  *
@@ -15,21 +15,23 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#ifndef SEIRINA_AUDIO_OUTPUT_H
+#define SEIRINA_AUDIO_OUTPUT_H
 
-#include <Seirina/Output.h>
+#include <Seirina/AudioFrame.h>
 
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+namespace Seirina::Audio
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
+	/*! Interface for audio output */
+	class Output
+	{
+	public:
+		/*! Output a frame of audio data to the output */
+		virtual void WriteFrame(Frame) = 0;
+
+		/* destroy the output object */
+		virtual ~Output() {};
+	};
 };
 
-#endif // SEIRINA_WAVE_FILE_H
+#endif // SEIRINA_OUTPUT_STREAM_H

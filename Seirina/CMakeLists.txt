@@ -14,50 +14,51 @@
 
 set(TARGET Seirina)
 set(PUBLIC_HEADERS
-	Audio/Adsr.h
-	Audio/AdsrTransform.h
-	Audio/AudioEvent.h
-	Audio/AudioFrame.h
-	Audio/AudioSample.h
-	Notation/Duration.h
-	Audio/Frequency.h
-	Notation/Note.h
-	Notation/Octave.h
-	Audio/Output.h
-	Audio/Phase.h
-	Notation/PitchClass.h
-	Notation/Rest.h
-	Audio/SampleDuration.h
-	Audio/SampleIndex.h
-	Audio/SampleRate.h
-	Audio/Silence.h
-	Audio/SimpleWaves.h
-	Audio/SynthNote.h
-	Notation/Tempo.h
-	Notation/Tuning.h
-	Audio/WaveForm.h
+	include/Seirina/Adsr.h
+	include/Seirina/AdsrTransform.h
+	include/Seirina/AudioEvent.h
+	include/Seirina/AudioFrame.h
+	include/Seirina/AudioSample.h
+	include/Seirina/Duration.h
+	include/Seirina/Frequency.h
+	include/Seirina/Note.h
+	include/Seirina/Octave.h
+	include/Seirina/Output.h
+	include/Seirina/Phase.h
+	include/Seirina/PitchClass.h
+	include/Seirina/Rest.h
+	include/Seirina/SampleDuration.h
+	include/Seirina/SampleIndex.h
+	include/Seirina/SampleRate.h
+	include/Seirina/Silence.h
+	include/Seirina/SimpleWaves.h
+	include/Seirina/SynthNote.h
+	include/Seirina/Tempo.h
+	include/Seirina/Tuning.h
+	include/Seirina/WaveForm.h
 )
+
 set(SOURCES
 	${PUBLIC_HEADERS}
-	Audio/Adsr.cc
-	Audio/AdsrTransform.cc
-	Audio/AudioFrame.cc
-	Audio/AudioSample.cc
-	Notation/Duration.cc
-	Audio/Frequency.cc
-	Notation/Note.cc
-	Notation/Octave.cc
-	Audio/Phase.cc
-	Notation/PitchClass.cc
-	Notation/Rest.cc
-	Audio/SampleDuration.cc
-	Audio/SampleIndex.cc
-	Audio/SampleRate.cc
-	Audio/Silence.cc
-	Audio/SimpleWaves.cc
-	Audio/SynthNote.cc
-	Notation/Tempo.cc
-	Notation/Tuning.cc
+	src/Audio/Adsr.cc
+	src/Audio/AdsrTransform.cc
+	src/Audio/AudioFrame.cc
+	src/Audio/AudioSample.cc
+	src/Notation/Duration.cc
+	src/Audio/Frequency.cc
+	src/Notation/Note.cc
+	src/Notation/Octave.cc
+	src/Audio/Phase.cc
+	src/Notation/PitchClass.cc
+	src/Notation/Rest.cc
+	src/Audio/SampleDuration.cc
+	src/Audio/SampleIndex.cc
+	src/Audio/SampleRate.cc
+	src/Audio/Silence.cc
+	src/Audio/SimpleWaves.cc
+	src/Audio/SynthNote.cc
+	src/Notation/Tempo.cc
+	src/Notation/Tuning.cc
 )
 set(DOXY_SOURCES
 	${PUBLIC_HEADERS}
@@ -74,6 +75,7 @@ if(DOXYGEN_FOUND)
 endif()
 
 add_library(${TARGET} SHARED ${SOURCES})
+target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set_target_properties(${TARGET} PROPERTIES
 	FRAMEWORK      TRUE
 	PUBLIC_HEADER  "${PUBLIC_HEADERS}"

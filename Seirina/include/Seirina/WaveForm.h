@@ -1,6 +1,6 @@
-/* WaveFile.h: Output to .wav file
+/* WaveForm.h: Represents a sound wave's form
  *
- * Copyright 2016, 2019 Vincent Damewood
+ * Copyright 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,24 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#ifndef SEIRINA_WAVE_FORM_H
+#define SEIRINA_WAVE_FORM_H
 
-#include <Seirina/Output.h>
+#include <Seirina/Phase.h>
+#include <Seirina/AudioSample.h>
 
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+namespace Seirina::Audio
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
+	/*! Interface for wave forms. */
+	class WaveForm
+	{
+	public:
+		/*! Destroy WaveForm object. */
+		virtual ~WaveForm() { };
+
+		/*! Get the sample at a particular phase of the wave form. */
+		virtual Sample GetSample(Phase) = 0;
+	};
 };
 
-#endif // SEIRINA_WAVE_FILE_H
+#endif // SEIRINA_WAVE_FORM_H

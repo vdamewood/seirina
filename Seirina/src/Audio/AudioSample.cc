@@ -1,6 +1,6 @@
-/* WaveFile.h: Output to .wav file
+/* AudioSample.cc: Momentary audio amplitude
  *
- * Copyright 2016, 2019 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,30 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#include <Seirina/AudioSample.h>
 
-#include <Seirina/Output.h>
-
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+static inline double clip(double i)
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
-};
+	return
+		i < -1.0 ? -1.0
+		: i > 1.0 ? 1.0
+		: i;
+}
 
-#endif // SEIRINA_WAVE_FILE_H
+namespace Seirina::Audio
+{
+	Sample::Sample(double newValue)
+		: value(clip(newValue))
+	{
+	}
+
+	Sample::operator double() const
+	{
+		return value;
+	}
+
+	Sample Sample::operator*(AdsrTransform transform) const
+	{
+		return value * transform;
+	}
+};

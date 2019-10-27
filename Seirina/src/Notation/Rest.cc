@@ -1,6 +1,6 @@
-/* WaveFile.h: Output to .wav file
+/* Rest.cc: Musical rest
  *
- * Copyright 2016, 2019 Vincent Damewood
+ * Copyright 2018, 2019 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,38 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_WAVE_FILE_H
-#define SEIRINA_WAVE_FILE_H
+#include <Seirina/Rest.h>
 
-#include <Seirina/Output.h>
-
-class WaveFilePrivate;
-
-class WaveFile : public Seirina::Audio::Output
+namespace Seirina::Notation
 {
-public:
-	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
-	virtual ~WaveFile();
-private:
-	WaveFilePrivate *d;
-};
+	class RestPrivate
+	{
+	public:
+		RestPrivate(Duration newDuration)
+			: duration(newDuration)
+		{
+		}
 
-#endif // SEIRINA_WAVE_FILE_H
+		Duration duration;
+	};
+
+	Rest::Rest(class Duration newDuration)
+		: p(new RestPrivate(newDuration))
+	{
+	}
+
+	Rest::Rest(const Rest& src)
+		: p(new RestPrivate(src.p->duration))
+	{
+	}
+
+	Rest::~Rest()
+	{
+		delete p;
+	}
+
+	Duration Rest::Duration() const
+	{
+		return p->duration;
+	}
+};
