@@ -12,7 +12,6 @@
 # implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-set(TARGET Seirina)
 set(PUBLIC_HEADERS
 	include/Seirina/Adsr.h
 	include/Seirina/AdsrTransform.h
@@ -38,54 +37,55 @@ set(PUBLIC_HEADERS
 	include/Seirina/WaveForm.h
 )
 
-set(SOURCES
-	${PUBLIC_HEADERS}
-	src/Adsr.cc
-	src/AdsrTransform.cc
-	src/AudioFrame.cc
-	src/AudioSample.cc
-	src/Duration.cc
-	src/Frequency.cc
-	src/Note.cc
-	src/Octave.cc
-	src/Phase.cc
-	src/PitchClass.cc
-	src/Rest.cc
-	src/SampleDuration.cc
-	src/SampleIndex.cc
-	src/SampleRate.cc
-	src/Silence.cc
-	src/SimpleWaves.cc
-	src/SynthNote.cc
-	src/Tempo.cc
-	src/Tuning.cc
-)
-set(DOXY_SOURCES
+set(DOXYGEN_SOURCES
 	${PUBLIC_HEADERS}
 	Doxygen.dox
 )
 
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-	set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+if(BUILD_DOCS AND DOXYGEN_FOUND)
+	set(DOXYGEN_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 	set(DOXYGEN_HTML_OUTPUT Docs)
 	set(DOXYGEN_REPEAT_BRIEF No)
 	set(DOXYGEN_QT_AUTOBRIEF Yes)
-	doxygen_add_docs(Docs ALL ${DOXY_SOURCES})
+	doxygen_add_docs(Docs ALL ${DOXYGEN_SOURCES})
 endif()
 
-add_library(${TARGET} SHARED ${SOURCES})
-target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-set_target_properties(${TARGET} PROPERTIES
+add_library(Seirina SHARED)
+target_sources(Seirina
+	PRIVATE
+		${PUBLIC_HEADERS}
+		src/Adsr.cc
+		src/AdsrTransform.cc
+		src/AudioFrame.cc
+		src/AudioSample.cc
+		src/Duration.cc
+		src/Frequency.cc
+		src/Note.cc
+		src/Octave.cc
+		src/Phase.cc
+		src/PitchClass.cc
+		src/Rest.cc
+		src/SampleDuration.cc
+		src/SampleIndex.cc
+		src/SampleRate.cc
+		src/Silence.cc
+		src/SimpleWaves.cc
+		src/SynthNote.cc
+		src/Tempo.cc
+		src/Tuning.cc
+)
+target_include_directories(Seirina PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_compile_features(Seirina PUBLIC cxx_std_17)
+set_target_properties(Seirina PROPERTIES
 	FRAMEWORK      TRUE
 	PUBLIC_HEADER  "${PUBLIC_HEADERS}"
 	VERSION        ${PROJECT_VERSION}
 	SOVERSION      ${PROJECT_VERSION_MAJOR}
 )
-install(TARGETS ${TARGET}
+install(TARGETS Seirina
 	RUNTIME       DESTINATION ${RUNTIME_INSTALL_PATH}
 	ARCHIVE       DESTINATION ${ARCHIVE_INSTALL_PATH}
 	LIBRARY       DESTINATION ${LIBRARY_INSTALL_PATH}
 	FRAMEWORK     DESTINATION ${FRAMEWORK_INSTALL_PATH}
-	PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH}/${TARGET}
+	PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH}/Seirina
 )

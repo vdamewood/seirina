@@ -19,11 +19,15 @@ project(Seirina
 	DESCRIPTION   "Music synthesis library and utilities"
 	LANGUAGES     CXX
 )
-set (CMAKE_CXX_STANDARD 17)
 
-###########################
-# System-dependent Values #
-###########################
+option(BUILD_DOCS "Build documentation with Doxygen" Off)
+
+find_package(Doxygen)
+
+
+##########################
+# Installation Locations #
+##########################
 
 if(APPLE)
 	set(RUNTIME_INSTALL_PATH   bin)
