@@ -51,6 +51,7 @@ if(BUILD_DOCS AND DOXYGEN_FOUND)
 endif()
 
 add_library(Seirina SHARED)
+add_library(Seirina::Seirina ALIAS Seirina)
 target_sources(Seirina
 	PRIVATE
 		${PUBLIC_HEADERS}

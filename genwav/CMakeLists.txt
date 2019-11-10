@@ -12,16 +12,16 @@
 # implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-set(TARGET genwav)
-
-set(SOURCES
-	genwav.cc
-	InputParser.h
-	InputParser.cc
-	WaveFile.h
-	WaveFile.cc
+add_executable(genwav)
+target_sources(genwav
+	PRIVATE
+		genwav.cc
+		InputParser.h
+		InputParser.cc
+		WaveFile.h
+		WaveFile.cc
 )
-
-include_directories(${PROJECT_SOURCE_DIR})
-add_executable(${TARGET} ${SOURCES})
-target_link_libraries(${TARGET} Seirina)
+target_link_libraries(genwav
+	PRIVATE
+		Seirina::Seirina
+)

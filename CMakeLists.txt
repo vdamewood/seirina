@@ -12,7 +12,7 @@
 # implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-cmake_minimum_required(VERSION 3.12.0)
+cmake_minimum_required(VERSION 3.14.0)
 
 project(Seirina
 	VERSION       0.0.0
