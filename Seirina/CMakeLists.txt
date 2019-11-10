@@ -50,7 +50,7 @@ if(BUILD_DOCS AND DOXYGEN_FOUND)
 	doxygen_add_docs(Docs ALL ${DOXYGEN_SOURCES})
 endif()
 
-add_library(Seirina SHARED)
+add_library(Seirina)
 add_library(Seirina::Seirina ALIAS Seirina)
 target_sources(Seirina
 	PRIVATE
