@@ -20,7 +20,7 @@ project(Seirina
 	LANGUAGES     CXX
 )
 
-option(BUILD_DOCS "Build documentation with Doxygen" Off)
+option(BUILD_DOCUMENTATION "Build documentation with Doxygen" Off)
 
 find_package(Doxygen)
 
