@@ -24,40 +24,6 @@ option(BUILD_DOCS "Build documentation with Doxygen" Off)
 
 find_package(Doxygen)
 
-
-##########################
-# Installation Locations #
-##########################
-
-if(APPLE)
-	set(RUNTIME_INSTALL_PATH   bin)
-	set(ARCHIVE_INSTALL_PATH   Error)
-	set(LIBRARY_INSTALL_PATH   Error)
-	set(BUNDLE_INSTALL_PATH    .)
-	set(FRAMEWORK_INSTALL_PATH .)
-	set(HEADER_INSTALL_PATH    Error)
-	set(SHARE_INSTALL_PATH     Error)
-	set(DOC_INSTALL_PATH       .)
-elseif(WIN32)
-	set(RUNTIME_INSTALL_PATH   .)
-	set(ARCHIVE_INSTALL_PATH   .)
-	set(LIBRARY_INSTALL_PATH   .)
-	set(BUNDLE_INSTALL_PATH    Error)
-	set(FRAMEWORK_INSTALL_PATH Error)
-	set(HEADER_INSTALL_PATH    ./include)
-	set(SHARE_INSTALL_PATH     .)
-	set(DOC_INSTALL_PATH       .)
-else()
-	set(RUNTIME_INSTALL_PATH   bin)
-	set(ARCHIVE_INSTALL_PATH   lib)
-	set(LIBRARY_INSTALL_PATH   lib)
-	set(BUNDLE_INSTALL_PATH    share/Seirina/error)
-	set(FRAMEWORK_INSTALL_PATH share/Seirina/error)
-	set(HEADER_INSTALL_PATH    include)
-	set(SHARE_INSTALL_PATH     share/Seirina)
-	set(DOC_INSTALL_PATH       share/Seirina/docs)
-endif()
-
 ###########################
 # Subdirectory Inclusions #
 ###########################
