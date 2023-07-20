@@ -22,7 +22,7 @@ namespace Seirina::Notation
 {
 	class DurationPrivate;
 
-	/*! A note in musical notation */
+	/*! The duration of a note as a rational number of beats */
 	class Duration
 	{
 	public:
