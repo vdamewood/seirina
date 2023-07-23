@@ -16,6 +16,7 @@
  */
 
 #include <fstream>
+#include <cctype>
 
 #include <Seirina/PitchClass.h>
 
@@ -30,6 +31,16 @@ using Seirina::Notation::Duration;
 
 ParserToken::ParserToken ()
 {
+}
+
+ParserToken::ParserToken (const ParserToken& original)
+{
+	if (original.note.has_value())
+		note = original.note.value();
+
+	if (original.rest.has_value())
+		rest = original.rest.value();
+
 }
 
 
@@ -57,6 +68,17 @@ bool ParserToken::IsRest()
 	return rest.has_value();
 }
 
+ParserLine::ParserLine(int newVoice, Duration newDuration)
+	: voice(newVoice), duration(newDuration)
+{
+}
+
+ParserLine& ParserLine::AddToken(ParserToken newToken)
+{
+	Tokens.push_back(newToken);
+	return *this;
+}
+
 InputParser::InputParser(const char* Filename)
 {
 	File = new std::ifstream(Filename);
@@ -68,28 +90,67 @@ InputParser::~InputParser()
 	delete File;
 }
 
-ParserToken InputParser::Fetch()
+int InputParser::FetchInteger()
 {
-	char NoteLetter = ' ';
-	char NoteAccidental = ' ';
-	int NoteOctave = 4;
-	int DurationDenominator = 1;
-	int DurationNumerator = 1;
+	std::string inLexeme;
+	while(std::isdigit(static_cast<unsigned char>(File->peek())))
+		inLexeme.push_back(File->get());
+	return std::atoi(inLexeme.c_str());
+}
 
-	int inChar = File->get();
+Duration InputParser::FetchDuration()
+{
+	int numerator;
+	if (std::isdigit(static_cast<unsigned char>(File->peek())))
+		numerator = FetchInteger();
+	else
+		throw SyntaxError();
 
-	if (inChar == EOF)
-		return ParserToken();
+	if (File->peek() != '/')
+		return Duration(numerator, 1);
+	File->get();
 
+	int denominator;
+	if (std::isdigit(static_cast<unsigned char>(File->peek())))
+		denominator = FetchInteger();
+	else
+		throw SyntaxError();
+	return Duration{numerator, denominator};
+}
 
-	if (inChar == '=')
-	{
-		while((inChar = File->get()) != '\n');
-		return Fetch();
-	}
+int InputParser::FetchVoice()
+{
+	int inVoice;
+	if (File->peek() == ':')
+		inVoice = 1;
+	else if (std::isdigit(static_cast<unsigned char>(File->peek())))
+		inVoice = FetchInteger();
+	else
+		throw SyntaxError();
 
+	if (File->peek() == ':')
+		File->get();
+	else
+		throw SyntaxError();
 
-	switch (inChar)
+	return inVoice;
+}
+
+Duration InputParser::FetchLineDuration()
+{
+	Duration rVal = FetchDuration();
+	if (File->peek() == ':')
+		File->get();
+	else
+		throw SyntaxError();
+	return rVal;
+}
+
+PitchClass InputParser::FetchPitchClass()
+{
+	char inChar;
+	char NoteLetter;
+	switch (inChar = File->get())
 	{
 	case 'A':
 	case 'B':
@@ -98,7 +159,6 @@ ParserToken InputParser::Fetch()
 	case 'E':
 	case 'F':
 	case 'G':
-	case 'R':
 		NoteLetter = inChar;
 		break;
 	case 'a':
@@ -108,36 +168,93 @@ ParserToken InputParser::Fetch()
 	case 'e':
 	case 'f':
 	case 'g':
-	case 'r':
 		NoteLetter = inChar - ('a' - 'A');
 		break;
 	default:
-		return ParserToken();
+		throw SyntaxError();
 	}
+
+	char NoteAccidental = ' ';
+	switch (inChar = File->peek())
+	{
+	case '-':
+	case '+':
+	case 'b':
+	case '#':
+	case ' ':
+		File->get();
+		NoteAccidental = inChar;
+	}
+
+	return MakePitchClass(NoteLetter, NoteAccidental);
+}
+
+Octave InputParser::FetchOctave()
+{
+	return Octave(FetchInteger());
+}
+
+Note InputParser::FetchNote()
+{
+		PitchClass myClass = FetchPitchClass();
+		Octave myOctave = FetchOctave();
+		if (File->peek() == '-')
+			File->get();
+		else
+			throw SyntaxError();
+
+		Duration myDuration = FetchDuration();
+		return Note(myClass, myOctave, myDuration);
+}
+
+Rest InputParser::FetchRest()
+{
+	int inChar = File->peek();
+
+	if (inChar == 'R'
+		|| inChar == 'r')
+	{
+		File->get();
+	}
+	else
+	{
+		throw SyntaxError();
+	}
+
+	if (File->peek() == '-')
+		File->get();
+	else
+		throw SyntaxError();
+
+	return Rest(FetchDuration());
+}
+
+ParserToken InputParser::FetchToken()
+{
+	ParserToken rVal;
+
+	int nextChar = File->peek();
+	if ((nextChar >= 'A' && nextChar <= 'G')
+		|| (nextChar >= 'a' && nextChar <= 'g'))
+	{
+		rVal.note = FetchNote();
+	}
+	else if (nextChar == 'R'
+		|| nextChar == 'r')
+	{
+		rVal.rest = FetchRest();
+	}
+
+	return rVal;
+	/*
+
+
 
 	if (NoteLetter != 'R')
 	{
-		switch (inChar = File->get())
-		{
-			case '-':
-			case '+':
-			case 'b':
-			case '#':
-			case ' ':
-				NoteAccidental = inChar;
-				inChar = File->get();
-		}
 
-
-		NoteOctave = inChar - '0';
-		if (inChar < '0' || inChar > '9')
-			return ParserToken();
-		NoteOctave = inChar - '0';
 	}
 
-	inChar = File->get();
-	if (inChar != '-')
-		return ParserToken();
 
 
 	inChar = File->get();
@@ -156,12 +273,13 @@ ParserToken InputParser::Fetch()
 		inChar = File->get();
 	}
 
-
+	/ *
 	if (inChar == '\r')
 		inChar = File->get();
 	if (inChar != '\n')
 		return ParserToken();
-
+	*/
+	/*
 	if (NoteLetter != 'R')
 		return ParserToken(Note(
 			MakePitchClass(NoteLetter, NoteAccidental),
@@ -173,4 +291,54 @@ ParserToken InputParser::Fetch()
 			Duration(
 				DurationNumerator,
 				DurationDenominator)));
+				*/
+}
+
+void InputParser::FetchEndOfLine()
+{
+	int inChar = File->get();
+	if (inChar == '\r')
+		inChar = File->get();
+	if (inChar != '\n')
+		throw SyntaxError();
+}
+
+
+ParserToken InputParser::Fetch()
+{
+	return FetchToken();
+}
+
+inline bool isNoteLetterOrRest(int input)
+{
+	return input - 'A' < 7
+		|| input - 'a' < 7
+		|| input == 'R'
+		|| input == 'r';
+}
+
+std::optional<ParserLine> InputParser::FetchLine()
+{
+	while (File->peek() == '=')
+		while(File->get() != '\n');
+
+	if (File->eof())
+	{
+		return std::nullopt;
+	}
+
+	ParserLine rVal(FetchVoice(), FetchLineDuration());
+	ParserToken inToken;
+	while (isNoteLetterOrRest(File->peek()))
+	{
+		rVal.AddToken(FetchToken());
+		int nextChar = File->peek();
+		if (nextChar == ':')
+			File->get();
+		else if (nextChar == '\r' || nextChar == '\n')
+			break;
+	}
+
+	FetchEndOfLine();
+	return rVal;
 }

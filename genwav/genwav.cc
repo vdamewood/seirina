@@ -16,6 +16,7 @@
  */
 
 #include <cstring>
+#include <iostream>
 #include <string>
 
 #include <Seirina/SynthNote.h>
@@ -74,9 +75,10 @@ int main(int argc, char *argv[])
 
 	Seirina::Notation::Tuning myTuning(Seirina::Notation::PitchClass::A, 440.0);
 	int i = 0;
-	while (1)
+	while (std::optional<ParserLine> line = Input.FetchLine())
 	{
-		ParserToken token = Input.Fetch();
+		ParserToken token = line.value().Tokens[0];
+
 		if (token.IsNote())
 		{
 			SynthNote pNote(

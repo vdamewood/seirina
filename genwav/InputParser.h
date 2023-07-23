@@ -23,26 +23,42 @@
 
 #include <Seirina/Duration.h>
 #include <Seirina/Note.h>
+#include <Seirina/Octave.h>
+#include <Seirina/PitchClass.h>
 #include <Seirina/Rest.h>
 
 using Seirina::Notation::Duration;
 using Seirina::Notation::Note;
+using Seirina::Notation::Octave;
+using Seirina::Notation::PitchClass;
 using Seirina::Notation::Rest;
 
 class ParserToken
 {
 public:
-	ParserToken ();
+	ParserToken();
+	ParserToken(const ParserToken&);
 	ParserToken(const Note&);
 	ParserToken(const Rest&);
 	~ParserToken();
 
 	bool IsNote();
 	bool IsRest();
+	// FIXME: std::variant!
 	std::optional<Note> note;
 	std::optional<Rest> rest;
 };
 
+class ParserLine
+{
+public:
+	ParserLine(int newChannel, Duration newDuration);
+	ParserLine& AddToken(ParserToken);
+//private:
+	int voice;
+	Duration duration;
+	std::vector<ParserToken> Tokens;
+};
 class InputParser
 {
 public:
@@ -50,9 +66,27 @@ public:
 	~InputParser();
 
 	ParserToken Fetch();
+	std::optional<ParserLine> FetchLine();
 
 private:
+	int FetchInteger();
+	Duration FetchDuration();
+	PitchClass FetchPitchClass();
+	Octave FetchOctave();
+	Note FetchNote();
+	Rest FetchRest();
+	void FetchEndOfLine();
+
+	int FetchVoice();
+	Duration FetchLineDuration();
+	ParserToken FetchToken();
+
 	std::ifstream* File;
+};
+
+class SyntaxError
+{
+
 };
 
 #endif // INPUT_PARSER_H
