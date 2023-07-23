@@ -58,12 +58,12 @@ int main(int argc, char *argv[])
 				WaveName = argv[arg];
 				break;
 			default:
-				exit(1);
+				return 1;
 			}
 		}
 		else
 		{
-			exit(1);
+			return 1;
 		}
 	}
 
