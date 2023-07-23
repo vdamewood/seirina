@@ -1,6 +1,6 @@
 /* genwav.cc: Generate music as a wav file
  *
- * Copyright 2016, 2018, 2019 Vincent Damewood
+ * Copyright 2016, 2018, 2019, 2023 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,10 +79,9 @@ int main(int argc, char *argv[])
 		ParserToken token = Input.Fetch();
 		if (token.IsNote())
 		{
-			std::unique_ptr<Note> innote = token.ExtractNote();
 			SynthNote pNote(
-				innote->Frequency(myTuning),
-				BeatLength * innote->Duration(),
+				token.note.value().Frequency(myTuning),
+				BeatLength * token.note.value().Duration(),
 				Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength),
 				MyWave,
 				Seirina::Audio::SampleRate::Cd);
@@ -96,8 +95,7 @@ int main(int argc, char *argv[])
 		}
 		else if (token.IsRest())
 		{
-			std::unique_ptr<Rest> inrest = token.ExtractRest();
-			Silence s(BeatLength * inrest->Duration());
+			Silence s(BeatLength * token.rest.value().Duration());
 			while (s.IsActive())
 			{
 				Seirina::Audio::Sample sample = s.NextSample();

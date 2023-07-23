@@ -1,6 +1,6 @@
 /* InputParser.cc: Parser for music input files
  *
- * Copyright 2018, 2019 Vincent Damewood
+ * Copyright 2018, 2019, 2023 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,67 +27,45 @@ using Seirina::Notation::Note;
 using Seirina::Notation::Rest;
 using Seirina::Notation::Duration;
 
-class ParserToken::Pimpl
-{
-public:
-	Pimpl() {};
-	Pimpl(std::unique_ptr<Note> newNote) {note = std::move(newNote);}
-	Pimpl(std::unique_ptr<Rest> newRest) {rest = std::move(newRest);}
-	std::unique_ptr<Note> note = nullptr;
-	std::unique_ptr<Rest> rest = nullptr;
-};
 
 ParserToken::ParserToken ()
-	: p(new Pimpl){};
+{
+}
 
-ParserToken::ParserToken (std::unique_ptr<Note> newNote)
-	: p(new Pimpl(std::move(newNote))){};
 
-ParserToken::ParserToken (std::unique_ptr<Rest> newRest)
-	: p(new Pimpl(std::move(newRest))){};
+ParserToken::ParserToken (const Note& newNote)
+	: note(newNote)
+{
+}
+
+ParserToken::ParserToken (const Rest& newRest)
+	: rest(newRest)
+{
+}
 
 ParserToken::~ParserToken()
 {
-	delete(p);
 }
 
 bool ParserToken::IsNote()
 {
-	return p->note != nullptr;
+	return note.has_value();
 }
 
 bool ParserToken::IsRest()
 {
-	return p->rest != nullptr;
+	return rest.has_value();
 }
-
-std::unique_ptr<Note> ParserToken::ExtractNote()
-{
-	return std::move(p->note);
-}
-
-std::unique_ptr<Rest> ParserToken::ExtractRest()
-{
-	return std::move(p->rest);
-}
-
-class InputParserPrivate
-{
-public:
-	std::ifstream* File;
-};
 
 InputParser::InputParser(const char* Filename)
 {
-	d = new InputParserPrivate();
-	d->File = new std::ifstream(Filename);
+	File = new std::ifstream(Filename);
 }
 
 InputParser::~InputParser()
 {
-	d->File->close();
-	delete d->File;
-	delete d;
+	File->close();
+	delete File;
 }
 
 ParserToken InputParser::Fetch()
@@ -98,7 +76,7 @@ ParserToken InputParser::Fetch()
 	int DurationDenominator = 1;
 	int DurationNumerator = 1;
 
-	int inChar = d->File->get();
+	int inChar = File->get();
 
 	if (inChar == EOF)
 		return ParserToken();
@@ -106,7 +84,7 @@ ParserToken InputParser::Fetch()
 
 	if (inChar == '=')
 	{
-		while((inChar = d->File->get()) != '\n');
+		while((inChar = File->get()) != '\n');
 		return Fetch();
 	}
 
@@ -139,7 +117,7 @@ ParserToken InputParser::Fetch()
 
 	if (NoteLetter != 'R')
 	{
-		switch (inChar = d->File->get())
+		switch (inChar = File->get())
 		{
 			case '-':
 			case '+':
@@ -147,7 +125,7 @@ ParserToken InputParser::Fetch()
 			case '#':
 			case ' ':
 				NoteAccidental = inChar;
-				inChar = d->File->get();
+				inChar = File->get();
 		}
 
 
@@ -157,42 +135,42 @@ ParserToken InputParser::Fetch()
 		NoteOctave = inChar - '0';
 	}
 
-	inChar = d->File->get();
+	inChar = File->get();
 	if (inChar != '-')
 		return ParserToken();
 
 
-	inChar = d->File->get();
+	inChar = File->get();
 	if (inChar < '0' || inChar > '9')
 		return ParserToken();
 	DurationNumerator = inChar - '0';
 
 
-	inChar = d->File->get();
+	inChar = File->get();
 	if (inChar == '/')
 	{
-		inChar = d->File->get();
+		inChar = File->get();
 		if (inChar < '1' || inChar > '9')
 			return ParserToken();
 		DurationDenominator = inChar - '0';
-		inChar = d->File->get();
+		inChar = File->get();
 	}
 
 
 	if (inChar == '\r')
-		inChar = d->File->get();
+		inChar = File->get();
 	if (inChar != '\n')
 		return ParserToken();
 
 	if (NoteLetter != 'R')
-		return ParserToken(std::unique_ptr<Note>(new Note(
+		return ParserToken(Note(
 			MakePitchClass(NoteLetter, NoteAccidental),
 			NoteOctave, Duration(
 			DurationNumerator,
-			DurationDenominator))));
+			DurationDenominator)));
 	else
-		return ParserToken(std::unique_ptr<Rest>(new Rest(
+		return ParserToken(Rest(
 			Duration(
 				DurationNumerator,
-				DurationDenominator))));
+				DurationDenominator)));
 }

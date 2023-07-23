@@ -1,6 +1,6 @@
 /* InputParser.h: Parser for music input files
  *
- * Copyright 2018, 2019 Vincent Damewood
+ * Copyright 2018, 2019, 2023 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,14 @@
 #if !defined INPUT_PARSER_H
 #define INPUT_PARSER_H
 
-#include <memory>
+#include <vector>
+#include <optional>
 
+#include <Seirina/Duration.h>
 #include <Seirina/Note.h>
 #include <Seirina/Rest.h>
 
+using Seirina::Notation::Duration;
 using Seirina::Notation::Note;
 using Seirina::Notation::Rest;
 
@@ -30,20 +33,16 @@ class ParserToken
 {
 public:
 	ParserToken ();
-	ParserToken (std::unique_ptr<Note>);
-	ParserToken (std::unique_ptr<Rest>);
+	ParserToken(const Note&);
+	ParserToken(const Rest&);
 	~ParserToken();
 
 	bool IsNote();
 	bool IsRest();
-	std::unique_ptr<Note> ExtractNote();
-	std::unique_ptr<Rest> ExtractRest();
-private:
-	class Pimpl;
-	Pimpl* p;
+	std::optional<Note> note;
+	std::optional<Rest> rest;
 };
 
-class InputParserPrivate;
 class InputParser
 {
 public:
@@ -53,7 +52,7 @@ public:
 	ParserToken Fetch();
 
 private:
-	InputParserPrivate* d;
+	std::ifstream* File;
 };
 
 #endif // INPUT_PARSER_H
