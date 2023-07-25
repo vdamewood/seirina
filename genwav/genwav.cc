@@ -18,6 +18,7 @@
 #include <cstring>
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include <Seirina/SynthNote.h>
 #include <Seirina/Silence.h>
@@ -31,6 +32,7 @@
 const int BeatLength = 18900; // 140 BPM: 44100*60/140
 const int ReleaseLength = BeatLength/4;
 
+using Seirina::Audio::Event;
 using Seirina::Audio::Silence;
 using Seirina::Audio::SynthNote;
 
@@ -74,39 +76,44 @@ int main(int argc, char *argv[])
 	WaveFile myWaveFile(OutFileName.c_str());
 
 	Seirina::Notation::Tuning myTuning(Seirina::Notation::PitchClass::A, 440.0);
-	int i = 0;
+
+	std::vector<std::unique_ptr<Event>> ActiveEvents;
 	while (std::optional<ParserLine> line = Input.FetchLine())
 	{
-		ParserToken token = line.value().Tokens[0];
+		for(ParserToken& token : line.value().Tokens)
+		{
+			if (token.IsNote())
+			{
+				ActiveEvents.push_back(std::make_unique<SynthNote>(
+					token.note.value().Frequency(myTuning),
+					BeatLength * token.note.value().Duration(),
+					Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength),
+					MyWave,
+					Seirina::Audio::SampleRate::Cd));
+			}
+			else if (token.IsRest())
+			{
+				ActiveEvents.push_back(std::make_unique<Silence>(
+					BeatLength * token.rest.value().Duration()));
+			}
+		}
 
-		if (token.IsNote())
+		for (int i = 0; i <= line.value().duration * BeatLength; i++)
 		{
-			SynthNote pNote(
-				token.note.value().Frequency(myTuning),
-				BeatLength * token.note.value().Duration(),
-				Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength),
-				MyWave,
-				Seirina::Audio::SampleRate::Cd);
-			while (pNote.IsActive())
+			//std::vector<Seirina::Audio::Sample> samples;
+			// FIXME: Need to remove inactive events from ActiveEvents
+
+			// FIXME: Replace this with a real mix function.
+			double MixSample = 0.0;
+			for (std::unique_ptr<Event>& p : ActiveEvents)
 			{
-				Seirina::Audio::Sample sample = pNote.NextSample();
-				myWaveFile.WriteFrame(
-					Seirina::Audio::Frame(sample, sample)
-				);
+				if (p->IsActive())
+					//samples.push_back(p->NextSample());
+					MixSample += p->NextSample();
 			}
+			MixSample /= 4;
+			myWaveFile.WriteFrame(
+				Seirina::Audio::Frame(MixSample, MixSample));
 		}
-		else if (token.IsRest())
-		{
-			Silence s(BeatLength * token.rest.value().Duration());
-			while (s.IsActive())
-			{
-				Seirina::Audio::Sample sample = s.NextSample();
-				myWaveFile.WriteFrame(
-					Seirina::Audio::Frame(sample, sample)
-				);
-			}
-		}
-		else
-			break;
 	}
 }
