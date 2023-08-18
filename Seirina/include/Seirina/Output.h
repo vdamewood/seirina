@@ -29,6 +29,9 @@ namespace Seirina::Audio
 		/*! Output a frame of audio data to the output */
 		virtual void WriteFrame(Frame) = 0;
 
+		/*! Get output device sample rate */
+		virtual SampleRate GetSampleRate() = 0;
+
 		/* destroy the output object */
 		virtual ~Output() {};
 	};

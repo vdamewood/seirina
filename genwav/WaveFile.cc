@@ -90,3 +90,8 @@ void WaveFile::WriteFrame(Frame frame)
 	d->WriteSample(double(frame[0]) * 0x7FFF);
 	d->WriteSample(double(frame[1]) * 0x7FFF);
 }
+
+SampleRate WaveFile::GetSampleRate()
+{
+	return SampleRate::Cd;
+}

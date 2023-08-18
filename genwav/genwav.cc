@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 					token.note.value().Frequency(myTuning),
 					BeatLength * token.note.value().Duration(),
 					MyVoice,
-					Seirina::Audio::SampleRate::Cd));
+					myWaveFile.GetSampleRate()));
 			}
 			else if (token.IsRest())
 			{

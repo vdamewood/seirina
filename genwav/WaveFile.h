@@ -26,7 +26,8 @@ class WaveFile : public Seirina::Audio::Output
 {
 public:
 	WaveFile(const char* Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame);
+	virtual void WriteFrame(Seirina::Audio::Frame) override;
+	virtual Seirina::Audio::SampleRate GetSampleRate() override;
 	virtual ~WaveFile();
 private:
 	WaveFilePrivate *d;
