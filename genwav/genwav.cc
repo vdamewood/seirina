@@ -24,6 +24,7 @@
 #include <Seirina/Silence.h>
 #include <Seirina/SimpleWaves.h>
 #include <Seirina/Tuning.h>
+#include <Seirina/Voice.h>
 
 #include "InputParser.h"
 #include "WaveFile.h"
@@ -35,6 +36,7 @@ const int ReleaseLength = BeatLength/4;
 using Seirina::Audio::Event;
 using Seirina::Audio::Silence;
 using Seirina::Audio::SynthNote;
+using Seirina::Audio::Voice;
 
 int main(int argc, char *argv[])
 {
@@ -70,12 +72,14 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	Seirina::Audio::WaveForm* MyWave =
-		Seirina::Audio::GetWave(WaveName.c_str());
+
 	InputParser Input(InFileName.c_str());
 	WaveFile myWaveFile(OutFileName.c_str());
 
 	Seirina::Notation::Tuning myTuning(Seirina::Notation::PitchClass::A, 440.0);
+
+	Voice MyVoice{WaveName.c_str(), Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength)};
+
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
 	while (std::optional<ParserLine> line = Input.FetchLine())
@@ -87,8 +91,7 @@ int main(int argc, char *argv[])
 				ActiveEvents.push_back(std::make_unique<SynthNote>(
 					token.note.value().Frequency(myTuning),
 					BeatLength * token.note.value().Duration(),
-					Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength),
-					MyWave,
+					MyVoice,
 					Seirina::Audio::SampleRate::Cd));
 			}
 			else if (token.IsRest())

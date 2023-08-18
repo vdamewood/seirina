@@ -58,14 +58,13 @@ namespace Seirina::Audio
 	SynthNote::SynthNote(
 		Frequency new_frequency,
 		SampleDuration new_duration,
-		AdsrEnvelope new_adsr,
-		WaveForm* new_waveform,
+		Voice new_voice,
 		SampleRate new_sample_rate)
 		: p(new SynthNotePrivate(
 			new_frequency,
 			new_duration,
-			new_adsr,
-			new_waveform,
+			new_voice.GetAdsrEnvelope(),
+			new_voice.getWaveForm(),
 			new_sample_rate))
 	{
 	}

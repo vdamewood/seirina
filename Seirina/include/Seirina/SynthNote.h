@@ -24,6 +24,7 @@
 #include <Seirina/SampleIndex.h>
 #include <Seirina/SampleRate.h>
 #include <Seirina/WaveForm.h>
+#include <Seirina/Voice.h>
 
 namespace Seirina::Audio
 {
@@ -36,8 +37,7 @@ namespace Seirina::Audio
 		SynthNote(
 			Frequency,
 			SampleDuration,
-			AdsrEnvelope,
-			WaveForm*,
+			Voice,
 			SampleRate);
 		/*! Copy constructor */
 		SynthNote(const SynthNote&);
