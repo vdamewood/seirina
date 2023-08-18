@@ -18,6 +18,8 @@
 #if !defined SEIRINA_TEMPO_H
 #define SEIRINA_TEMPO_H
 
+#include <Seirina/SampleRate.h>
+
 namespace Seirina::Notation
 {
 	/*! Represents the tempo of a song in beats per minute. */
@@ -27,10 +29,13 @@ namespace Seirina::Notation
 		/*! Construct a Tempo object. */
 		Tempo(int);
 
+		/*! Return the length of a beat in audio frames. */
+		int getBeatLength(Seirina::Audio::SampleRate atThisSampleRate);
+
 		/*! Convert to an `int`. */
 		operator int() const;
 	private:
-		double value;
+		int value;
 	};
 };
 

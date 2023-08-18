@@ -23,20 +23,22 @@
 #include <Seirina/SynthNote.h>
 #include <Seirina/Silence.h>
 #include <Seirina/SimpleWaves.h>
+#include <Seirina/Tempo.h>
 #include <Seirina/Tuning.h>
 #include <Seirina/Voice.h>
 
 #include "InputParser.h"
 #include "WaveFile.h"
 
-// FIXME: these shouldn't be constants here
-const int BeatLength = 18900; // 140 BPM: 44100*60/140
-const int ReleaseLength = BeatLength/4;
-
+using Seirina::Audio::AdsrEnvelope;
 using Seirina::Audio::Event;
+using Seirina::Audio::Frame;
 using Seirina::Audio::Silence;
 using Seirina::Audio::SynthNote;
 using Seirina::Audio::Voice;
+using Seirina::Notation::PitchClass;
+using Seirina::Notation::Tempo;
+using Seirina::Notation::Tuning;
 
 int main(int argc, char *argv[])
 {
@@ -76,9 +78,12 @@ int main(int argc, char *argv[])
 	InputParser Input(InFileName.c_str());
 	WaveFile myWaveFile(OutFileName.c_str());
 
-	Seirina::Notation::Tuning myTuning(Seirina::Notation::PitchClass::A, 440.0);
+	// Fixme: These shuld be part of a meta structure for the whole
+	// project.
+	Tempo myTempo = 140;
+	Tuning myTuning(PitchClass::A, 440.0);
 
-	Voice MyVoice{WaveName.c_str(), Seirina::Audio::AdsrEnvelope(0, 0, 1.0, ReleaseLength)};
+	Voice MyVoice{WaveName.c_str(), AdsrEnvelope(0, 0, 1.0, 4725)};
 
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
@@ -90,18 +95,20 @@ int main(int argc, char *argv[])
 			{
 				ActiveEvents.push_back(std::make_unique<SynthNote>(
 					token.note.value().Frequency(myTuning),
-					BeatLength * token.note.value().Duration(),
+					myTempo.getBeatLength(myWaveFile.GetSampleRate()) * token.note.value().Duration(),
 					MyVoice,
 					myWaveFile.GetSampleRate()));
 			}
 			else if (token.IsRest())
 			{
 				ActiveEvents.push_back(std::make_unique<Silence>(
-					BeatLength * token.rest.value().Duration()));
+					myTempo.getBeatLength(myWaveFile.GetSampleRate()) * token.rest.value().Duration()));
 			}
 		}
 
-		for (int i = 0; i <= line.value().duration * BeatLength; i++)
+		for (int i = 0;
+			i <= line.value().duration * myTempo.getBeatLength(myWaveFile.GetSampleRate());
+			i++)
 		{
 			//std::vector<Seirina::Audio::Sample> samples;
 			// FIXME: Need to remove inactive events from ActiveEvents
@@ -115,8 +122,7 @@ int main(int argc, char *argv[])
 					MixSample += p->NextSample();
 			}
 			MixSample /= 4;
-			myWaveFile.WriteFrame(
-				Seirina::Audio::Frame(MixSample, MixSample));
+			myWaveFile.WriteFrame(Frame(MixSample, MixSample));
 		}
 	}
 }
