@@ -20,6 +20,7 @@
 #include <string>
 #include <memory>
 
+#include <Seirina/Project.h>
 #include <Seirina/SynthNote.h>
 #include <Seirina/Silence.h>
 #include <Seirina/SimpleWaves.h>
@@ -30,9 +31,11 @@
 #include "InputParser.h"
 #include "WaveFile.h"
 
+using Seirina::Project;
 using Seirina::Audio::AdsrEnvelope;
 using Seirina::Audio::Event;
 using Seirina::Audio::Frame;
+using Seirina::Audio::Frequency;
 using Seirina::Audio::Silence;
 using Seirina::Audio::SynthNote;
 using Seirina::Audio::Voice;
@@ -78,13 +81,8 @@ int main(int argc, char *argv[])
 	InputParser Input(InFileName.c_str());
 	WaveFile myWaveFile(OutFileName.c_str());
 
-	// Fixme: These shuld be part of a meta structure for the whole
-	// project.
-	Tempo myTempo = 140;
-	Tuning myTuning(PitchClass::A, 440.0);
-
+	Project myProject{140, PitchClass::A, Frequency{440}};
 	Voice MyVoice{WaveName.c_str(), AdsrEnvelope(0, 0, 1.0, 4725)};
-
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
 	while (std::optional<ParserLine> line = Input.FetchLine())
@@ -94,20 +92,20 @@ int main(int argc, char *argv[])
 			if (token.IsNote())
 			{
 				ActiveEvents.push_back(std::make_unique<SynthNote>(
-					token.note.value().Frequency(myTuning),
-					myTempo.getBeatLength(myWaveFile.GetSampleRate()) * token.note.value().Duration(),
+					token.note.value().Frequency(myProject.getTuning()),
+					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.note.value().Duration(),
 					MyVoice,
 					myWaveFile.GetSampleRate()));
 			}
 			else if (token.IsRest())
 			{
 				ActiveEvents.push_back(std::make_unique<Silence>(
-					myTempo.getBeatLength(myWaveFile.GetSampleRate()) * token.rest.value().Duration()));
+					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.rest.value().Duration()));
 			}
 		}
 
 		for (int i = 0;
-			i <= line.value().duration * myTempo.getBeatLength(myWaveFile.GetSampleRate());
+			i <= line.value().duration * myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate());
 			i++)
 		{
 			//std::vector<Seirina::Audio::Sample> samples;

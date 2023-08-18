@@ -25,6 +25,7 @@ set(PUBLIC_HEADERS
 	include/Seirina/Output.h
 	include/Seirina/Phase.h
 	include/Seirina/PitchClass.h
+	include/Seirina/Project.h
 	include/Seirina/Rational.h
 	include/Seirina/Rest.h
 	include/Seirina/SampleDuration.h
@@ -67,6 +68,7 @@ target_sources(Seirina
 		src/Octave.cc
 		src/Phase.cc
 		src/PitchClass.cc
+		src/Project.cc
 		src/Rational.cc
 		src/Rest.cc
 		src/SampleDuration.cc

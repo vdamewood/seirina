@@ -30,7 +30,7 @@ namespace Seirina::Notation
 		Tempo(int);
 
 		/*! Return the length of a beat in audio frames. */
-		int getBeatLength(Seirina::Audio::SampleRate atThisSampleRate);
+		int getBeatLength(Seirina::Audio::SampleRate atThisSampleRate) const;
 
 		/*! Convert to an `int`. */
 		operator int() const;

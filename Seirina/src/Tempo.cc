@@ -29,7 +29,7 @@ namespace Seirina::Notation
 		return value;
 	}
 
-	int Tempo::getBeatLength(Seirina::Audio::SampleRate rate)
+	int Tempo::getBeatLength(Seirina::Audio::SampleRate rate) const
 	{
 		return (rate * 60) / value;
 	}
