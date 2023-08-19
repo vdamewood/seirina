@@ -15,7 +15,10 @@
  * permissions and limitations under the License.
  */
 
+#include <unordered_map>
+
 #include <Seirina/Project.h>
+#include <Seirina/Voice.h>
 
 namespace Seirina
 {
@@ -29,6 +32,7 @@ namespace Seirina
 
         Notation::Tempo tempo;
         Notation::Tuning tuning;
+        std::unordered_map<std::string, std::unique_ptr<Seirina::Audio::Voice>> voices;
     };
 
     Project::Project(Notation::Tempo newTempo, Notation::Tuning newTuning)
@@ -46,6 +50,20 @@ namespace Seirina
         delete p;
     }
 
+    /*template<class... Args>
+    void Project::addVoice(std::string voiceName, Args&&... args)
+    {
+        //p->voices.emplace(voiceName, Voice(std::forward<Args>(args)...));
+        p->voices.emplace(voiceName, std::forward<Args>(args)...);
+    }*/
+
+
+    void Project::realAddVoice(std::string voiceName, Audio::Voice* newVoice)
+    {
+        p->voices[voiceName] = std::unique_ptr<Audio::Voice>(newVoice);
+    }
+
+
     const Notation::Tempo& Project::getTempo()
     {
         return p->tempo;
@@ -54,5 +72,9 @@ namespace Seirina
     const Notation::Tuning& Project::getTuning()
     {
         return p->tuning;
+    }
+    Audio::Voice& Project::getVoice(const std::string& voiceName)
+    {
+        return *p->voices[voiceName];
     }
 }

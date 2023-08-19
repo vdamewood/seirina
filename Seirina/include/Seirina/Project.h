@@ -18,10 +18,13 @@
 #if !defined SEIRINA_PROJECT_H
 #define SEIRINA_PROJECT_H
 
+#include <string>
+
 #include <Seirina/Frequency.h>
 #include <Seirina/Tempo.h>
 #include <Seirina/Tuning.h>
 #include <Seirina/PitchClass.h>
+#include <Seirina/Voice.h>
 
 namespace Seirina
 {
@@ -33,9 +36,17 @@ namespace Seirina
         Project(Notation::Tempo, Notation::PitchClass, Audio::Frequency);
         ~Project();
 
+        template<class... Args>
+        void addVoice(std::string voiceName, Args&&... args)
+        {
+            realAddVoice(voiceName, new Audio::Voice(std::forward<Args>(args)...));
+        }
+
         const Notation::Tempo& getTempo();
         const Notation::Tuning& getTuning();
+        Audio::Voice& getVoice(const std::string& voiceName);
     private:
+        void realAddVoice(std::string, Audio::Voice*);
         ProjectPrivate* p;
     };
 }
