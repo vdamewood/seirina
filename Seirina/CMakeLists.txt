@@ -35,8 +35,8 @@ set(PUBLIC_HEADERS
 	include/Seirina/SimpleWaves.h
 	include/Seirina/SynthNote.h
 	include/Seirina/Tempo.h
+	include/Seirina/Timbre.h
 	include/Seirina/Tuning.h
-	include/Seirina/Voice.h
 	include/Seirina/WaveForm.h
 )
 
@@ -78,8 +78,8 @@ target_sources(Seirina
 		src/SimpleWaves.cc
 		src/SynthNote.cc
 		src/Tempo.cc
+		src/Timbre.cc
 		src/Tuning.cc
-		src/Voice.cc
 )
 target_include_directories(Seirina PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_compile_features(Seirina PUBLIC cxx_std_17)

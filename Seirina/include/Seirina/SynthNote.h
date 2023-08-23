@@ -23,8 +23,8 @@
 #include <Seirina/Frequency.h>
 #include <Seirina/SampleIndex.h>
 #include <Seirina/SampleRate.h>
+#include <Seirina/Timbre.h>
 #include <Seirina/WaveForm.h>
-#include <Seirina/Voice.h>
 
 namespace Seirina::Audio
 {
@@ -37,7 +37,7 @@ namespace Seirina::Audio
 		SynthNote(
 			Frequency,
 			SampleDuration,
-			Voice,
+			Timbre,
 			SampleRate);
 		/*! Copy constructor */
 		SynthNote(const SynthNote&);

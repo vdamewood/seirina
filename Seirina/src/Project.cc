@@ -18,7 +18,6 @@
 #include <unordered_map>
 
 #include <Seirina/Project.h>
-#include <Seirina/Voice.h>
 
 namespace Seirina
 {
@@ -32,7 +31,7 @@ namespace Seirina
 
         Notation::Tempo tempo;
         Notation::Tuning tuning;
-        std::unordered_map<std::string, std::unique_ptr<Seirina::Audio::Voice>> voices;
+        std::unordered_map<std::string, std::unique_ptr<Seirina::Audio::Timbre>> timbres;
     };
 
     Project::Project(Notation::Tempo newTempo, Notation::Tuning newTuning)
@@ -50,17 +49,9 @@ namespace Seirina
         delete p;
     }
 
-    /*template<class... Args>
-    void Project::addVoice(std::string voiceName, Args&&... args)
+    void Project::realAddTimbre(std::string timbreName, Audio::Timbre* newTimbre)
     {
-        //p->voices.emplace(voiceName, Voice(std::forward<Args>(args)...));
-        p->voices.emplace(voiceName, std::forward<Args>(args)...);
-    }*/
-
-
-    void Project::realAddVoice(std::string voiceName, Audio::Voice* newVoice)
-    {
-        p->voices[voiceName] = std::unique_ptr<Audio::Voice>(newVoice);
+        p->timbres[timbreName] = std::unique_ptr<Audio::Timbre>(newTimbre);
     }
 
 
@@ -73,8 +64,8 @@ namespace Seirina
     {
         return p->tuning;
     }
-    Audio::Voice& Project::getVoice(const std::string& voiceName)
+    Audio::Timbre& Project::getTimbre(const std::string& timbreName)
     {
-        return *p->voices[voiceName];
+        return *p->timbres[timbreName];
     }
 }

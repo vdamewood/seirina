@@ -1,4 +1,4 @@
-/* Voice.cc: A Synthesizer voice (waveform and adsr envelope)
+/* Timbre.cc: A Synthesizer timbre (waveform and adsr envelope)
  *
  * Copyright 2023 Vincent Damewood
  *
@@ -16,14 +16,14 @@
  */
 
 #include <Seirina/SimpleWaves.h>
-#include <Seirina/Voice.h>
+#include <Seirina/Timbre.h>
 
 namespace Seirina::Audio
 {
-    class VoicePrivate
+    class TimbrePrivate
     {
     public:
-        VoicePrivate(WaveForm* newWaveForm, AdsrEnvelope newEnvelope)
+        TimbrePrivate(WaveForm* newWaveForm, AdsrEnvelope newEnvelope)
             : waveForm(newWaveForm), adsrEnvelope(newEnvelope)
         {
 
@@ -32,31 +32,31 @@ namespace Seirina::Audio
         AdsrEnvelope adsrEnvelope;
     };
 
-    Voice::Voice(const char* newWaveName, AdsrEnvelope newEnvelope)
-        : p(new VoicePrivate(GetWave(newWaveName), newEnvelope))
+    Timbre::Timbre(const char* newWaveName, AdsrEnvelope newEnvelope)
+        : p(new TimbrePrivate(GetWave(newWaveName), newEnvelope))
     {
 
     }
-    Voice::Voice(WaveForm* newWaveForm, AdsrEnvelope newEnvelope)
-        : p(new VoicePrivate(newWaveForm, newEnvelope))
+    Timbre::Timbre(WaveForm* newWaveForm, AdsrEnvelope newEnvelope)
+        : p(new TimbrePrivate(newWaveForm, newEnvelope))
     {
     }
 
-    Voice::Voice(const Voice& src)
-        : p(new VoicePrivate(src.p->waveForm, src.p->adsrEnvelope))
+    Timbre::Timbre(const Timbre& src)
+        : p(new TimbrePrivate(src.p->waveForm, src.p->adsrEnvelope))
     {
     }
 
-    Voice::~Voice()
+    Timbre::~Timbre()
     {
         delete p;
     }
 
-    WaveForm* Voice::getWaveForm() const
+    WaveForm* Timbre::getWaveForm() const
     {
         return p->waveForm;
     }
-    AdsrEnvelope& Voice::GetAdsrEnvelope()
+    AdsrEnvelope& Timbre::GetAdsrEnvelope()
     {
         return p->adsrEnvelope;
     }

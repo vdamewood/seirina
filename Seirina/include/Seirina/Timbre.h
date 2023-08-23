@@ -1,4 +1,4 @@
-/* Voice.h: A Synthesizer voice (waveform and adsr envelope)
+/* Timbre.h: A Synthesizer timbre (waveform and adsr envelope)
  *
  * Copyright 2023 Vincent Damewood
  *
@@ -15,28 +15,28 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_VOICE_H
-#define SEIRINA_VOICE_H
+#if !defined SEIRINA_TIMBRE_H
+#define SEIRINA_TIMBRE_H
 
 #include <Seirina/Adsr.h>
 #include <Seirina/WaveForm.h>
 
 namespace Seirina::Audio
 {
-    class VoicePrivate;
-    class Voice
+    class TimbrePrivate;
+    class Timbre
     {
         public:
-            Voice(const char* newWaveName, AdsrEnvelope newAdsr);
-            Voice(WaveForm* newWaveForm, AdsrEnvelope newAdsr);
-            Voice(const Voice&);
-            ~Voice();
+            Timbre(const char* newWaveName, AdsrEnvelope newAdsr);
+            Timbre(WaveForm* newWaveForm, AdsrEnvelope newAdsr);
+            Timbre(const Timbre&);
+            ~Timbre();
 
             WaveForm* getWaveForm() const;
             AdsrEnvelope& GetAdsrEnvelope(); // FIXME: Constify this
         private:
-            VoicePrivate* p;
+            TimbrePrivate* p;
     };
 }
 
-#endif // SEIRINA_VOICE_H
+#endif // SEIRINA_TIMBRE_H

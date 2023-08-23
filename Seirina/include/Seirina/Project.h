@@ -22,9 +22,9 @@
 
 #include <Seirina/Frequency.h>
 #include <Seirina/Tempo.h>
+#include <Seirina/Timbre.h>
 #include <Seirina/Tuning.h>
 #include <Seirina/PitchClass.h>
-#include <Seirina/Voice.h>
 
 namespace Seirina
 {
@@ -37,16 +37,16 @@ namespace Seirina
         ~Project();
 
         template<class... Args>
-        void addVoice(std::string voiceName, Args&&... args)
+        void addTimbre(std::string timbreName, Args&&... args)
         {
-            realAddVoice(voiceName, new Audio::Voice(std::forward<Args>(args)...));
+            realAddTimbre(timbreName, new Audio::Timbre(std::forward<Args>(args)...));
         }
 
         const Notation::Tempo& getTempo();
         const Notation::Tuning& getTuning();
-        Audio::Voice& getVoice(const std::string& voiceName);
+        Audio::Timbre& getTimbre(const std::string& timbreName);
     private:
-        void realAddVoice(std::string, Audio::Voice*);
+        void realAddTimbre(std::string, Audio::Timbre*);
         ProjectPrivate* p;
     };
 }

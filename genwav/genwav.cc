@@ -25,8 +25,8 @@
 #include <Seirina/Silence.h>
 #include <Seirina/SimpleWaves.h>
 #include <Seirina/Tempo.h>
+#include <Seirina/Timbre.h>
 #include <Seirina/Tuning.h>
-#include <Seirina/Voice.h>
 
 #include "InputParser.h"
 #include "WaveFile.h"
@@ -38,7 +38,7 @@ using Seirina::Audio::Frame;
 using Seirina::Audio::Frequency;
 using Seirina::Audio::Silence;
 using Seirina::Audio::SynthNote;
-using Seirina::Audio::Voice;
+using Seirina::Audio::Timbre;
 using Seirina::Notation::PitchClass;
 using Seirina::Notation::Tempo;
 using Seirina::Notation::Tuning;
@@ -82,9 +82,7 @@ int main(int argc, char *argv[])
 	WaveFile myWaveFile(OutFileName.c_str());
 
 	Project myProject{140, PitchClass::A, Frequency{440}};
-	myProject.addVoice("Melody", WaveName.c_str(), AdsrEnvelope(0, 0, 1.0, 4725));
-	//Voice MyVoice{WaveName.c_str(), AdsrEnvelope(0, 0, 1.0, 4725)};
-	//myProject.getVoice("Melody")
+	myProject.addTimbre("Melody", WaveName.c_str(), AdsrEnvelope(0, 0, 1.0, 4725));
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
 	while (std::optional<ParserLine> line = Input.FetchLine())
@@ -96,7 +94,7 @@ int main(int argc, char *argv[])
 				ActiveEvents.push_back(std::make_unique<SynthNote>(
 					token.note.value().Frequency(myProject.getTuning()),
 					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.note.value().Duration(),
-					myProject.getVoice("Melody"),
+					myProject.getTimbre("Melody"),
 					myWaveFile.GetSampleRate()));
 			}
 			else if (token.IsRest())
