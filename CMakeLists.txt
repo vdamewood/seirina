@@ -30,3 +30,5 @@ find_package(Doxygen)
 
 add_subdirectory(Seirina)
 add_subdirectory(genwav)
+enable_testing()
+add_subdirectory(tests)
