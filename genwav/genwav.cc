@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 		}
 
 		for (int i = 0;
-			i <= line.value().duration * myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate());
+			i <= static_cast<double>(line.value().duration) * myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate());
 			i++)
 		{
 			//std::vector<Seirina::Audio::Sample> samples;

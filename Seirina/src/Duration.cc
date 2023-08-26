@@ -20,24 +20,12 @@
 namespace Seirina::Notation
 {
 	Duration::Duration(int newNumerator, int newDenominator)
-		: numerator(newNumerator),
-			denominator(newDenominator)
+		: Rational(newNumerator, newDenominator)
 	{
 	}
 
 	Duration::Duration(const Duration& src)
-		: numerator(src.numerator),
-			denominator(src.denominator)
+		: Rational(src)
 	{
-	}
-
-	Duration::~Duration()
-	{
-	}
-
-	Duration::operator double() const
-	{
-		return static_cast<double>(numerator)
-			/ static_cast<double>(denominator);
 	}
 };

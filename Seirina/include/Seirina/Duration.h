@@ -18,27 +18,19 @@
 #if !defined SEIRINA_NOTATION_DURATION_H
 #define SEIRINA_NOTATION_DURATION_H
 
+#include <Seirina/Rational.h>
+
 namespace Seirina::Notation
 {
-	class DurationPrivate;
-
 	/*! The duration of a note as a rational number of beats */
-	class Duration
+	class Duration : public Rational
 	{
 	public:
 		/*! Construct a duration */
 		Duration(int numerator, int denominator=1);
+
 		/*! Copy constructor */
 		Duration(const Duration&);
-
-		/*! Destructor */
-		~Duration();
-
-		/*! Get duration as a double */
-		operator double() const;
-	private:
-		int numerator;
-		int denominator;
 	};
 };
 
