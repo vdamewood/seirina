@@ -68,8 +68,8 @@ bool ParserToken::IsRest()
 	return rest.has_value();
 }
 
-ParserLine::ParserLine(int newVoice, Duration newDuration)
-	: voice(newVoice), duration(newDuration)
+ParserLine::ParserLine(Duration newDuration)
+	: duration(newDuration)
 {
 }
 
@@ -116,24 +116,6 @@ Duration InputParser::FetchDuration()
 	else
 		throw SyntaxError();
 	return Duration{numerator, denominator};
-}
-
-int InputParser::FetchVoice()
-{
-	int inVoice;
-	if (File->peek() == ':')
-		inVoice = 1;
-	else if (std::isdigit(static_cast<unsigned char>(File->peek())))
-		inVoice = FetchInteger();
-	else
-		throw SyntaxError();
-
-	if (File->peek() == ':')
-		File->get();
-	else
-		throw SyntaxError();
-
-	return inVoice;
 }
 
 Duration InputParser::FetchLineDuration()
@@ -327,7 +309,7 @@ std::optional<ParserLine> InputParser::FetchLine()
 		return std::nullopt;
 	}
 
-	ParserLine rVal(FetchVoice(), FetchLineDuration());
+	ParserLine rVal(FetchLineDuration());
 	ParserToken inToken;
 	while (isNoteLetterOrRest(File->peek()))
 	{

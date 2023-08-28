@@ -52,10 +52,9 @@ public:
 class ParserLine
 {
 public:
-	ParserLine(int newChannel, Duration newDuration);
+	ParserLine(Duration newDuration);
 	ParserLine& AddToken(ParserToken);
 //private:
-	int voice;
 	Duration duration;
 	std::vector<ParserToken> Tokens;
 };
