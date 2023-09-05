@@ -1,6 +1,6 @@
-/* AdsrTransform.cc: The transoform applied by and ADSR envelope
+/* AdsrTransform.h: The transoform applied by and ADSR envelope
  *
- * Copyright 2019 Vincent Damewood
+ * Copyright 2016-2019, 2023 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
