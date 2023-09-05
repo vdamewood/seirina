@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 	WaveFile myWaveFile(OutFileName.c_str());
 
 	Project myProject{140, PitchClass::A, Frequency{440}};
-	myProject.addTimbre("Melody", WaveName.c_str(), AdsrEnvelope(0, 0, 1.0, 4725));
+	myProject.addTimbre("Melody", WaveName.c_str(), AdsrEnvelope(0, 0, 1.0, 4410));
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
 	while (std::optional<ParserLine> line = Input.FetchLine())
