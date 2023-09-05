@@ -16,7 +16,6 @@
  */
 
 #include <cmath>
-#include <map>
 
 #include <Seirina/Note.h>
 #include <Seirina/PitchClass.h>

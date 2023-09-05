@@ -21,8 +21,6 @@
 
 namespace Seirina
 {
-	class RationalPrivate;
-
 	/*! A rational number */
 	class Rational
 	{

@@ -18,9 +18,6 @@
 #if !defined SEIRINA_NOTATION_REST_H
 #define SEIRINA_NOTATION_REST_H
 
-#include <Seirina/Frequency.h>
-#include <Seirina/Octave.h>
-#include <Seirina/PitchClass.h>
 #include <Seirina/Duration.h>
 
 namespace Seirina::Notation

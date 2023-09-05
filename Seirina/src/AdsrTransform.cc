@@ -15,8 +15,6 @@
  * permissions and limitations under the License.
  */
 
-#include <cmath>
-
 #include <Seirina/AdsrTransform.h>
 
 static inline double clip(double i)

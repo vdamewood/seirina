@@ -15,7 +15,6 @@
  * permissions and limitations under the License.
  */
 
-#include <cmath>
 #include <map>
 
 #include <Seirina/Tuning.h>
