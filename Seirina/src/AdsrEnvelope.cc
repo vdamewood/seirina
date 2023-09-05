@@ -15,7 +15,7 @@
  * permissions and limitations under the License.
  */
 
-#include <Seirina/Adsr.h>
+#include <Seirina/AdsrEnvelope.h>
 #include <Seirina/SampleDuration.h>
 
 namespace Seirina::Audio

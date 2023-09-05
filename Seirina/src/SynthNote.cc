@@ -17,7 +17,7 @@
 
 #include <cmath>
 
-#include <Seirina/Adsr.h>
+#include <Seirina/AdsrEnvelope.h>
 #include <Seirina/Frequency.h>
 #include <Seirina/SampleIndex.h>
 #include <Seirina/SampleRate.h>

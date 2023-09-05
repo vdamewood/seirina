@@ -18,7 +18,7 @@
 #if !defined SEIRINA_TIMBRE_H
 #define SEIRINA_TIMBRE_H
 
-#include <Seirina/Adsr.h>
+#include <Seirina/AdsrEnvelope.h>
 #include <Seirina/WaveForm.h>
 
 namespace Seirina::Audio

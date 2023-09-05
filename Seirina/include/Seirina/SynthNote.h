@@ -18,7 +18,7 @@
 #if !defined SEIRINA_PLAYED_NOTE_H
 #define SEIRINA_PLAYED_NOTE_H
 
-#include <Seirina/Adsr.h>
+#include <Seirina/AdsrEnvelope.h>
 #include <Seirina/AudioEvent.h>
 #include <Seirina/Frequency.h>
 #include <Seirina/SampleIndex.h>

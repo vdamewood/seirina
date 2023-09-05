@@ -13,7 +13,7 @@
 # permissions and limitations under the License.
 
 set(PUBLIC_HEADERS
-	include/Seirina/Adsr.h
+	include/Seirina/AdsrEnvelope.h
 	include/Seirina/AdsrTransform.h
 	include/Seirina/AudioEvent.h
 	include/Seirina/AudioFrame.h
@@ -58,7 +58,7 @@ add_library(Seirina::Seirina ALIAS Seirina)
 target_sources(Seirina
 	PRIVATE
 		${PUBLIC_HEADERS}
-		src/Adsr.cc
+		src/AdsrEnvelope.cc
 		src/AdsrTransform.cc
 		src/AudioFrame.cc
 		src/AudioSample.cc
