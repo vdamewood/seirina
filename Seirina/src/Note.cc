@@ -32,7 +32,7 @@ namespace Seirina::Notation
 		NotePrivate(
 			PitchClass newPitchClass,
 			Octave newOctave,
-			Duration newDuration)
+			NoteDuration newDuration)
 		: pitchClass(newPitchClass),
 			octave(newOctave),
 			duration(newDuration)
@@ -41,13 +41,13 @@ namespace Seirina::Notation
 
 		PitchClass pitchClass;
 		Octave octave;
-		Duration duration;
+		NoteDuration duration;
 	};
 
 	Note::Note(
 			enum PitchClass newPitchClass,
 			class Octave newOctave,
-			class Duration newDuration)
+			NoteDuration newDuration)
 		: p(new NotePrivate(
 			newPitchClass,
 			newOctave,
@@ -84,7 +84,7 @@ namespace Seirina::Notation
 	}
 
 
-	Duration Note::Duration() const
+	NoteDuration Note::Duration() const
 	{
 		return p->duration;
 	}

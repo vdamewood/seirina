@@ -22,15 +22,15 @@ namespace Seirina::Notation
 	class RestPrivate
 	{
 	public:
-		RestPrivate(Duration newDuration)
+		RestPrivate(NoteDuration newDuration)
 			: duration(newDuration)
 		{
 		}
 
-		Duration duration;
+		NoteDuration duration;
 	};
 
-	Rest::Rest(class Duration newDuration)
+	Rest::Rest(NoteDuration newDuration)
 		: p(new RestPrivate(newDuration))
 	{
 	}
@@ -45,7 +45,7 @@ namespace Seirina::Notation
 		delete p;
 	}
 
-	Duration Rest::Duration() const
+	NoteDuration Rest::Duration() const
 	{
 		return p->duration;
 	}

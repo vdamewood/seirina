@@ -19,10 +19,8 @@
 #define SEIRINA_NOTATION_TUNING_H
 
 #include <Seirina/Frequency.h>
-#include <Seirina/Octave.h>
+//#include <Seirina/Octave.h>
 #include <Seirina/PitchClass.h>
-#include <Seirina/Duration.h>
-//#include <Seirina/Note.h>
 
 namespace Seirina::Notation
 {

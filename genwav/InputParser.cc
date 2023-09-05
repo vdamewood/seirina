@@ -26,7 +26,7 @@ using Seirina::Notation::PitchClass;
 using Seirina::Notation::MakePitchClass;
 using Seirina::Notation::Note;
 using Seirina::Notation::Rest;
-using Seirina::Notation::Duration;
+using Seirina::Notation::NoteDuration;
 
 
 ParserToken::ParserToken ()
@@ -68,7 +68,7 @@ bool ParserToken::IsRest()
 	return rest.has_value();
 }
 
-ParserLine::ParserLine(Duration newDuration)
+ParserLine::ParserLine(NoteDuration newDuration)
 	: duration(newDuration)
 {
 }
@@ -98,7 +98,7 @@ int InputParser::FetchInteger()
 	return std::atoi(inLexeme.c_str());
 }
 
-Duration InputParser::FetchDuration()
+NoteDuration InputParser::FetchDuration()
 {
 	int numerator;
 	if (std::isdigit(static_cast<unsigned char>(File->peek())))
@@ -107,7 +107,7 @@ Duration InputParser::FetchDuration()
 		throw SyntaxError();
 
 	if (File->peek() != '/')
-		return Duration(numerator, 1);
+		return NoteDuration(numerator, 1);
 	File->get();
 
 	int denominator;
@@ -115,12 +115,12 @@ Duration InputParser::FetchDuration()
 		denominator = FetchInteger();
 	else
 		throw SyntaxError();
-	return Duration{numerator, denominator};
+	return NoteDuration{numerator, denominator};
 }
 
-Duration InputParser::FetchLineDuration()
+NoteDuration InputParser::FetchLineDuration()
 {
-	Duration rVal = FetchDuration();
+	NoteDuration rVal = FetchDuration();
 	if (File->peek() == ':')
 		File->get();
 	else
@@ -185,7 +185,7 @@ Note InputParser::FetchNote()
 		else
 			throw SyntaxError();
 
-		Duration myDuration = FetchDuration();
+		NoteDuration myDuration = FetchDuration();
 		return Note(myClass, myOctave, myDuration);
 }
 

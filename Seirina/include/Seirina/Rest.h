@@ -18,7 +18,7 @@
 #if !defined SEIRINA_NOTATION_REST_H
 #define SEIRINA_NOTATION_REST_H
 
-#include <Seirina/Duration.h>
+#include <Seirina/NoteDuration.h>
 
 namespace Seirina::Notation
 {
@@ -28,14 +28,14 @@ namespace Seirina::Notation
 	{
 	public:
 		/*! Construct a Rest object */
-		Rest(Duration);
+		Rest(NoteDuration);
 		/*! Copy constructor */
 		Rest(const Rest&);
 		/*! Destructor */
 		~Rest();
 
 		/*! Get the duration of the Rest */
-		Duration Duration() const;
+		NoteDuration Duration() const;
 	private:
 		RestPrivate* p;
 	};

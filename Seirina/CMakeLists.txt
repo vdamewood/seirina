@@ -18,9 +18,9 @@ set(PUBLIC_HEADERS
 	include/Seirina/AudioEvent.h
 	include/Seirina/AudioFrame.h
 	include/Seirina/AudioSample.h
-	include/Seirina/Duration.h
 	include/Seirina/Frequency.h
 	include/Seirina/Note.h
+	include/Seirina/NoteDuration.h
 	include/Seirina/Octave.h
 	include/Seirina/Output.h
 	include/Seirina/Phase.h
@@ -62,9 +62,9 @@ target_sources(Seirina
 		src/AdsrTransform.cc
 		src/AudioFrame.cc
 		src/AudioSample.cc
-		src/Duration.cc
 		src/Frequency.cc
 		src/Note.cc
+		src/NoteDuration.cc
 		src/Octave.cc
 		src/Phase.cc
 		src/PitchClass.cc

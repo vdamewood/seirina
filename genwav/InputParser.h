@@ -21,13 +21,13 @@
 #include <vector>
 #include <optional>
 
-#include <Seirina/Duration.h>
+#include <Seirina/NoteDuration.h>
 #include <Seirina/Note.h>
 #include <Seirina/Octave.h>
 #include <Seirina/PitchClass.h>
 #include <Seirina/Rest.h>
 
-using Seirina::Notation::Duration;
+using Seirina::Notation::NoteDuration;
 using Seirina::Notation::Note;
 using Seirina::Notation::Octave;
 using Seirina::Notation::PitchClass;
@@ -52,10 +52,10 @@ public:
 class ParserLine
 {
 public:
-	ParserLine(Duration newDuration);
+	ParserLine(NoteDuration newDuration);
 	ParserLine& AddToken(ParserToken);
 //private:
-	Duration duration;
+	NoteDuration duration;
 	std::vector<ParserToken> Tokens;
 };
 class InputParser
@@ -69,7 +69,7 @@ public:
 
 private:
 	int FetchInteger();
-	Duration FetchDuration();
+	NoteDuration FetchDuration();
 	PitchClass FetchPitchClass();
 	Octave FetchOctave();
 	Note FetchNote();
@@ -77,7 +77,7 @@ private:
 	void FetchEndOfLine();
 
 	int FetchVoice();
-	Duration FetchLineDuration();
+	NoteDuration FetchLineDuration();
 	ParserToken FetchToken();
 
 	std::ifstream* File;

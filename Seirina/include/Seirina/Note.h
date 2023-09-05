@@ -19,9 +19,9 @@
 #define SEIRINA_NOTATION_NOTE_H
 
 #include <Seirina/Frequency.h>
+#include <Seirina/NoteDuration.h>
 #include <Seirina/Octave.h>
 #include <Seirina/PitchClass.h>
-#include <Seirina/Duration.h>
 #include <Seirina/Tuning.h>
 
 namespace Seirina::Notation
@@ -34,9 +34,9 @@ namespace Seirina::Notation
 	public:
 		/*! Construct a note */
 		Note(
-			Seirina::Notation::PitchClass,
-			Seirina::Notation::Octave,
-			Duration);
+			PitchClass,
+			Octave,
+			NoteDuration);
 		/*! Copy constructor */
 		Note(const Note&);
 
@@ -44,16 +44,16 @@ namespace Seirina::Notation
 		~Note();
 
 		/*! Fetch the PitchClass of the note */
-		const Seirina::Notation::PitchClass& PitchClass() const;
+		const PitchClass& PitchClass() const;
 
 		/*! Fetch the Octave of the note */
-		const Seirina::Notation::Octave& Octave() const;
+		const Octave& Octave() const;
 
 		/*! Fetch the Frequency of the note */
 		Seirina::Audio::Frequency Frequency(Tuning) const;
 
 		/*! Fetch the Duration of the note */
-		Duration Duration() const;
+		NoteDuration Duration() const;
 	private:
 		NotePrivate* p;
 	};

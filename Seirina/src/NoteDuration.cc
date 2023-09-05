@@ -1,6 +1,6 @@
-/* Duration.h: Musical duration
+/* NoteDuration.cc: The duration of a musical note
  *
- * Copyright 2018, 2019 Vincent Damewood
+ * Copyright 2018, 2019, 2023 Vincent Damewood
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,17 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_NOTATION_DURATION_H
-#define SEIRINA_NOTATION_DURATION_H
-
-#include <Seirina/Rational.h>
+#include <Seirina/NoteDuration.h>
 
 namespace Seirina::Notation
 {
-	/*! The duration of a note as a rational number of beats */
-	class Duration : public Rational
+	NoteDuration::NoteDuration(int newNumerator, int newDenominator)
+		: Rational(newNumerator, newDenominator)
 	{
-	public:
-		/*! Construct a duration */
-		Duration(int numerator, int denominator=1);
+	}
 
-		/*! Copy constructor */
-		Duration(const Duration&);
-	};
+	NoteDuration::NoteDuration(const NoteDuration& src)
+		: Rational(src)
+	{
+	}
 };
-
-#endif // SEIRINA_NOTATION_DURATION_H
