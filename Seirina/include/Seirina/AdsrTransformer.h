@@ -15,33 +15,31 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_ADSR_ENVELOPE_H
-#define SEIRINA_ADSR_ENVELOPE_H
+#if !defined SEIRINA_ADSR_TRANSFORMER_H
+#define SEIRINA_ADSR_TRANSFORMER_H
 
+#include <Seirina/AdsrEnvelope.h>
 #include <Seirina/AdsrTransform.h>
 #include <Seirina/SampleDuration.h>
+#include <Seirina/SampleRate.h>
 #include <Seirina/SampleIndex.h>
 
-typedef int TimeDuration;
-
-namespace Seirina::Audio
+namespace Seirina
 {
-	/*! Represents the attack, decay, sustain, and release of a note
-	 *  played in music. */
-	class AdsrEnvelope
+	/*! Applies an ADSR envelope to synthesized music. */
+	class AdsrTransformer
 	{
 	public:
-		/*! Constust a new ADSR Envelope. */
-		AdsrEnvelope(TimeDuration Attack, TimeDuration Decay,
-			AdsrTransform Sustain, TimeDuration Release);
-		TimeDuration getAttack();
-		TimeDuration getDecay();
-		AdsrTransform getSustain();
-		TimeDuration getRelease();
+		/*! Constust a new ADSR Transformer. */
+		AdsrTransformer(Audio::AdsrEnvelope envelope, Audio::SampleRate rate);
+
+		/*! Get the value to transform the sound wave by at a particular
+			position in the playing. */
+		Audio::AdsrTransform GetTransform(Audio::SampleIndex, Audio::SampleDuration);
 	private:
 		class PImpl;
 		PImpl* p;
 	};
 }
 
-#endif // SEIRINA_ADSR_ENVELOPE_H
+#endif // SEIRINA_ADSR_TRANSFORMER_H

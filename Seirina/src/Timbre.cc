@@ -23,27 +23,27 @@ namespace Seirina::Audio
     class TimbrePrivate
     {
     public:
-        TimbrePrivate(WaveForm* newWaveForm, AdsrEnvelope newEnvelope)
-            : waveForm(newWaveForm), adsrEnvelope(newEnvelope)
+        TimbrePrivate(WaveForm* newWaveForm, AdsrTransformer newAdsr)
+            : waveForm(newWaveForm), adsrTransformer(newAdsr)
         {
 
         }
         WaveForm* waveForm;
-        AdsrEnvelope adsrEnvelope;
+        AdsrTransformer adsrTransformer;
     };
 
-    Timbre::Timbre(const char* newWaveName, AdsrEnvelope newEnvelope)
-        : p(new TimbrePrivate(GetWave(newWaveName), newEnvelope))
+    Timbre::Timbre(const char* newWaveName, AdsrTransformer newAdsr)
+        : p(new TimbrePrivate(GetWave(newWaveName), newAdsr))
     {
 
     }
-    Timbre::Timbre(WaveForm* newWaveForm, AdsrEnvelope newEnvelope)
-        : p(new TimbrePrivate(newWaveForm, newEnvelope))
+    Timbre::Timbre(WaveForm* newWaveForm, AdsrTransformer newAdsr)
+        : p(new TimbrePrivate(newWaveForm, newAdsr))
     {
     }
 
     Timbre::Timbre(const Timbre& src)
-        : p(new TimbrePrivate(src.p->waveForm, src.p->adsrEnvelope))
+        : p(new TimbrePrivate(src.p->waveForm, src.p->adsrTransformer))
     {
     }
 
@@ -56,8 +56,8 @@ namespace Seirina::Audio
     {
         return p->waveForm;
     }
-    AdsrEnvelope& Timbre::GetAdsrEnvelope()
+    AdsrTransformer& Timbre::GetAdsrTransformer()
     {
-        return p->adsrEnvelope;
+        return p->adsrTransformer;
     }
 }

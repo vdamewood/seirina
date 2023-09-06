@@ -31,7 +31,7 @@ namespace Seirina::Audio
 		SynthNotePrivate(
 			Frequency new_frequency,
 			SampleDuration new_duration,
-			AdsrEnvelope new_adsr,
+			AdsrTransformer new_adsr,
 			WaveForm* new_waveform,
 			SampleRate new_sample_rate,
 			SampleIndex new_position=0)
@@ -46,7 +46,7 @@ namespace Seirina::Audio
 
 		// Note: frequency and sampleRate are only used to calculate
 		//  CycleLength at the moment, but might be useful later.
-		AdsrEnvelope adsr;
+		AdsrTransformer adsr;
 		double cycleLength;
 		WaveForm* waveform;
 		SampleRate sampleRate;
@@ -63,7 +63,7 @@ namespace Seirina::Audio
 		: p(new SynthNotePrivate(
 			new_frequency,
 			new_duration,
-			new_timbre.GetAdsrEnvelope(),
+			new_timbre.GetAdsrTransformer(),
 			new_timbre.getWaveForm(),
 			new_sample_rate))
 	{

@@ -15,6 +15,7 @@
 set(PUBLIC_HEADERS
 	include/Seirina/AdsrEnvelope.h
 	include/Seirina/AdsrTransform.h
+	include/Seirina/AdsrTransformer.h
 	include/Seirina/AudioEvent.h
 	include/Seirina/AudioFrame.h
 	include/Seirina/AudioSample.h
@@ -60,6 +61,7 @@ target_sources(Seirina
 		${PUBLIC_HEADERS}
 		src/AdsrEnvelope.cc
 		src/AdsrTransform.cc
+		src/AdsrTransformer.cc
 		src/AudioFrame.cc
 		src/AudioSample.cc
 		src/Frequency.cc

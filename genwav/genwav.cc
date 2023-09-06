@@ -20,6 +20,7 @@
 #include <string>
 #include <memory>
 
+#include <Seirina/AdsrTransformer.h>
 #include <Seirina/Project.h>
 #include <Seirina/SynthNote.h>
 #include <Seirina/Silence.h>
@@ -32,6 +33,7 @@
 #include "WaveFile.h"
 
 using Seirina::Project;
+using Seirina::AdsrTransformer;
 using Seirina::Audio::AdsrEnvelope;
 using Seirina::Audio::Event;
 using Seirina::Audio::Frame;
@@ -82,7 +84,8 @@ int main(int argc, char *argv[])
 	WaveFile myWaveFile(OutFileName.c_str());
 
 	Project myProject{140, PitchClass::A, Frequency{440}};
-	myProject.addTimbre("Melody", WaveName.c_str(), AdsrEnvelope(0, 0, 1.0, 4410));
+	AdsrEnvelope envelope(0, 0, 1.0, 100);
+	myProject.addTimbre("Melody", WaveName.c_str(), AdsrTransformer(envelope, myWaveFile.GetSampleRate()));
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
 	while (std::optional<ParserLine> line = Input.FetchLine())

@@ -1,4 +1,4 @@
-/* adsr.cc: Attack/Decay/Sustain/Release Envelops
+/* AdsrTransformer.cc: Applicator of ADSR Transformations
  *
  * Copyright 2016-2019, 2023 Vincent Damewood
  *
@@ -15,56 +15,38 @@
  * permissions and limitations under the License.
  */
 
-#include <Seirina/AdsrEnvelope.h>
+#include <Seirina/AdsrTransformer.h>
 #include <Seirina/SampleDuration.h>
 
-namespace Seirina::Audio
+using Seirina::Audio::AdsrTransform;;
+using Seirina::Audio::SampleDuration;
+using Seirina::Audio::SampleIndex;
+
+namespace Seirina
 {
-	class AdsrEnvelope::PImpl
+
+	class AdsrTransformer::PImpl
 	{
 	public:
-		PImpl(TimeDuration a, TimeDuration d, AdsrTransform s, TimeDuration r)
-			: attack(a), decay(d), sustain(s), release(r)
+		PImpl(Audio::AdsrEnvelope envelope, Audio::SampleRate rate)
+			: attack(envelope.getAttack()*rate/100)
+			, decay(envelope.getDecay()*rate/100)
+			, sustain(envelope.getSustain())
+			, release(envelope.getRelease()*rate/100)
 		{
 		}
-		TimeDuration attack;
-		TimeDuration decay;
+		SampleDuration attack;
+		SampleDuration decay;
 		AdsrTransform sustain;
-		TimeDuration release;
+		SampleDuration release;
 	};
 
-	AdsrEnvelope::AdsrEnvelope(
-		TimeDuration newAttack,
-		TimeDuration newDecay,
-		AdsrTransform newSustain,
-		TimeDuration newRelease)
-		: p(new PImpl(newAttack, newDecay, newSustain, newRelease))
+	AdsrTransformer::AdsrTransformer(Audio::AdsrEnvelope envelope, Audio::SampleRate rate)
+		: p(new PImpl(envelope, rate))
 	{
 	}
 
-	TimeDuration AdsrEnvelope::getAttack()
-	{
-		return p->attack;
-	}
-
-	TimeDuration AdsrEnvelope::getDecay()
-	{
-		return p->decay;
-	}
-
-	AdsrTransform AdsrEnvelope::getSustain()
-	{
-		return p->sustain;
-	}
-
-	TimeDuration AdsrEnvelope::getRelease()
-	{
-		return p->release;
-	}
-
-
-	/*
-	AdsrTransform AdsrEnvelope::GetTransform(SampleIndex position, SampleDuration duration)
+	AdsrTransform AdsrTransformer::GetTransform(SampleIndex position, SampleDuration duration)
 	{
 		duration -= p->release;
 		if (position < p->attack)
@@ -80,5 +62,4 @@ namespace Seirina::Audio
 			return p->sustain - (static_cast<double>(position-duration)
 				/ static_cast<double>(p->release));
 	}
-	*/
 };
