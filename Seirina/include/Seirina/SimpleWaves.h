@@ -18,6 +18,8 @@
 #ifndef SEIRINA_SIMPLE_WAVES_H
 #define SEIRINA_SIMPLE_WAVES_H
 
+#include <string>
+
 #include <Seirina/WaveForm.h>
 
 namespace Seirina::Audio
@@ -63,7 +65,7 @@ namespace Seirina::Audio
 	};
 
 	/*! Look up simple waveform by name */
-	WaveForm* GetWave(const char *WaveName);
+	WaveForm* GetWave(const std::string& WaveName);
 };
 
 #endif // SEIRINA_SIMPLE_WAVES_H

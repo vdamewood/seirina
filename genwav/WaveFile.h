@@ -18,6 +18,8 @@
 #ifndef SEIRINA_WAVE_FILE_H
 #define SEIRINA_WAVE_FILE_H
 
+#include <string>
+
 #include <Seirina/Output.h>
 
 class WaveFilePrivate;
@@ -25,7 +27,7 @@ class WaveFilePrivate;
 class WaveFile : public Seirina::Audio::Output
 {
 public:
-	WaveFile(const char* Filename);
+	WaveFile(const std::string& Filename);
 	virtual void WriteFrame(Seirina::Audio::Frame) override;
 	virtual Seirina::Audio::SampleRate GetSampleRate() override;
 	virtual ~WaveFile();

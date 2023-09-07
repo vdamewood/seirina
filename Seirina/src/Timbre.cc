@@ -32,7 +32,7 @@ namespace Seirina::Audio
         AdsrTransformer adsrTransformer;
     };
 
-    Timbre::Timbre(const char* newWaveName, AdsrTransformer newAdsr)
+    Timbre::Timbre(const std::string& newWaveName, AdsrTransformer newAdsr)
         : p(new TimbrePrivate(GetWave(newWaveName), newAdsr))
     {
 

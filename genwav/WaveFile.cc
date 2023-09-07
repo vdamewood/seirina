@@ -66,7 +66,7 @@ public:
 	int DataSize = 0;
 };
 
-WaveFile::WaveFile(const char* filename)
+WaveFile::WaveFile(const std::string& filename)
 {
 	d = new WaveFilePrivate();
 	d->File = new std::ofstream(filename);

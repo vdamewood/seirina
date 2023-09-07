@@ -80,12 +80,12 @@ int main(int argc, char *argv[])
 	}
 
 
-	InputParser Input(InFileName.c_str());
-	WaveFile myWaveFile(OutFileName.c_str());
+	InputParser Input(InFileName);
+	WaveFile myWaveFile(OutFileName);
 
 	Project myProject{140, PitchClass::A, Frequency{440}};
 	AdsrEnvelope envelope(0, 0, 1.0, 100);
-	myProject.addTimbre("Melody", WaveName.c_str(), AdsrTransformer(envelope, myWaveFile.GetSampleRate()));
+	myProject.addTimbre("Melody", WaveName, AdsrTransformer(envelope, myWaveFile.GetSampleRate()));
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
 	while (std::optional<ParserLine> line = Input.FetchLine())

@@ -58,7 +58,7 @@ namespace Seirina::Audio
 		{std::string("triangle"), new TriangleWave()},
 	};
 
-	WaveForm* GetWave(const char *WaveName)
+	WaveForm* GetWave(const std::string& WaveName)
 	{
 		try
 		{

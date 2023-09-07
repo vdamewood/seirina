@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <optional>
+#include <string>
 
 #include <Seirina/NoteDuration.h>
 #include <Seirina/Note.h>
@@ -61,7 +62,7 @@ public:
 class InputParser
 {
 public:
-	InputParser(const char* FileName);
+	InputParser(const std::string& FileName);
 	~InputParser();
 
 	ParserToken Fetch();

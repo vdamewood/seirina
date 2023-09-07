@@ -79,7 +79,7 @@ ParserLine& ParserLine::AddToken(ParserToken newToken)
 	return *this;
 }
 
-InputParser::InputParser(const char* Filename)
+InputParser::InputParser(const std::string& Filename)
 {
 	File = new std::ifstream(Filename);
 }

@@ -18,6 +18,8 @@
 #if !defined SEIRINA_TIMBRE_H
 #define SEIRINA_TIMBRE_H
 
+#include <string>
+
 #include <Seirina/AdsrTransformer.h>
 #include <Seirina/WaveForm.h>
 
@@ -27,7 +29,7 @@ namespace Seirina::Audio
     class Timbre
     {
         public:
-            Timbre(const char* newWaveName, AdsrTransformer newAdsr);
+            Timbre(const std::string& newWaveName, AdsrTransformer newAdsr);
             Timbre(WaveForm* newWaveForm, AdsrTransformer newAdsr);
             Timbre(const Timbre&);
             ~Timbre();
