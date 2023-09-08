@@ -16,8 +16,8 @@ add_executable(genwav)
 target_sources(genwav
 	PRIVATE
 		genwav.cc
-		InputParser.h
-		InputParser.cc
+		RollParser.h
+		RollParser.cc
 		WaveFile.h
 		WaveFile.cc
 )

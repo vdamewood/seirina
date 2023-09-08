@@ -29,7 +29,7 @@
 #include <Seirina/Timbre.h>
 #include <Seirina/Tuning.h>
 
-#include "InputParser.h"
+#include "RollParser.h"
 #include "WaveFile.h"
 
 using Seirina::Project;
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	InputParser Input(InFileName);
+	RollParser Input(InFileName);
 	WaveFile myWaveFile(OutFileName);
 
 	Project myProject{140, PitchClass::A, Frequency{440}};
@@ -88,9 +88,9 @@ int main(int argc, char *argv[])
 	myProject.addTimbre("Melody", WaveName, AdsrTransformer(envelope, myWaveFile.GetSampleRate()));
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
-	while (std::optional<ParserLine> line = Input.FetchLine())
+	while (std::optional<RollParserLine> line = Input.FetchLine())
 	{
-		for(ParserToken& token : line.value().Tokens)
+		for(RollParserToken& token : line.value().Tokens)
 		{
 			if (token.IsNote())
 			{

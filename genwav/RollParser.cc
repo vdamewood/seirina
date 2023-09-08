@@ -20,7 +20,7 @@
 
 #include <Seirina/PitchClass.h>
 
-#include "InputParser.h"
+#include "RollParser.h"
 
 using Seirina::Notation::PitchClass;
 using Seirina::Notation::MakePitchClass;
@@ -29,69 +29,69 @@ using Seirina::Notation::Rest;
 using Seirina::Notation::NoteDuration;
 
 
-ParserToken::ParserToken (const ParserToken& original)
+RollParserToken::RollParserToken (const RollParserToken& original)
 	: item(original.item)
 {
 }
 
 
-ParserToken::ParserToken (const Note& newNote)
+RollParserToken::RollParserToken (const Note& newNote)
 	: item(newNote)
 {
 }
 
-ParserToken::ParserToken (const Rest& newRest)
+RollParserToken::RollParserToken (const Rest& newRest)
 	: item(newRest)
 {
 }
 
-ParserToken::~ParserToken()
+RollParserToken::~RollParserToken()
 {
 }
 
-bool ParserToken::IsNote()
+bool RollParserToken::IsNote()
 {
 	return std::holds_alternative<Note>(item);
 }
 
-bool ParserToken::IsRest()
+bool RollParserToken::IsRest()
 {
 	return std::holds_alternative<Rest>(item);
 }
 
-const Note& ParserToken::GetNote()
+const Note& RollParserToken::GetNote()
 {
 	return std::get<Note>(item);
 }
 
-const Rest& ParserToken::GetRest()
+const Rest& RollParserToken::GetRest()
 {
 	return std::get<Rest>(item);
 }
 
-ParserLine::ParserLine(NoteDuration newDuration)
+RollParserLine::RollParserLine(NoteDuration newDuration)
 	: duration(newDuration)
 {
 }
 
-ParserLine& ParserLine::AddToken(ParserToken newToken)
+RollParserLine& RollParserLine::AddToken(RollParserToken newToken)
 {
 	Tokens.push_back(newToken);
 	return *this;
 }
 
-InputParser::InputParser(const std::string& Filename)
+RollParser::RollParser(const std::string& Filename)
 {
 	File = new std::ifstream(Filename);
 }
 
-InputParser::~InputParser()
+RollParser::~RollParser()
 {
 	File->close();
 	delete File;
 }
 
-int InputParser::FetchInteger()
+int RollParser::FetchInteger()
 {
 	std::string inLexeme;
 	while(std::isdigit(static_cast<unsigned char>(File->peek())))
@@ -99,7 +99,7 @@ int InputParser::FetchInteger()
 	return std::atoi(inLexeme.c_str());
 }
 
-NoteDuration InputParser::FetchDuration()
+NoteDuration RollParser::FetchDuration()
 {
 	int numerator;
 	if (std::isdigit(static_cast<unsigned char>(File->peek())))
@@ -119,7 +119,7 @@ NoteDuration InputParser::FetchDuration()
 	return NoteDuration{numerator, denominator};
 }
 
-NoteDuration InputParser::FetchLineDuration()
+NoteDuration RollParser::FetchLineDuration()
 {
 	NoteDuration rVal = FetchDuration();
 	if (File->peek() == ':')
@@ -129,7 +129,7 @@ NoteDuration InputParser::FetchLineDuration()
 	return rVal;
 }
 
-PitchClass InputParser::FetchPitchClass()
+PitchClass RollParser::FetchPitchClass()
 {
 	char inChar;
 	char NoteLetter;
@@ -172,12 +172,12 @@ PitchClass InputParser::FetchPitchClass()
 	return MakePitchClass(NoteLetter, NoteAccidental);
 }
 
-Octave InputParser::FetchOctave()
+Octave RollParser::FetchOctave()
 {
 	return Octave(FetchInteger());
 }
 
-Note InputParser::FetchNote()
+Note RollParser::FetchNote()
 {
 		PitchClass myClass = FetchPitchClass();
 		Octave myOctave = FetchOctave();
@@ -190,7 +190,7 @@ Note InputParser::FetchNote()
 		return Note(myClass, myOctave, myDuration);
 }
 
-Rest InputParser::FetchRest()
+Rest RollParser::FetchRest()
 {
 	int inChar = File->peek();
 
@@ -212,18 +212,18 @@ Rest InputParser::FetchRest()
 	return Rest(FetchDuration());
 }
 
-ParserToken InputParser::FetchToken()
+RollParserToken RollParser::FetchToken()
 {
 	int nextChar = File->peek();
 	if ((nextChar >= 'A' && nextChar <= 'G')
 		|| (nextChar >= 'a' && nextChar <= 'g'))
 	{
-		return ParserToken(FetchNote());
+		return RollParserToken(FetchNote());
 	}
 	else if (nextChar == 'R'
 		|| nextChar == 'r')
 	{
-		return ParserToken(FetchRest());
+		return RollParserToken(FetchRest());
 	}
 	else
 	{
@@ -231,7 +231,7 @@ ParserToken InputParser::FetchToken()
 	}
 }
 
-void InputParser::FetchEndOfLine()
+void RollParser::FetchEndOfLine()
 {
 	int inChar = File->get();
 	if (inChar == '\r')
@@ -241,7 +241,7 @@ void InputParser::FetchEndOfLine()
 }
 
 
-ParserToken InputParser::Fetch()
+RollParserToken RollParser::Fetch()
 {
 	return FetchToken();
 }
@@ -254,7 +254,7 @@ inline bool isNoteLetterOrRest(int input)
 		|| input == 'r';
 }
 
-std::optional<ParserLine> InputParser::FetchLine()
+std::optional<RollParserLine> RollParser::FetchLine()
 {
 	while (File->peek() == '=')
 		while(File->get() != '\n');
@@ -264,7 +264,7 @@ std::optional<ParserLine> InputParser::FetchLine()
 		return std::nullopt;
 	}
 
-	ParserLine rVal(FetchLineDuration());
+	RollParserLine rVal(FetchLineDuration());
 	while (isNoteLetterOrRest(File->peek()))
 	{
 		rVal.AddToken(FetchToken());

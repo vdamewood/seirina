@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined INPUT_PARSER_H
-#define INPUT_PARSER_H
+#if !defined ROLL_PARSER_H
+#define ROLL_PARSER_H
 
 #include <vector>
 #include <optional>
@@ -34,13 +34,13 @@ using Seirina::Notation::Octave;
 using Seirina::Notation::PitchClass;
 using Seirina::Notation::Rest;
 
-class ParserToken
+class RollParserToken
 {
 public:
-	ParserToken(const ParserToken&);
-	ParserToken(const Note&);
-	ParserToken(const Rest&);
-	~ParserToken();
+	RollParserToken(const RollParserToken&);
+	RollParserToken(const Note&);
+	RollParserToken(const Rest&);
+	~RollParserToken();
 
 	bool IsNote();
 	bool IsRest();
@@ -51,23 +51,24 @@ private:
 	std::variant<Note,Rest> item;
 };
 
-class ParserLine
+class RollParserLine
 {
 public:
-	ParserLine(NoteDuration newDuration);
-	ParserLine& AddToken(ParserToken);
+	RollParserLine(NoteDuration newDuration);
+	RollParserLine& AddToken(RollParserToken);
 //private:
 	NoteDuration duration;
-	std::vector<ParserToken> Tokens;
+	std::vector<RollParserToken> Tokens;
 };
-class InputParser
+
+class RollParser
 {
 public:
-	InputParser(const std::string& FileName);
-	~InputParser();
+	RollParser(const std::string& FileName);
+	~RollParser();
 
-	ParserToken Fetch();
-	std::optional<ParserLine> FetchLine();
+	RollParserToken Fetch();
+	std::optional<RollParserLine> FetchLine();
 
 private:
 	int FetchInteger();
@@ -80,7 +81,7 @@ private:
 
 	int FetchVoice();
 	NoteDuration FetchLineDuration();
-	ParserToken FetchToken();
+	RollParserToken FetchToken();
 
 	std::ifstream* File;
 };
@@ -90,4 +91,4 @@ class SyntaxError
 
 };
 
-#endif // INPUT_PARSER_H
+#endif // ROLL_PARSER_H
