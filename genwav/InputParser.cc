@@ -229,51 +229,6 @@ ParserToken InputParser::FetchToken()
 	{
 		throw SyntaxError();
 	}
-
-
-	/*
-	if (NoteLetter != 'R')
-	{
-
-	}
-
-
-
-	inChar = File->get();
-	if (inChar < '0' || inChar > '9')
-		return ParserToken();
-	DurationNumerator = inChar - '0';
-
-
-	inChar = File->get();
-	if (inChar == '/')
-	{
-		inChar = File->get();
-		if (inChar < '1' || inChar > '9')
-			return ParserToken();
-		DurationDenominator = inChar - '0';
-		inChar = File->get();
-	}
-
-	/ *
-	if (inChar == '\r')
-		inChar = File->get();
-	if (inChar != '\n')
-		return ParserToken();
-	*/
-	/*
-	if (NoteLetter != 'R')
-		return ParserToken(Note(
-			MakePitchClass(NoteLetter, NoteAccidental),
-			NoteOctave, Duration(
-			DurationNumerator,
-			DurationDenominator)));
-	else
-		return ParserToken(Rest(
-			Duration(
-				DurationNumerator,
-				DurationDenominator)));
-				*/
 }
 
 void InputParser::FetchEndOfLine()
