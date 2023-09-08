@@ -83,17 +83,21 @@ int main(int argc, char *argv[])
 	}
 
 
-	RollParser Input(InFileName);
 	WaveFile myWaveFile(OutFileName);
 
 	Project myProject{140, PitchClass::A, Frequency{440}};
 	AdsrEnvelope envelope(0, 0, 1.0, 100);
 	myProject.addTimbre("Melody", WaveName, AdsrTransformer(envelope, myWaveFile.GetSampleRate()));
 
-	std::vector<std::unique_ptr<Event>> ActiveEvents;
+	RollParser Input(InFileName);
+	std::vector<RollLine> lines;
 	while (std::optional<RollLine> line = Input.FetchLine())
+		lines.push_back(line.value());
+
+	std::vector<std::unique_ptr<Event>> ActiveEvents;
+	for (auto& line : lines)
 	{
-		for(const auto& item : line.value().getItems())
+		for(const auto& item : line.getItems())
 		{
 			std::visit([&ActiveEvents, &myProject, &myWaveFile](auto&& itemValue)
 			{
@@ -111,7 +115,7 @@ int main(int argc, char *argv[])
 		}
 
 		for (int i = 0;
-			i <= static_cast<double>(line.value().getDuration()) * myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate());
+			i <= static_cast<double>(line.getDuration()) * myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate());
 			i++)
 		{
 			//std::vector<Seirina::Audio::Sample> samples;
