@@ -22,63 +22,13 @@
 
 #include "RollParser.h"
 
+using Seirina::RollLine;
 using Seirina::Notation::PitchClass;
 using Seirina::Notation::MakePitchClass;
 using Seirina::Notation::Note;
 using Seirina::Notation::Rest;
 using Seirina::Notation::NoteDuration;
 
-
-RollParserToken::RollParserToken (const RollParserToken& original)
-	: item(original.item)
-{
-}
-
-
-RollParserToken::RollParserToken (const Note& newNote)
-	: item(newNote)
-{
-}
-
-RollParserToken::RollParserToken (const Rest& newRest)
-	: item(newRest)
-{
-}
-
-RollParserToken::~RollParserToken()
-{
-}
-
-bool RollParserToken::IsNote()
-{
-	return std::holds_alternative<Note>(item);
-}
-
-bool RollParserToken::IsRest()
-{
-	return std::holds_alternative<Rest>(item);
-}
-
-const Note& RollParserToken::GetNote()
-{
-	return std::get<Note>(item);
-}
-
-const Rest& RollParserToken::GetRest()
-{
-	return std::get<Rest>(item);
-}
-
-RollParserLine::RollParserLine(NoteDuration newDuration)
-	: duration(newDuration)
-{
-}
-
-RollParserLine& RollParserLine::AddToken(RollParserToken newToken)
-{
-	Tokens.push_back(newToken);
-	return *this;
-}
 
 RollParser::RollParser(const std::string& Filename)
 {
@@ -212,18 +162,18 @@ Rest RollParser::FetchRest()
 	return Rest(FetchDuration());
 }
 
-RollParserToken RollParser::FetchToken()
+std::variant<Rest,Note> RollParser::FetchToken()
 {
 	int nextChar = File->peek();
 	if ((nextChar >= 'A' && nextChar <= 'G')
 		|| (nextChar >= 'a' && nextChar <= 'g'))
 	{
-		return RollParserToken(FetchNote());
+		return FetchNote();
 	}
 	else if (nextChar == 'R'
 		|| nextChar == 'r')
 	{
-		return RollParserToken(FetchRest());
+		return FetchRest();
 	}
 	else
 	{
@@ -240,12 +190,6 @@ void RollParser::FetchEndOfLine()
 		throw SyntaxError();
 }
 
-
-RollParserToken RollParser::Fetch()
-{
-	return FetchToken();
-}
-
 inline bool isNoteLetterOrRest(int input)
 {
 	return input - 'A' < 7
@@ -254,7 +198,7 @@ inline bool isNoteLetterOrRest(int input)
 		|| input == 'r';
 }
 
-std::optional<RollParserLine> RollParser::FetchLine()
+std::optional<RollLine> RollParser::FetchLine()
 {
 	while (File->peek() == '=')
 		while(File->get() != '\n');
@@ -264,10 +208,10 @@ std::optional<RollParserLine> RollParser::FetchLine()
 		return std::nullopt;
 	}
 
-	RollParserLine rVal(FetchLineDuration());
+	RollLine rVal(FetchLineDuration());
 	while (isNoteLetterOrRest(File->peek()))
 	{
-		rVal.AddToken(FetchToken());
+		rVal.add(FetchToken());
 		int nextChar = File->peek();
 		if (nextChar == ':')
 			File->get();

@@ -27,6 +27,7 @@
 #include <Seirina/Octave.h>
 #include <Seirina/PitchClass.h>
 #include <Seirina/Rest.h>
+#include <Seirina/RollLine.h>
 
 using Seirina::Notation::NoteDuration;
 using Seirina::Notation::Note;
@@ -34,32 +35,6 @@ using Seirina::Notation::Octave;
 using Seirina::Notation::PitchClass;
 using Seirina::Notation::Rest;
 
-class RollParserToken
-{
-public:
-	RollParserToken(const RollParserToken&);
-	RollParserToken(const Note&);
-	RollParserToken(const Rest&);
-	~RollParserToken();
-
-	bool IsNote();
-	bool IsRest();
-	const Note& GetNote();
-	const Rest& GetRest();
-
-private:
-	std::variant<Note,Rest> item;
-};
-
-class RollParserLine
-{
-public:
-	RollParserLine(NoteDuration newDuration);
-	RollParserLine& AddToken(RollParserToken);
-//private:
-	NoteDuration duration;
-	std::vector<RollParserToken> Tokens;
-};
 
 class RollParser
 {
@@ -67,8 +42,7 @@ public:
 	RollParser(const std::string& FileName);
 	~RollParser();
 
-	RollParserToken Fetch();
-	std::optional<RollParserLine> FetchLine();
+	std::optional<Seirina::RollLine> FetchLine();
 
 private:
 	int FetchInteger();
@@ -81,7 +55,7 @@ private:
 
 	int FetchVoice();
 	NoteDuration FetchLineDuration();
-	RollParserToken FetchToken();
+	std::variant<Rest,Note> FetchToken();
 
 	std::ifstream* File;
 };

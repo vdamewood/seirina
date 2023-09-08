@@ -19,9 +19,11 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <variant>
 
 #include <Seirina/AdsrTransformer.h>
 #include <Seirina/Project.h>
+#include <Seirina/RollLine.h>
 #include <Seirina/SynthNote.h>
 #include <Seirina/Silence.h>
 #include <Seirina/SimpleWaves.h>
@@ -38,6 +40,7 @@ using Seirina::Audio::AdsrEnvelope;
 using Seirina::Audio::Event;
 using Seirina::Audio::Frame;
 using Seirina::Audio::Frequency;
+using Seirina::RollLine;
 using Seirina::Audio::Silence;
 using Seirina::Audio::SynthNote;
 using Seirina::Audio::Timbre;
@@ -88,27 +91,27 @@ int main(int argc, char *argv[])
 	myProject.addTimbre("Melody", WaveName, AdsrTransformer(envelope, myWaveFile.GetSampleRate()));
 
 	std::vector<std::unique_ptr<Event>> ActiveEvents;
-	while (std::optional<RollParserLine> line = Input.FetchLine())
+	while (std::optional<RollLine> line = Input.FetchLine())
 	{
-		for(RollParserToken& token : line.value().Tokens)
+		for(const auto& item : line.value().getItems())
 		{
-			if (token.IsNote())
+			std::visit([&ActiveEvents, &myProject, &myWaveFile](auto&& itemValue)
 			{
-				ActiveEvents.push_back(std::make_unique<SynthNote>(
-					token.GetNote().Frequency(myProject.getTuning()),
-					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.GetNote().Duration(),
-					myProject.getTimbre("Melody"),
-					myWaveFile.GetSampleRate()));
-			}
-			else if (token.IsRest())
-			{
-				ActiveEvents.push_back(std::make_unique<Silence>(
-					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.GetRest().Duration()));
-			}
+				using Alt = std::decay_t<decltype(itemValue)>;
+				if constexpr (std::is_same_v<Alt, Rest>)
+					ActiveEvents.push_back(std::make_unique<Silence>(
+						myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * itemValue.Duration()));
+				if constexpr (std::is_same_v<Alt, Note>)
+					ActiveEvents.push_back(std::make_unique<SynthNote>(
+						itemValue.Frequency(myProject.getTuning()),
+						myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * itemValue.Duration(),
+						myProject.getTimbre("Melody"),
+						myWaveFile.GetSampleRate()));
+			}, item);
 		}
 
 		for (int i = 0;
-			i <= static_cast<double>(line.value().duration) * myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate());
+			i <= static_cast<double>(line.value().getDuration()) * myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate());
 			i++)
 		{
 			//std::vector<Seirina::Audio::Sample> samples;

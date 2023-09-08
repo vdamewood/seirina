@@ -29,6 +29,7 @@ set(PUBLIC_HEADERS
 	include/Seirina/Project.h
 	include/Seirina/Rational.h
 	include/Seirina/Rest.h
+	include/Seirina/RollLine.h
 	include/Seirina/SampleDuration.h
 	include/Seirina/SampleIndex.h
 	include/Seirina/SampleRate.h
@@ -73,6 +74,7 @@ target_sources(Seirina
 		src/Project.cc
 		src/Rational.cc
 		src/Rest.cc
+		src/RollLine.cc
 		src/SampleDuration.cc
 		src/SampleIndex.cc
 		src/SampleRate.cc
