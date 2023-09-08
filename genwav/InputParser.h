@@ -37,7 +37,6 @@ using Seirina::Notation::Rest;
 class ParserToken
 {
 public:
-	ParserToken();
 	ParserToken(const ParserToken&);
 	ParserToken(const Note&);
 	ParserToken(const Rest&);
@@ -45,9 +44,11 @@ public:
 
 	bool IsNote();
 	bool IsRest();
-	// FIXME: std::variant!
-	std::optional<Note> note;
-	std::optional<Rest> rest;
+	const Note& GetNote();
+	const Rest& GetRest();
+
+private:
+	std::variant<Note,Rest> item;
 };
 
 class ParserLine

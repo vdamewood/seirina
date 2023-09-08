@@ -29,28 +29,19 @@ using Seirina::Notation::Rest;
 using Seirina::Notation::NoteDuration;
 
 
-ParserToken::ParserToken ()
-{
-}
-
 ParserToken::ParserToken (const ParserToken& original)
+	: item(original.item)
 {
-	if (original.note.has_value())
-		note = original.note.value();
-
-	if (original.rest.has_value())
-		rest = original.rest.value();
-
 }
 
 
 ParserToken::ParserToken (const Note& newNote)
-	: note(newNote)
+	: item(newNote)
 {
 }
 
 ParserToken::ParserToken (const Rest& newRest)
-	: rest(newRest)
+	: item(newRest)
 {
 }
 
@@ -60,12 +51,22 @@ ParserToken::~ParserToken()
 
 bool ParserToken::IsNote()
 {
-	return note.has_value();
+	return std::holds_alternative<Note>(item);
 }
 
 bool ParserToken::IsRest()
 {
-	return rest.has_value();
+	return std::holds_alternative<Rest>(item);
+}
+
+const Note& ParserToken::GetNote()
+{
+	return std::get<Note>(item);
+}
+
+const Rest& ParserToken::GetRest()
+{
+	return std::get<Rest>(item);
 }
 
 ParserLine::ParserLine(NoteDuration newDuration)
@@ -213,25 +214,24 @@ Rest InputParser::FetchRest()
 
 ParserToken InputParser::FetchToken()
 {
-	ParserToken rVal;
-
 	int nextChar = File->peek();
 	if ((nextChar >= 'A' && nextChar <= 'G')
 		|| (nextChar >= 'a' && nextChar <= 'g'))
 	{
-		rVal.note = FetchNote();
+		return ParserToken(FetchNote());
 	}
 	else if (nextChar == 'R'
 		|| nextChar == 'r')
 	{
-		rVal.rest = FetchRest();
+		return ParserToken(FetchRest());
+	}
+	else
+	{
+		throw SyntaxError();
 	}
 
-	return rVal;
+
 	/*
-
-
-
 	if (NoteLetter != 'R')
 	{
 
@@ -310,7 +310,6 @@ std::optional<ParserLine> InputParser::FetchLine()
 	}
 
 	ParserLine rVal(FetchLineDuration());
-	ParserToken inToken;
 	while (isNoteLetterOrRest(File->peek()))
 	{
 		rVal.AddToken(FetchToken());

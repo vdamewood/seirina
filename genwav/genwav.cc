@@ -95,15 +95,15 @@ int main(int argc, char *argv[])
 			if (token.IsNote())
 			{
 				ActiveEvents.push_back(std::make_unique<SynthNote>(
-					token.note.value().Frequency(myProject.getTuning()),
-					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.note.value().Duration(),
+					token.GetNote().Frequency(myProject.getTuning()),
+					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.GetNote().Duration(),
 					myProject.getTimbre("Melody"),
 					myWaveFile.GetSampleRate()));
 			}
 			else if (token.IsRest())
 			{
 				ActiveEvents.push_back(std::make_unique<Silence>(
-					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.rest.value().Duration()));
+					myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * token.GetRest().Duration()));
 			}
 		}
 
