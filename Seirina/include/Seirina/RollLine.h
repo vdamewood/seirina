@@ -31,6 +31,7 @@ namespace Seirina
     {
     public:
         RollLine(Seirina::Notation::NoteDuration newDuration);
+
         RollLine& add(std::variant<
             Seirina::Notation::Rest,
             Seirina::Notation::Note>);

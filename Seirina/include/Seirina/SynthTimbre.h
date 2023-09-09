@@ -1,4 +1,4 @@
-/* Timbre.h: A Synthesizer timbre (waveform and adsr envelope)
+/* SynthTimbre.h: A Synthesizer timbre (waveform and adsr envelope)
  *
  * Copyright 2016-2019, 2023 Vincent Damewood
  *
@@ -15,30 +15,31 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_TIMBRE_H
-#define SEIRINA_TIMBRE_H
+#if !defined SEIRINA_SYNTH_TIMBRE_H
+#define SEIRINA_SYNTH_TIMBRE_H
 
 #include <string>
 
 #include <Seirina/AdsrTransformer.h>
 #include <Seirina/WaveForm.h>
 
-namespace Seirina::Audio
+
+namespace Seirina
 {
-    class TimbrePrivate;
-    class Timbre
+    class SynthTimbre
     {
         public:
-            Timbre(const std::string& newWaveName, AdsrTransformer newAdsr);
-            Timbre(WaveForm* newWaveForm, AdsrTransformer newAdsr);
-            Timbre(const Timbre&);
-            ~Timbre();
+            SynthTimbre(const std::string& newWaveName, AdsrTransformer newAdsr);
+            SynthTimbre(Audio::WaveForm* newWaveForm, AdsrTransformer newAdsr);
+            SynthTimbre(const SynthTimbre&);
+            ~SynthTimbre();
 
-            WaveForm* getWaveForm() const;
+            Audio::WaveForm* getWaveForm() const;
             AdsrTransformer& GetAdsrTransformer(); // FIXME: Constify this
         private:
-            TimbrePrivate* p;
+            class PImpl;
+            std::unique_ptr<PImpl> p;
     };
 }
 
-#endif // SEIRINA_TIMBRE_H
+#endif // SEIRINA_SYNTH_TIMBRE_H

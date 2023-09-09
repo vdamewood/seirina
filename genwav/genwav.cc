@@ -36,6 +36,7 @@
 
 using Seirina::Project;
 using Seirina::AdsrTransformer;
+//using Seirina::SynthTimbre;
 using Seirina::Audio::AdsrEnvelope;
 using Seirina::Audio::Event;
 using Seirina::Audio::Frame;
@@ -43,7 +44,6 @@ using Seirina::Audio::Frequency;
 using Seirina::RollLine;
 using Seirina::Audio::Silence;
 using Seirina::Audio::SynthNote;
-using Seirina::Audio::Timbre;
 using Seirina::Notation::PitchClass;
 using Seirina::Notation::Tempo;
 using Seirina::Notation::Tuning;

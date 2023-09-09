@@ -58,7 +58,7 @@ namespace Seirina::Audio
 	SynthNote::SynthNote(
 		Frequency new_frequency,
 		SampleDuration new_duration,
-		Timbre new_timbre,
+		SynthTimbre new_timbre,
 		SampleRate new_sample_rate)
 		: p(new SynthNotePrivate(
 			new_frequency,

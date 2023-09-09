@@ -1,4 +1,4 @@
-/* Timbre.cc: A Synthesizer timbre (waveform and adsr envelope)
+/* SynthTimbre.cc: A Synthesizer timbre (waveform and adsr envelope)
  *
  * Copyright 2016-2019, 2023 Vincent Damewood
  *
@@ -16,14 +16,16 @@
  */
 
 #include <Seirina/SimpleWaves.h>
-#include <Seirina/Timbre.h>
+#include <Seirina/SynthTimbre.h>
 
-namespace Seirina::Audio
+using Seirina::Audio::WaveForm;
+
+namespace Seirina
 {
-    class TimbrePrivate
+    class SynthTimbre::PImpl
     {
     public:
-        TimbrePrivate(WaveForm* newWaveForm, AdsrTransformer newAdsr)
+        PImpl(WaveForm* newWaveForm, AdsrTransformer newAdsr)
             : waveForm(newWaveForm), adsrTransformer(newAdsr)
         {
 
@@ -32,31 +34,30 @@ namespace Seirina::Audio
         AdsrTransformer adsrTransformer;
     };
 
-    Timbre::Timbre(const std::string& newWaveName, AdsrTransformer newAdsr)
-        : p(new TimbrePrivate(GetWave(newWaveName), newAdsr))
+    SynthTimbre::SynthTimbre(const std::string& newWaveName, AdsrTransformer newAdsr)
+        : p(std::make_unique<PImpl>(Audio::GetWave(newWaveName), newAdsr))
     {
 
     }
-    Timbre::Timbre(WaveForm* newWaveForm, AdsrTransformer newAdsr)
-        : p(new TimbrePrivate(newWaveForm, newAdsr))
+    SynthTimbre::SynthTimbre(WaveForm* newWaveForm, AdsrTransformer newAdsr)
+        : p(std::make_unique<PImpl>(newWaveForm, newAdsr))
     {
     }
 
-    Timbre::Timbre(const Timbre& src)
-        : p(new TimbrePrivate(src.p->waveForm, src.p->adsrTransformer))
+    SynthTimbre::SynthTimbre(const SynthTimbre& src)
+        : p(std::make_unique<PImpl>(src.p->waveForm, src.p->adsrTransformer))
     {
     }
 
-    Timbre::~Timbre()
+    SynthTimbre::~SynthTimbre()
     {
-        delete p;
     }
 
-    WaveForm* Timbre::getWaveForm() const
+    WaveForm* SynthTimbre::getWaveForm() const
     {
         return p->waveForm;
     }
-    AdsrTransformer& Timbre::GetAdsrTransformer()
+    AdsrTransformer& SynthTimbre::GetAdsrTransformer()
     {
         return p->adsrTransformer;
     }

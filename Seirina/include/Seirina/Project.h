@@ -21,8 +21,8 @@
 #include <string>
 
 #include <Seirina/Frequency.h>
+#include <Seirina/SynthTimbre.h>
 #include <Seirina/Tempo.h>
-#include <Seirina/Timbre.h>
 #include <Seirina/Tuning.h>
 #include <Seirina/PitchClass.h>
 
@@ -39,14 +39,14 @@ namespace Seirina
         template<class... Args>
         void addTimbre(std::string timbreName, Args&&... args)
         {
-            realAddTimbre(timbreName, new Audio::Timbre(std::forward<Args>(args)...));
+            realAddTimbre(timbreName, new SynthTimbre(std::forward<Args>(args)...));
         }
 
         const Notation::Tempo& getTempo();
         const Notation::Tuning& getTuning();
-        Audio::Timbre& getTimbre(const std::string& timbreName);
+        SynthTimbre& getTimbre(const std::string& timbreName);
     private:
-        void realAddTimbre(std::string, Audio::Timbre*);
+        void realAddTimbre(std::string, SynthTimbre*);
         ProjectPrivate* p;
     };
 }
