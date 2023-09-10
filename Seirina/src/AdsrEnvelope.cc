@@ -42,6 +42,19 @@ namespace Seirina::Audio
 	{
 	}
 
+	AdsrEnvelope::AdsrEnvelope(const AdsrEnvelope& other)
+		: p{std::make_unique<PImpl>(
+			other.p->attack,
+			other.p->decay,
+			other.p->sustain,
+			other.p->release)}
+	{
+	}
+
+	AdsrEnvelope::~AdsrEnvelope()
+	{
+	}
+
 	TimeDuration AdsrEnvelope::getAttack()
 	{
 		return p->attack;

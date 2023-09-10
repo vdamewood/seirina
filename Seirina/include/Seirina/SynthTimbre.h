@@ -38,7 +38,7 @@ namespace Seirina
             AdsrTransformer& GetAdsrTransformer(); // FIXME: Constify this
         private:
             class PImpl;
-            std::unique_ptr<PImpl> p;
+            const std::unique_ptr<PImpl> p;
     };
 }
 

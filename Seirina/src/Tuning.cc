@@ -28,10 +28,10 @@ using Seirina::Audio::Frequency;
 
 namespace Seirina::Notation
 {
-	class TuningPrivate
+	class Tuning::PImpl
 	{
 	public:
-		TuningPrivate(
+		PImpl(
 			PitchClass newPitchClass,
 			Frequency newFrequency)
 		{
@@ -68,20 +68,19 @@ namespace Seirina::Notation
 	Tuning::Tuning(
 			enum PitchClass newPitchClass,
 			class Frequency newFrequency)
-		: p(new TuningPrivate(
+		: p{std::make_unique<PImpl>(
 			newPitchClass,
-			newFrequency))
+			newFrequency)}
 	{
 	}
 
 	Tuning::Tuning(const Tuning& src)
-		: p(new TuningPrivate(PitchClass::A, 440.0))
+		: p{std::make_unique<PImpl>(PitchClass::A, 440.0)}
 	{
 	}
 
 	Tuning::~Tuning()
 	{
-		//delete p;
 	}
 
 	Seirina::Audio::Frequency Tuning::operator[](PitchClass inClass)

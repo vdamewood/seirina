@@ -28,6 +28,18 @@ namespace Seirina
 	class AdsrTransformer::PImpl
 	{
 	public:
+		PImpl(
+			SampleDuration newAttack,
+			SampleDuration newDecay,
+			AdsrTransform newSustain,
+			SampleDuration newRelease)
+			: attack(newAttack)
+			, decay(newDecay)
+			, sustain(newSustain)
+			, release(newRelease)
+		{
+		}
+
 		PImpl(Audio::AdsrEnvelope envelope, Audio::SampleRate rate)
 			: attack(envelope.getAttack()*rate/100)
 			, decay(envelope.getDecay()*rate/100)
@@ -42,7 +54,20 @@ namespace Seirina
 	};
 
 	AdsrTransformer::AdsrTransformer(Audio::AdsrEnvelope envelope, Audio::SampleRate rate)
-		: p(new PImpl(envelope, rate))
+		: p{std::make_unique<PImpl>(envelope, rate)}
+	{
+	}
+
+	AdsrTransformer::AdsrTransformer(const AdsrTransformer& original)
+		: p{std::make_unique<PImpl>(
+			original.p->attack,
+			original.p->decay,
+			original.p->sustain,
+			original.p->release)}
+	{
+	}
+
+	AdsrTransformer::~AdsrTransformer()
 	{
 	}
 

@@ -28,7 +28,6 @@
 
 namespace Seirina::Audio
 {
-	class SynthNotePrivate;
 	/*! A note generated with synthesis */
 	class SynthNote : public Event
 	{
@@ -47,8 +46,10 @@ namespace Seirina::Audio
 	public: // Event
 		Sample NextSample() override;
 		bool IsActive() const override;
+
 	private:
-		SynthNotePrivate* p;
+		class PImpl;
+		const std::unique_ptr<PImpl> p;
 	};
 };
 

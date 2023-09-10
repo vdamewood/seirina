@@ -18,6 +18,8 @@
 #if !defined SEIRINA_NOTATION_NOTE_H
 #define SEIRINA_NOTATION_NOTE_H
 
+#include <memory>
+
 #include <Seirina/Frequency.h>
 #include <Seirina/NoteDuration.h>
 #include <Seirina/Octave.h>
@@ -26,8 +28,6 @@
 
 namespace Seirina::Notation
 {
-	class NotePrivate;
-
 	/*! A note in musical notation */
 	class Note
 	{
@@ -37,6 +37,7 @@ namespace Seirina::Notation
 			PitchClass,
 			Octave,
 			NoteDuration);
+
 		/*! Copy constructor */
 		Note(const Note&);
 
@@ -55,7 +56,8 @@ namespace Seirina::Notation
 		/*! Fetch the Duration of the note */
 		NoteDuration Duration() const;
 	private:
-		NotePrivate* p;
+		class PImpl;
+		const std::unique_ptr<PImpl> p;
 	};
 };
 

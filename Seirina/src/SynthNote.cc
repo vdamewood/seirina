@@ -25,10 +25,10 @@
 
 namespace Seirina::Audio
 {
-	class SynthNotePrivate
+	class SynthNote::PImpl
 	{
 	public:
-		SynthNotePrivate(
+		PImpl(
 			Frequency new_frequency,
 			SampleDuration new_duration,
 			AdsrTransformer new_adsr,
@@ -60,29 +60,28 @@ namespace Seirina::Audio
 		SampleDuration new_duration,
 		SynthTimbre new_timbre,
 		SampleRate new_sample_rate)
-		: p(new SynthNotePrivate(
+		: p{std::make_unique<PImpl>(
 			new_frequency,
 			new_duration,
 			new_timbre.GetAdsrTransformer(),
 			new_timbre.getWaveForm(),
-			new_sample_rate))
+			new_sample_rate)}
 	{
 	}
 
 	SynthNote::SynthNote(const SynthNote& src)
-		: p(new SynthNotePrivate(
+		: p{std::make_unique<PImpl>(
 			src.p->frequency,
 			src.p->duration,
 			src.p->adsr,
 			src.p->waveform,
 			src.p->sampleRate,
-			src.p->position))
+			src.p->position)}
 	{
 	}
 
 	SynthNote::~SynthNote()
 	{
-		delete p;
 	}
 
 	Seirina::Audio::Sample SynthNote::NextSample()

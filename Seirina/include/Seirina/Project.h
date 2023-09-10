@@ -28,12 +28,12 @@
 
 namespace Seirina
 {
-    class ProjectPrivate;
     class Project
     {
     public:
         Project(Notation::Tempo, Notation::Tuning);
         Project(Notation::Tempo, Notation::PitchClass, Audio::Frequency);
+        Project(const Project&);
         ~Project();
 
         template<class... Args>
@@ -47,7 +47,9 @@ namespace Seirina
         SynthTimbre& getTimbre(const std::string& timbreName);
     private:
         void realAddTimbre(std::string, SynthTimbre*);
-        ProjectPrivate* p;
+	private:
+		class PImpl;
+		const std::unique_ptr<PImpl> p;
     };
 }
 

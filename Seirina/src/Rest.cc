@@ -19,10 +19,10 @@
 
 namespace Seirina::Notation
 {
-	class RestPrivate
+	class Rest::PImpl
 	{
 	public:
-		RestPrivate(NoteDuration newDuration)
+		PImpl(NoteDuration newDuration)
 			: duration(newDuration)
 		{
 		}
@@ -31,18 +31,17 @@ namespace Seirina::Notation
 	};
 
 	Rest::Rest(NoteDuration newDuration)
-		: p(new RestPrivate(newDuration))
+		: p{std::make_unique<PImpl>(newDuration)}
 	{
 	}
 
 	Rest::Rest(const Rest& src)
-		: p(new RestPrivate(src.p->duration))
+		: p{std::make_unique<PImpl>(src.p->duration)}
 	{
 	}
 
 	Rest::~Rest()
 	{
-		delete p;
 	}
 
 	NoteDuration Rest::Duration() const

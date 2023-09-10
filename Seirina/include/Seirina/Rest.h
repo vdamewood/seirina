@@ -18,11 +18,12 @@
 #if !defined SEIRINA_NOTATION_REST_H
 #define SEIRINA_NOTATION_REST_H
 
+#include <memory>
+
 #include <Seirina/NoteDuration.h>
 
 namespace Seirina::Notation
 {
-	class RestPrivate;
 	/*! A rest in musical notation */
 	class Rest
 	{
@@ -37,7 +38,8 @@ namespace Seirina::Notation
 		/*! Get the duration of the Rest */
 		NoteDuration Duration() const;
 	private:
-		RestPrivate* p;
+		class PImpl;
+		const std::unique_ptr<PImpl> p;
 	};
 };
 

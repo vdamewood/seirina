@@ -18,14 +18,14 @@
 #if !defined SEIRINA_NOTATION_TUNING_H
 #define SEIRINA_NOTATION_TUNING_H
 
+#include <memory>
+
 #include <Seirina/Frequency.h>
 //#include <Seirina/Octave.h>
 #include <Seirina/PitchClass.h>
 
 namespace Seirina::Notation
 {
-	class TuningPrivate;
-
 	/*! A tuning for a musical scale */
 	class Tuning
 	{
@@ -45,8 +45,10 @@ namespace Seirina::Notation
 
 		/*! Get a particular frequency based on a pitch class */
 		Seirina::Audio::Frequency operator[](PitchClass);
+
 	private:
-		TuningPrivate* p;
+		class PImpl;
+		const std::unique_ptr<PImpl> p;
 	};
 };
 

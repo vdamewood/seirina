@@ -18,20 +18,20 @@
 #if !defined SEIRINA_AUDIO_SILENCE_H
 #define SEIRINA_AUDIO_SILENCE_H
 
+#include <memory>
+
 #include <Seirina/AudioEvent.h>
 #include <Seirina/SampleDuration.h>
 
 namespace Seirina::Audio
 {
-	class SilencePrivate;
-
 	/*! Represents a period of silence. */
 	class Silence : public Seirina::Audio::Event
 	{
 	public:
 		/*! Construct a Silence object. */
 		Silence(SampleDuration);
-		/*! Copyconstructor. */
+		/*! Copyc onstructor. */
 		Silence(const Silence&);
 		/*! Destructor. */
 		~Silence() override;
@@ -40,7 +40,8 @@ namespace Seirina::Audio
 		Seirina::Audio::Sample NextSample() override;
 		bool IsActive() const override;
 	private:
-		SilencePrivate* p;
+		class PImpl;
+		const std::unique_ptr<PImpl> p;
 	};
 };
 

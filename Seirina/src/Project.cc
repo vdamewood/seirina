@@ -21,10 +21,10 @@
 
 namespace Seirina
 {
-    class ProjectPrivate
+    class Project::PImpl
     {
     public:
-        ProjectPrivate(Notation::Tempo newTempo, Notation::Tuning newTuning)
+        PImpl(Notation::Tempo newTempo, Notation::Tuning newTuning)
             : tempo(newTempo), tuning(newTuning)
         {
         }
@@ -35,18 +35,22 @@ namespace Seirina
     };
 
     Project::Project(Notation::Tempo newTempo, Notation::Tuning newTuning)
-        : p(new ProjectPrivate{newTempo, newTuning})
+        : p{std::make_unique<PImpl>(newTempo, newTuning)}
     {
     }
 
     Project::Project(Notation::Tempo newTempo, Notation::PitchClass newPitchClass, Audio::Frequency newFrequency)
-        : Project(newTempo, Notation::Tuning{newPitchClass, newFrequency})
+        : Project{newTempo, Notation::Tuning{newPitchClass, newFrequency}}
+    {
+    }
+
+    Project::Project(const Project& other)
+        : p{std::make_unique<PImpl>(other.p->tempo, other.p->tuning)}
     {
     }
 
     Project::~Project()
     {
-        delete p;
     }
 
     void Project::realAddTimbre(std::string timbreName, SynthTimbre* newTimbre)

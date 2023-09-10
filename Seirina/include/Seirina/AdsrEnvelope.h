@@ -18,6 +18,8 @@
 #if !defined SEIRINA_ADSR_ENVELOPE_H
 #define SEIRINA_ADSR_ENVELOPE_H
 
+#include <memory>
+
 #include <Seirina/AdsrTransform.h>
 #include <Seirina/SampleDuration.h>
 #include <Seirina/SampleIndex.h>
@@ -34,13 +36,16 @@ namespace Seirina::Audio
 		/*! Constust a new ADSR Envelope. */
 		AdsrEnvelope(TimeDuration Attack, TimeDuration Decay,
 			AdsrTransform Sustain, TimeDuration Release);
+		AdsrEnvelope(const AdsrEnvelope&);
+		~AdsrEnvelope();
+
 		TimeDuration getAttack();
 		TimeDuration getDecay();
 		AdsrTransform getSustain();
 		TimeDuration getRelease();
 	private:
 		class PImpl;
-		PImpl* p;
+		const std::unique_ptr<PImpl> p;
 	};
 }
 

@@ -20,10 +20,10 @@
 
 namespace Seirina::Audio
 {
-	class SilencePrivate
+	class Silence::PImpl
 	{
 	public:
-		SilencePrivate(SampleDuration newDuration, SampleIndex newPosition = 0)
+		PImpl(SampleDuration newDuration, SampleIndex newPosition = 0)
 			: duration(newDuration), position(newPosition)
 		{
 		}
@@ -33,18 +33,17 @@ namespace Seirina::Audio
 	};
 
 	Silence::Silence(SampleDuration newDuration)
-		: p(new SilencePrivate(newDuration))
+		: p{std::make_unique<PImpl>(newDuration)}
 	{
 	}
 
 	Silence::Silence(const Silence& src)
-		: p(new SilencePrivate(src.p->duration, src.p->position))
+		: p{std::make_unique<PImpl>(src.p->duration, src.p->position)}
 	{
 	}
 
 	Silence::~Silence()
 	{
-		delete p;
 	}
 
 	Seirina::Audio::Sample Silence::NextSample()

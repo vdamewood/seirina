@@ -26,12 +26,12 @@ using Seirina::Notation::PitchClass;
 
 namespace Seirina::Notation
 {
-	class NotePrivate
+	class Note::PImpl
 	{
 	public:
-		NotePrivate(
-			PitchClass newPitchClass,
-			Octave newOctave,
+		PImpl(
+			enum PitchClass newPitchClass,
+			class Octave newOctave,
 			NoteDuration newDuration)
 		: pitchClass(newPitchClass),
 			octave(newOctave),
@@ -39,8 +39,8 @@ namespace Seirina::Notation
 		{
 		}
 
-		PitchClass pitchClass;
-		Octave octave;
+		enum PitchClass pitchClass;
+		class Octave octave;
 		NoteDuration duration;
 	};
 
@@ -48,7 +48,7 @@ namespace Seirina::Notation
 			enum PitchClass newPitchClass,
 			class Octave newOctave,
 			NoteDuration newDuration)
-		: p(new NotePrivate(
+		: p(std::make_unique<PImpl>(
 			newPitchClass,
 			newOctave,
 			newDuration))
@@ -56,7 +56,7 @@ namespace Seirina::Notation
 	}
 
 	Note::Note(const Note& src)
-		: p(new NotePrivate(
+		: p(std::make_unique<PImpl>(
 			src.p->pitchClass,
 			src.p->octave,
 			src.p->duration))
@@ -65,7 +65,6 @@ namespace Seirina::Notation
 
 	Note::~Note()
 	{
-		//delete p;
 	}
 
 	const PitchClass& Note::PitchClass() const

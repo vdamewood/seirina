@@ -18,6 +18,8 @@
 #if !defined SEIRINA_ADSR_TRANSFORMER_H
 #define SEIRINA_ADSR_TRANSFORMER_H
 
+#include <memory>
+
 #include <Seirina/AdsrEnvelope.h>
 #include <Seirina/AdsrTransform.h>
 #include <Seirina/SampleDuration.h>
@@ -33,12 +35,18 @@ namespace Seirina
 		/*! Constust a new ADSR Transformer. */
 		AdsrTransformer(Audio::AdsrEnvelope envelope, Audio::SampleRate rate);
 
+		/*! Constust a new ADSR Transformer. */
+		AdsrTransformer(const AdsrTransformer&);
+
+		/*: Destructor */
+		~AdsrTransformer();
+
 		/*! Get the value to transform the sound wave by at a particular
 			position in the playing. */
 		Audio::AdsrTransform GetTransform(Audio::SampleIndex, Audio::SampleDuration);
 	private:
 		class PImpl;
-		PImpl* p;
+		const std::unique_ptr<PImpl> p;
 	};
 }
 

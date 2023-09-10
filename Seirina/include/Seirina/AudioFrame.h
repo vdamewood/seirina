@@ -18,12 +18,12 @@
 #if !defined SEIRINA_AUDIO_FRAME_H
 #define SEIRINA_AUDIO_FRAME_H
 
+#include <memory>
+
 #include <Seirina/AudioSample.h>
 
 namespace Seirina::Audio
 {
-	class FramePrivate;
-
 	/*! Represent a frame of audio date. */
 	class Frame
 	{
@@ -42,7 +42,8 @@ namespace Seirina::Audio
 		/*! Access a specific channel value. */
 		Seirina::Audio::Sample operator[](int) const;
 	private:
-		FramePrivate* const p;
+		class PImpl;
+		const std::unique_ptr<PImpl> p;
 	};
 };
 

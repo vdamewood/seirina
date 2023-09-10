@@ -23,24 +23,25 @@ using Seirina::Audio::Sample;
 
 namespace Seirina::Audio
 {
-	class FramePrivate
+	class Frame::PImpl
 	{
 	public:
-		FramePrivate(size_t size)
+		inline PImpl(size_t size)
 		{
 			channels.reserve(size);
 		}
+
 		std::vector<Sample> channels;
 	};
 
 	Frame::Frame(Sample input)
-		: p(new FramePrivate(1))
+		: p(std::make_unique<PImpl>(1))
 	{
 		p->channels.push_back(input);
 	}
 
 	Frame::Frame(Sample left, Sample right)
-		: p(new FramePrivate(2))
+		: p(std::make_unique<PImpl>(2))
 	{
 		p->channels.push_back(left);
 		p->channels.push_back(right);
@@ -48,7 +49,6 @@ namespace Seirina::Audio
 
 	Frame::~Frame()
 	{
-		delete p;
 	}
 
 	Sample Frame::operator[] (int idx) const
