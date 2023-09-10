@@ -27,8 +27,8 @@
 #include <Seirina/SynthNote.h>
 #include <Seirina/Silence.h>
 #include <Seirina/SimpleWaves.h>
+#include <Seirina/SynthTimbre.h>
 #include <Seirina/Tempo.h>
-#include <Seirina/Timbre.h>
 #include <Seirina/Tuning.h>
 
 #include "RollParser.h"
