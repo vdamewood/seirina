@@ -18,7 +18,7 @@
 #if !defined SEIRINA_ADSR_TRANSFORM_H
 #define SEIRINA_ADSR_TRANSFORM_H
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represents the transform applied to a sound wave by an ADSR
 	*  envelope. */

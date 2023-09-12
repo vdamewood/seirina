@@ -23,11 +23,11 @@
 #include "RollParser.h"
 
 using Seirina::RollLine;
-using Seirina::Notation::PitchClass;
-using Seirina::Notation::MakePitchClass;
-using Seirina::Notation::Note;
-using Seirina::Notation::Rest;
-using Seirina::Notation::NoteDuration;
+using Seirina::PitchClass;
+using Seirina::MakePitchClass;
+using Seirina::Note;
+using Seirina::Rest;
+using Seirina::NoteDuration;
 
 
 RollParser::RollParser(const std::string& Filename)

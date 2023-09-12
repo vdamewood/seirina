@@ -18,7 +18,7 @@
 #if !defined SEIRINA_SAMPLE_INDEX_H
 #define SEIRINA_SAMPLE_INDEX_H
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represent an index of a sample of audio date. */
 	class SampleIndex

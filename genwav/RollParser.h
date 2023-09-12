@@ -29,11 +29,11 @@
 #include <Seirina/Rest.h>
 #include <Seirina/RollLine.h>
 
-using Seirina::Notation::NoteDuration;
-using Seirina::Notation::Note;
-using Seirina::Notation::Octave;
-using Seirina::Notation::PitchClass;
-using Seirina::Notation::Rest;
+using Seirina::NoteDuration;
+using Seirina::Note;
+using Seirina::Octave;
+using Seirina::PitchClass;
+using Seirina::Rest;
 
 
 class RollParser

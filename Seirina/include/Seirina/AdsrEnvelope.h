@@ -26,7 +26,7 @@
 
 typedef int TimeDuration;
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represents the attack, decay, sustain, and release of a note
 	 *  played in music. */

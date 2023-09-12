@@ -17,7 +17,7 @@
 
 #include <Seirina/PitchClass.h>
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	PitchClass MakePitchClass(char Letter, char Accidental)
 	{

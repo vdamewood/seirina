@@ -30,11 +30,11 @@ namespace Seirina
     {
         public:
             SynthTimbre(const std::string& newWaveName, AdsrTransformer newAdsr);
-            SynthTimbre(Audio::WaveForm* newWaveForm, AdsrTransformer newAdsr);
+            SynthTimbre(WaveForm* newWaveForm, AdsrTransformer newAdsr);
             SynthTimbre(const SynthTimbre&);
             ~SynthTimbre();
 
-            Audio::WaveForm* getWaveForm() const;
+            WaveForm* getWaveForm() const;
             AdsrTransformer& GetAdsrTransformer(); // FIXME: Constify this
         private:
             class PImpl;

@@ -21,7 +21,7 @@
 #include <Seirina/Phase.h>
 #include <Seirina/AudioSample.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Interface for wave forms. */
 	class WaveForm

@@ -25,7 +25,8 @@ static inline double clip(double i)
 		: i;
 }
 
-namespace Seirina::Audio
+
+namespace Seirina
 {
 	Sample::Sample(double newValue)
 		: value(clip(newValue))

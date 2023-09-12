@@ -17,7 +17,7 @@
 
 #include <Seirina/Rest.h>
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	class Rest::PImpl
 	{

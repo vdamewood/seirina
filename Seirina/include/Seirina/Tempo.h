@@ -20,7 +20,7 @@
 
 #include <Seirina/SampleRate.h>
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	/*! Represents the tempo of a song in beats per minute. */
 	class Tempo
@@ -30,7 +30,7 @@ namespace Seirina::Notation
 		Tempo(int);
 
 		/*! Return the length of a beat in audio frames. */
-		int getBeatLength(Seirina::Audio::SampleRate atThisSampleRate) const;
+		int getBeatLength(SampleRate atThisSampleRate) const;
 
 		/*! Convert to an `int`. */
 		operator int() const;

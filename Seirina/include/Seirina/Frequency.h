@@ -18,7 +18,7 @@
 #if !defined SEIRINA_FREQUENCY_H
 #define SEIRINA_FREQUENCY_H
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represents the frequency of a sound wave. */
 	class Frequency

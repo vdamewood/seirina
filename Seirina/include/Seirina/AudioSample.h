@@ -20,7 +20,7 @@
 
 #include <Seirina/AdsrTransform.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represent a sample of audio date. */
 	class Sample

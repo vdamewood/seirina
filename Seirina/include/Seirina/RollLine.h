@@ -30,23 +30,21 @@ namespace Seirina
     class RollLine
     {
     public:
-        RollLine(Seirina::Notation::NoteDuration newDuration);
+        RollLine(Seirina::NoteDuration newDuration);
 
-        RollLine& add(std::variant<
-            Seirina::Notation::Rest,
-            Seirina::Notation::Note>);
-        RollLine& add(Seirina::Notation::Note);
-        RollLine& add(Seirina::Notation::Rest);
+        RollLine& add(std::variant<Rest,Note>);
+        RollLine& add(Seirina::Note);
+        RollLine& add(Seirina::Rest);
 
-        const Seirina::Notation::NoteDuration& getDuration();
+        const Seirina::NoteDuration& getDuration();
         const std::vector<std::variant<
-            Seirina::Notation::Rest,
-            Seirina::Notation::Note>>& getItems();
+            Seirina::Rest,
+            Seirina::Note>>& getItems();
     private:
-        Seirina::Notation::NoteDuration duration;
+        Seirina::NoteDuration duration;
         std::vector<std::variant<
-            Seirina::Notation::Rest,
-            Seirina::Notation::Note>> items;
+            Seirina::Rest,
+            Seirina::Note>> items;
     };
 };
 

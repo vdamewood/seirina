@@ -15,18 +15,18 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_AUDIO_SILENCE_H
-#define SEIRINA_AUDIO_SILENCE_H
+#if !defined SEIRINA_SILENCE_H
+#define SEIRINA_SILENCE_H
 
 #include <memory>
 
 #include <Seirina/AudioEvent.h>
 #include <Seirina/SampleDuration.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represents a period of silence. */
-	class Silence : public Seirina::Audio::Event
+	class Silence : public AudioEvent
 	{
 	public:
 		/*! Construct a Silence object. */
@@ -37,7 +37,7 @@ namespace Seirina::Audio
 		~Silence() override;
 
 	public: // Event
-		Seirina::Audio::Sample NextSample() override;
+		Sample NextSample() override;
 		bool IsActive() const override;
 	private:
 		class PImpl;
@@ -45,4 +45,4 @@ namespace Seirina::Audio
 	};
 };
 
-#endif // SEIRINA_AUDIO_SILENCE_H
+#endif // SEIRINA_SILENCE_H

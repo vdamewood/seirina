@@ -18,9 +18,6 @@
 #include <Seirina/AdsrTransformer.h>
 #include <Seirina/SampleDuration.h>
 
-using Seirina::Audio::AdsrTransform;;
-using Seirina::Audio::SampleDuration;
-using Seirina::Audio::SampleIndex;
 
 namespace Seirina
 {
@@ -40,7 +37,7 @@ namespace Seirina
 		{
 		}
 
-		PImpl(Audio::AdsrEnvelope envelope, Audio::SampleRate rate)
+		PImpl(AdsrEnvelope envelope, SampleRate rate)
 			: attack(envelope.getAttack()*rate/100)
 			, decay(envelope.getDecay()*rate/100)
 			, sustain(envelope.getSustain())
@@ -53,7 +50,7 @@ namespace Seirina
 		SampleDuration release;
 	};
 
-	AdsrTransformer::AdsrTransformer(Audio::AdsrEnvelope envelope, Audio::SampleRate rate)
+	AdsrTransformer::AdsrTransformer(AdsrEnvelope envelope, SampleRate rate)
 		: p{std::make_unique<PImpl>(envelope, rate)}
 	{
 	}

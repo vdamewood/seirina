@@ -23,7 +23,8 @@
 #include <Seirina/SampleRate.h>
 #include <Seirina/SynthNote.h>
 
-namespace Seirina::Audio
+
+namespace Seirina
 {
 	class SynthNote::PImpl
 	{
@@ -84,7 +85,7 @@ namespace Seirina::Audio
 	{
 	}
 
-	Seirina::Audio::Sample SynthNote::NextSample()
+	Sample SynthNote::NextSample()
 	{
 		SampleIndex idx = p->position++;
 		return

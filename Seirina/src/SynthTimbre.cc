@@ -18,7 +18,6 @@
 #include <Seirina/SimpleWaves.h>
 #include <Seirina/SynthTimbre.h>
 
-using Seirina::Audio::WaveForm;
 
 namespace Seirina
 {
@@ -35,7 +34,7 @@ namespace Seirina
     };
 
     SynthTimbre::SynthTimbre(const std::string& newWaveName, AdsrTransformer newAdsr)
-        : p(std::make_unique<PImpl>(Audio::GetWave(newWaveName), newAdsr))
+        : p(std::make_unique<PImpl>(GetWave(newWaveName), newAdsr))
     {
 
     }

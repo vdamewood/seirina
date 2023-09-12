@@ -25,7 +25,8 @@ static inline int clip(int i)
 		: i;
 }
 
-namespace Seirina::Notation
+
+namespace Seirina
 {
 	Octave::Octave(int newValue)
 	{

@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_NOTATION_TUNING_H
-#define SEIRINA_NOTATION_TUNING_H
+#if !defined SEIRINA_TUNING_H
+#define SEIRINA_TUNING_H
 
 #include <memory>
 
@@ -24,7 +24,7 @@
 //#include <Seirina/Octave.h>
 #include <Seirina/PitchClass.h>
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	/*! A tuning for a musical scale */
 	class Tuning
@@ -34,9 +34,7 @@ namespace Seirina::Notation
 		 *
 		 * Note: Currently, this always returns an A=440Hz tuning.
 		 */
-		Tuning(
-			Seirina::Notation::PitchClass,
-			Seirina::Audio::Frequency);
+		Tuning(PitchClass, Frequency);
 		/*! Copy constructor */
 		Tuning(const Tuning&);
 
@@ -44,7 +42,7 @@ namespace Seirina::Notation
 		~Tuning();
 
 		/*! Get a particular frequency based on a pitch class */
-		Seirina::Audio::Frequency operator[](PitchClass);
+		Seirina::Frequency operator[](PitchClass);
 
 	private:
 		class PImpl;
@@ -52,4 +50,4 @@ namespace Seirina::Notation
 	};
 };
 
-#endif // SEIRINA_NOTATION_TUNING_H
+#endif // SEIRINA_TUNING_H

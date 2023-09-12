@@ -25,7 +25,7 @@ static inline double clip(double i)
 		: i;
 }
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	AdsrTransform::AdsrTransform(double newValue)
 		: value(clip(newValue))

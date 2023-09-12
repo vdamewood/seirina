@@ -31,8 +31,8 @@ namespace Seirina
     class Project
     {
     public:
-        Project(Notation::Tempo, Notation::Tuning);
-        Project(Notation::Tempo, Notation::PitchClass, Audio::Frequency);
+        Project(Tempo, Tuning);
+        Project(Tempo, PitchClass, Frequency);
         Project(const Project&);
         ~Project();
 
@@ -42,8 +42,8 @@ namespace Seirina
             realAddTimbre(timbreName, new SynthTimbre(std::forward<Args>(args)...));
         }
 
-        const Notation::Tempo& getTempo();
-        const Notation::Tuning& getTuning();
+        const Tempo& getTempo();
+        const Tuning& getTuning();
         SynthTimbre& getTimbre(const std::string& timbreName);
     private:
         void realAddTimbre(std::string, SynthTimbre*);

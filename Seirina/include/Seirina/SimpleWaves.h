@@ -22,7 +22,7 @@
 
 #include <Seirina/WaveForm.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represents an absolute-value-of-sine wave. */
 	class AbsineWave : public WaveForm

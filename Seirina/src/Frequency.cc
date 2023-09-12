@@ -17,7 +17,8 @@
 
 #include <Seirina/Frequency.h>
 
-namespace Seirina::Audio
+
+namespace Seirina
 {
 	Frequency::Frequency(double newValue)
 	{

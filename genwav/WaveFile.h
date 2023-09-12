@@ -24,12 +24,12 @@
 
 class WaveFilePrivate;
 
-class WaveFile : public Seirina::Audio::Output
+class WaveFile : public Seirina::Output
 {
 public:
 	WaveFile(const std::string& Filename);
-	virtual void WriteFrame(Seirina::Audio::Frame) override;
-	virtual Seirina::Audio::SampleRate GetSampleRate() override;
+	virtual void WriteFrame(Seirina::Frame) override;
+	virtual Seirina::SampleRate GetSampleRate() override;
 	virtual ~WaveFile();
 private:
 	WaveFilePrivate *d;

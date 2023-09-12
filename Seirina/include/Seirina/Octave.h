@@ -18,7 +18,7 @@
 #if !defined SEIRINA_OCTAVE_H
 #define SEIRINA_OCTAVE_H
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	/*! Represents an octave in music notation
 	*/

@@ -22,7 +22,7 @@ static inline int clip(int i)
 	return i < 0 ? 0 : i;
 }
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	SampleIndex::SampleIndex(int newValue)
 		: value(clip(newValue))

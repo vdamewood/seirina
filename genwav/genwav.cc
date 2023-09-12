@@ -37,16 +37,16 @@
 using Seirina::Project;
 using Seirina::AdsrTransformer;
 //using Seirina::SynthTimbre;
-using Seirina::Audio::AdsrEnvelope;
-using Seirina::Audio::Event;
-using Seirina::Audio::Frame;
-using Seirina::Audio::Frequency;
+using Seirina::AdsrEnvelope;
+using Event = Seirina::AudioEvent;
+using Seirina::Frame;
+using Seirina::Frequency;
 using Seirina::RollLine;
-using Seirina::Audio::Silence;
-using Seirina::Audio::SynthNote;
-using Seirina::Notation::PitchClass;
-using Seirina::Notation::Tempo;
-using Seirina::Notation::Tuning;
+using Seirina::Silence;
+using Seirina::SynthNote;
+using Seirina::PitchClass;
+using Seirina::Tempo;
+using Seirina::Tuning;
 
 int main(int argc, char *argv[])
 {

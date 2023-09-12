@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_PLAYED_NOTE_H
-#define SEIRINA_PLAYED_NOTE_H
+#if !defined SEIRINA_SYNTH_NOTE_H
+#define SEIRINA_SYNTH_NOTE_H
 
 #include <Seirina/AdsrEnvelope.h>
 #include <Seirina/AudioEvent.h>
@@ -26,10 +26,10 @@
 #include <Seirina/SynthTimbre.h>
 #include <Seirina/WaveForm.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! A note generated with synthesis */
-	class SynthNote : public Event
+	class SynthNote : public AudioEvent
 	{
 	public:
 		/*! Construct a SynthNote object */
@@ -43,7 +43,7 @@ namespace Seirina::Audio
 		/*! Destroy SynthNote object */
 		~SynthNote() override;
 
-	public: // Event
+	public: // AudioEvent overrides
 		Sample NextSample() override;
 		bool IsActive() const override;
 
@@ -53,4 +53,4 @@ namespace Seirina::Audio
 	};
 };
 
-#endif // SEIRINA_PLAYED_NOTE_H
+#endif // SEIRINA_SYNTH_NOTE_H

@@ -15,14 +15,14 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_NOTATION_REST_H
-#define SEIRINA_NOTATION_REST_H
+#if !defined SEIRINA_REST_H
+#define SEIRINA_REST_H
 
 #include <memory>
 
 #include <Seirina/NoteDuration.h>
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	/*! A rest in musical notation */
 	class Rest
@@ -43,4 +43,4 @@ namespace Seirina::Notation
 	};
 };
 
-#endif // SEIRINA_NOTATION_REST_H
+#endif // SEIRINA_REST_H

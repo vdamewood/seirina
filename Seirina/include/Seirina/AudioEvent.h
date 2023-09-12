@@ -20,18 +20,18 @@
 
 #include <Seirina/AudioSample.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represents some occurance of sound */
-	class Event
+	class AudioEvent
 	{
 	public:
 		/*! Destroy Event object */
-		virtual ~Event() { };
+		virtual ~AudioEvent() { };
 
 		/*! Get the current sample from the event, and advance to the
 			next sample. */
-		virtual Seirina::Audio::Sample NextSample() = 0;
+		virtual Sample NextSample() = 0;
 
 		/*! Indicate if the event still has samples to return. */
 		virtual bool IsActive() const = 0;

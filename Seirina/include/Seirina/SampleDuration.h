@@ -18,7 +18,7 @@
 #if !defined SEIRINA_SAMPLE_DURATION_H
 #define SEIRINA_SAMPLE_DURATION_H
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represent an span of time in samples of audio date. */
 	class SampleDuration

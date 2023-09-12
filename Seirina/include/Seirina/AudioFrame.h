@@ -22,25 +22,25 @@
 
 #include <Seirina/AudioSample.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represent a frame of audio date. */
 	class Frame
 	{
 	public:
 		/*! Construct a monaural audio frame. */
-		Frame(Seirina::Audio::Sample);
+		Frame(Sample);
 		/*! Construct a binaural (stereo) audio frame. */
 		Frame(
-			Seirina::Audio::Sample left,
-			Seirina::Audio::Sample right);
+			Sample left,
+			Sample right);
 		~Frame();
 
 		/*! Get number of channels in frame. */
 		int FrameCount();
 
 		/*! Access a specific channel value. */
-		Seirina::Audio::Sample operator[](int) const;
+		Sample operator[](int) const;
 	private:
 		class PImpl;
 		const std::unique_ptr<PImpl> p;

@@ -17,7 +17,6 @@
 
 #include <Seirina/RollLine.h>
 
-using Seirina::Notation::NoteDuration;
 
 namespace Seirina
 {
@@ -26,21 +25,19 @@ namespace Seirina
     {
     }
 
-    RollLine& RollLine::add(std::variant<
-            Seirina::Notation::Rest,
-            Seirina::Notation::Note> input)
+    RollLine& RollLine::add(std::variant<Rest, Note> input)
     {
         items.push_back(input);
         return *this;
     }
 
-    RollLine& RollLine::add(Seirina::Notation::Note input)
+    RollLine& RollLine::add(Note input)
     {
         items.push_back(input);
         return *this;
     }
 
-    RollLine& RollLine::add(Seirina::Notation::Rest input)
+    RollLine& RollLine::add(Rest input)
     {
         items.push_back(input);
         return *this;
@@ -51,9 +48,7 @@ namespace Seirina
         return duration;
     }
 
-    const std::vector<std::variant<
-            Seirina::Notation::Rest,
-            Seirina::Notation::Note>>& RollLine::getItems()
+    const std::vector<std::variant<Rest, Note>>& RollLine::getItems()
     {
         return items;
     }

@@ -26,7 +26,7 @@
 
 #include <Seirina/SimpleWaves.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	Sample AbsineWave::GetSample(Phase phase)
 	{

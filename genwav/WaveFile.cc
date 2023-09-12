@@ -20,7 +20,7 @@
 #include <Seirina/SampleRate.h>
 #include "WaveFile.h"
 
-using Seirina::Audio::SampleRate;
+using Seirina::SampleRate;
 
 class WaveFilePrivate
 {
@@ -84,8 +84,8 @@ WaveFile::~WaveFile()
 }
 
 #include <iostream>
-using Seirina::Audio::Frame;
-void WaveFile::WriteFrame(Frame frame)
+
+void WaveFile::WriteFrame(Seirina::Frame frame)
 {
 	d->WriteSample(double(frame[0]) * 0x7FFF);
 	d->WriteSample(double(frame[1]) * 0x7FFF);

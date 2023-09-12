@@ -18,7 +18,8 @@
 #include <Seirina/SampleIndex.h>
 #include <Seirina/Silence.h>
 
-namespace Seirina::Audio
+
+namespace Seirina
 {
 	class Silence::PImpl
 	{
@@ -46,7 +47,7 @@ namespace Seirina::Audio
 	{
 	}
 
-	Seirina::Audio::Sample Silence::NextSample()
+	Sample Silence::NextSample()
 	{
 		p->position++;
 		return 0.0;

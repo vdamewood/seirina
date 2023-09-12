@@ -19,9 +19,8 @@
 
 #include <Seirina/AudioFrame.h>
 
-using Seirina::Audio::Sample;
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	class Frame::PImpl
 	{

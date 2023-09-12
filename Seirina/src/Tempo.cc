@@ -17,7 +17,8 @@
 
 #include <Seirina/Tempo.h>
 
-namespace Seirina::Notation
+
+namespace Seirina
 {
 	Tempo::Tempo(int newValue)
 	{
@@ -29,7 +30,7 @@ namespace Seirina::Notation
 		return value;
 	}
 
-	int Tempo::getBeatLength(Seirina::Audio::SampleRate rate) const
+	int Tempo::getBeatLength(SampleRate rate) const
 	{
 		return (rate * 60) / value;
 	}

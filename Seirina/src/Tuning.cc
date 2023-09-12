@@ -23,10 +23,8 @@
 #define ROOT12_OF_2 1.0594630943592951988208028
 #define CONCERT_A 440.0
 
-using Seirina::Notation::PitchClass;
-using Seirina::Audio::Frequency;
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	class Tuning::PImpl
 	{
@@ -83,7 +81,7 @@ namespace Seirina::Notation
 	{
 	}
 
-	Seirina::Audio::Frequency Tuning::operator[](PitchClass inClass)
+	Frequency Tuning::operator[](PitchClass inClass)
 	{
 		return p->PitchMap[inClass];
 	}

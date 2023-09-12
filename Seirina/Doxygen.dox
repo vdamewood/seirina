@@ -18,11 +18,3 @@
 /*! \namespace Seirina
  *  \brief The Seirina backend music syenthesis library
  */
-
-/*! \namespace Seirina::Audio
- *  \brief Types and objects used for audio data
- */
-
-/*! \namespace Seirina::Notation
- *  \brief Types and objects used for representing musical notation
- */

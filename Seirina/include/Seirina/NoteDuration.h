@@ -20,7 +20,7 @@
 
 #include <Seirina/Rational.h>
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	/*! The duration of a note as a rational number of beats */
 	class NoteDuration : public Rational

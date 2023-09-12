@@ -17,7 +17,7 @@
 
 #include <Seirina/SampleRate.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	SampleRate::SampleRate(int newValue)
 	{

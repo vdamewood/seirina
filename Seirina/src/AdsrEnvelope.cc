@@ -18,7 +18,7 @@
 #include <Seirina/AdsrEnvelope.h>
 #include <Seirina/SampleDuration.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	class AdsrEnvelope::PImpl
 	{

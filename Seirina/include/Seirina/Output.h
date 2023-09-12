@@ -15,12 +15,12 @@
  * permissions and limitations under the License.
  */
 
-#ifndef SEIRINA_AUDIO_OUTPUT_H
-#define SEIRINA_AUDIO_OUTPUT_H
+#ifndef SEIRINA_OUTPUT_H
+#define SEIRINA_OUTPUT_H
 
 #include <Seirina/AudioFrame.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Interface for audio output */
 	class Output
@@ -37,4 +37,4 @@ namespace Seirina::Audio
 	};
 };
 
-#endif // SEIRINA_OUTPUT_STREAM_H
+#endif // SEIRINA_OUTPUT_H

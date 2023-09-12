@@ -19,7 +19,7 @@
 
 #include <Seirina/Phase.h>
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	Phase::Phase(double newValue)
 	{

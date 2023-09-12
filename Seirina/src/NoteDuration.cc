@@ -17,7 +17,8 @@
 
 #include <Seirina/NoteDuration.h>
 
-namespace Seirina::Notation
+
+namespace Seirina
 {
 	NoteDuration::NoteDuration(int newNumerator, int newDenominator)
 		: Rational(newNumerator, newDenominator)

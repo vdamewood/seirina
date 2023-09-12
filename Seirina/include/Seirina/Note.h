@@ -15,8 +15,8 @@
  * permissions and limitations under the License.
  */
 
-#if !defined SEIRINA_NOTATION_NOTE_H
-#define SEIRINA_NOTATION_NOTE_H
+#if !defined SEIRINA_NOTE_H
+#define SEIRINA_NOTE_H
 
 #include <memory>
 
@@ -26,17 +26,14 @@
 #include <Seirina/PitchClass.h>
 #include <Seirina/Tuning.h>
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	/*! A note in musical notation */
 	class Note
 	{
 	public:
 		/*! Construct a note */
-		Note(
-			PitchClass,
-			Octave,
-			NoteDuration);
+		Note(PitchClass, Octave, NoteDuration);
 
 		/*! Copy constructor */
 		Note(const Note&);
@@ -51,7 +48,7 @@ namespace Seirina::Notation
 		const Octave& Octave() const;
 
 		/*! Fetch the Frequency of the note */
-		Seirina::Audio::Frequency Frequency(Tuning) const;
+		Frequency Frequency(Tuning) const;
 
 		/*! Fetch the Duration of the note */
 		NoteDuration Duration() const;
@@ -61,4 +58,4 @@ namespace Seirina::Notation
 	};
 };
 
-#endif // SEIRINA_NOTATION_NOTE_H
+#endif // SEIRINA_NOTE_H

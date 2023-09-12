@@ -18,7 +18,7 @@
 #if !defined SEIRINA_PITCH_CLASS_H
 #define SEIRINA_PITCH_CLASS_H
 
-namespace Seirina::Notation
+namespace Seirina
 {
 	/*! Represents a pitch class, the 'letter' and accidental portion of
 	 *  a notes name without regard for octave.

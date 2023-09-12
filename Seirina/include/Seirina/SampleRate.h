@@ -18,7 +18,7 @@
 #if !defined SEIRINA_SAMPLE_RATE_H
 #define SEIRINA_SAMPLE_RATE_H
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represents the sampling rate of audio data.
 	*/

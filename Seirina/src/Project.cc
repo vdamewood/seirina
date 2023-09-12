@@ -24,23 +24,23 @@ namespace Seirina
     class Project::PImpl
     {
     public:
-        PImpl(Notation::Tempo newTempo, Notation::Tuning newTuning)
+        PImpl(Tempo newTempo, Tuning newTuning)
             : tempo(newTempo), tuning(newTuning)
         {
         }
 
-        Notation::Tempo tempo;
-        Notation::Tuning tuning;
+        Tempo tempo;
+        Tuning tuning;
         std::unordered_map<std::string, std::unique_ptr<Seirina::SynthTimbre>> timbres;
     };
 
-    Project::Project(Notation::Tempo newTempo, Notation::Tuning newTuning)
+    Project::Project(Tempo newTempo, Tuning newTuning)
         : p{std::make_unique<PImpl>(newTempo, newTuning)}
     {
     }
 
-    Project::Project(Notation::Tempo newTempo, Notation::PitchClass newPitchClass, Audio::Frequency newFrequency)
-        : Project{newTempo, Notation::Tuning{newPitchClass, newFrequency}}
+    Project::Project(Tempo newTempo, PitchClass newPitchClass, Frequency newFrequency)
+        : Project{newTempo, Tuning{newPitchClass, newFrequency}}
     {
     }
 
@@ -59,12 +59,12 @@ namespace Seirina
     }
 
 
-    const Notation::Tempo& Project::getTempo()
+    const Tempo& Project::getTempo()
     {
         return p->tempo;
     }
 
-    const Notation::Tuning& Project::getTuning()
+    const Tuning& Project::getTuning()
     {
         return p->tuning;
     }

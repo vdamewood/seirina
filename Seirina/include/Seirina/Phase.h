@@ -18,7 +18,7 @@
 #if !defined SEIRINA_PHASE_H
 #define SEIRINA_PHASE_H
 
-namespace Seirina::Audio
+namespace Seirina
 {
 	/*! Represents the phase of a sound wave. */
 	class Phase

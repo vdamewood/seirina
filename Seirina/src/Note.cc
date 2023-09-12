@@ -21,10 +21,7 @@
 #include <Seirina/PitchClass.h>
 
 
-using Seirina::Notation::Octave;
-using Seirina::Notation::PitchClass;
-
-namespace Seirina::Notation
+namespace Seirina
 {
 	class Note::PImpl
 	{
@@ -77,7 +74,7 @@ namespace Seirina::Notation
 		return p->octave;
 	}
 
-	Seirina::Audio::Frequency Note::Frequency(Tuning inTuning) const
+	Frequency Note::Frequency(Tuning inTuning) const
 	{
 		return inTuning[p->pitchClass] * std::pow(2.0, p->octave - 4);
 	}

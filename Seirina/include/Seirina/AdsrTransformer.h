@@ -33,7 +33,7 @@ namespace Seirina
 	{
 	public:
 		/*! Constust a new ADSR Transformer. */
-		AdsrTransformer(Audio::AdsrEnvelope envelope, Audio::SampleRate rate);
+		AdsrTransformer(AdsrEnvelope envelope, SampleRate rate);
 
 		/*! Constust a new ADSR Transformer. */
 		AdsrTransformer(const AdsrTransformer&);
@@ -43,7 +43,7 @@ namespace Seirina
 
 		/*! Get the value to transform the sound wave by at a particular
 			position in the playing. */
-		Audio::AdsrTransform GetTransform(Audio::SampleIndex, Audio::SampleDuration);
+		AdsrTransform GetTransform(SampleIndex, SampleDuration);
 	private:
 		class PImpl;
 		const std::unique_ptr<PImpl> p;
