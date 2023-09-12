@@ -48,6 +48,7 @@ using Seirina::PitchClass;
 using Seirina::Tempo;
 using Seirina::Tuning;
 
+
 int main(int argc, char *argv[])
 {
 	std::string WaveName("sine");
@@ -107,7 +108,7 @@ int main(int argc, char *argv[])
 						myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * itemValue.Duration()));
 				if constexpr (std::is_same_v<Alt, Note>)
 					ActiveEvents.push_back(std::make_unique<SynthNote>(
-						itemValue.Frequency(myProject.getTuning()),
+						myProject.getTuning()[itemValue],
 						myProject.getTempo().getBeatLength(myWaveFile.GetSampleRate()) * itemValue.Duration(),
 						myProject.getTimbre("Melody"),
 						myWaveFile.GetSampleRate()));

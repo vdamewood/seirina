@@ -74,12 +74,6 @@ namespace Seirina
 		return p->octave;
 	}
 
-	Frequency Note::Frequency(Tuning inTuning) const
-	{
-		return inTuning[p->pitchClass] * std::pow(2.0, p->octave - 4);
-	}
-
-
 	NoteDuration Note::Duration() const
 	{
 		return p->duration;

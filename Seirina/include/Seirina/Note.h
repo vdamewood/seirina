@@ -20,11 +20,9 @@
 
 #include <memory>
 
-#include <Seirina/Frequency.h>
 #include <Seirina/NoteDuration.h>
 #include <Seirina/Octave.h>
 #include <Seirina/PitchClass.h>
-#include <Seirina/Tuning.h>
 
 namespace Seirina
 {
@@ -46,9 +44,6 @@ namespace Seirina
 
 		/*! Fetch the Octave of the note */
 		const Octave& Octave() const;
-
-		/*! Fetch the Frequency of the note */
-		Frequency Frequency(Tuning) const;
 
 		/*! Fetch the Duration of the note */
 		NoteDuration Duration() const;

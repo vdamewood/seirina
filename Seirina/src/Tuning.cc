@@ -81,8 +81,13 @@ namespace Seirina
 	{
 	}
 
-	Frequency Tuning::operator[](PitchClass inClass)
+	Frequency Tuning::operator[](PitchClass inClass) const
 	{
 		return p->PitchMap[inClass];
+	}
+
+	Frequency Tuning::operator[](Note note) const
+	{
+		return p->PitchMap[note.PitchClass()] * std::pow(2.0, note.Octave() - 4);;
 	}
 };

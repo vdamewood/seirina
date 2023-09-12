@@ -23,6 +23,7 @@
 #include <Seirina/Frequency.h>
 //#include <Seirina/Octave.h>
 #include <Seirina/PitchClass.h>
+#include <Seirina/Note.h>
 
 namespace Seirina
 {
@@ -42,8 +43,10 @@ namespace Seirina
 		~Tuning();
 
 		/*! Get a particular frequency based on a pitch class */
-		Seirina::Frequency operator[](PitchClass);
+		Frequency operator[](PitchClass) const;
 
+		/*! Get a particular frequency based on a pitch class */
+		Frequency operator[](Note) const;
 	private:
 		class PImpl;
 		const std::unique_ptr<PImpl> p;
